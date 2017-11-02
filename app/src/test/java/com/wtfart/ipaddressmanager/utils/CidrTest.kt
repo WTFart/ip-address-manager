@@ -1,7 +1,6 @@
 package com.wtfart.ipaddressmanager.utils
 
 import org.junit.Assert.assertArrayEquals
-import org.junit.Assert.assertEquals
 import org.junit.Test
 
 /**
