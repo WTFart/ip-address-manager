@@ -21,9 +21,9 @@ class CidrTest {
     }
 
     @Test
-    fun `requesting 3 addresses should result in 2 address bits of 2 and 1`() {
+    fun `requesting 3 addresses should result in 2 address bits of 1 and 0`() {
         val addressBitsCombination = Cidr.computeAddressBitsCombination(3)
-        assertArrayEquals(arrayOf(2, 1), addressBitsCombination)
+        assertArrayEquals(arrayOf(1, 0), addressBitsCombination)
     }
 
     @Test
