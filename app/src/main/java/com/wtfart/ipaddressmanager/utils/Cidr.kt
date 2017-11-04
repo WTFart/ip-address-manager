@@ -5,9 +5,9 @@ package com.wtfart.ipaddressmanager.utils
  */
 data class Cidr(
         val notation: String,
-        val netmask: String,
-        val wildcard: String,
-        val addresses: Array<String>
+        val netmask: Long,
+        val wildcard: Long,
+        val addresses: Array<Long>
 ) {
 
     companion object {
@@ -34,9 +34,9 @@ data class Cidr(
         fun compute(ipAddress: String, numberOfRequestedAddresses: Int) = arrayOf(
                 Cidr(
                         "",
-                        "",
-                        "",
-                        arrayOf("")
+                        0b0,
+                        0b0,
+                        arrayOf(0b0)
                 )
         )
     }
