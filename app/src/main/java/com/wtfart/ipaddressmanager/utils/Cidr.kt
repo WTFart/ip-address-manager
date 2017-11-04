@@ -41,18 +41,7 @@ data class Cidr(
         )
     }
 
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
+    override fun equals(other: Any?) = notation == (other as Cidr).notation
 
-        other as Cidr
-
-        if (notation != other.notation) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        return notation.hashCode()
-    }
+    override fun hashCode() = notation.hashCode()
 }
