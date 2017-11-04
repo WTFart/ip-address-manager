@@ -14,7 +14,7 @@ class Cidr {
         fun computeInitialIpAddresses(addressBitsCombination: Array<Int>) = arrayOf("")
 
         @JvmStatic
-        fun computeCidrNotation(ipAddress: Long, numberOfMaskBits: Int) = ""
+        fun computeCidrNotation(ipAddress: String, numberOfMaskBits: Int) = ""
 
         @JvmStatic
         fun computeCidrNetmask(numberOfMaskBits: Int) = ""
