@@ -15,7 +15,7 @@ class CidrTest {
     }
 
     @Test
-    fun `IP Address of 192|30|12|15 and 31 mask bits should result in 192|30|12|8,31 CIDR notation`() {
+    fun `IP Address of 192|30|12|15 and 31 mask bits should result in 192|30|12|14,31 CIDR notation`() {
         val cidrNotation = Cidr.computeCidrNotation("192.30.12.14", 31)
         assertEquals("192.30.12.14/31", cidrNotation)
     }
