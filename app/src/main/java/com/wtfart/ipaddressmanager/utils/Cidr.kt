@@ -17,7 +17,17 @@ class Cidr {
         fun computeCidrNotation(ipAddress: String, numberOfMaskBits: Int) = ""
 
         @JvmStatic
-        fun computeCidrNetmask(numberOfMaskBits: Int) = 0b0
+        fun computeCidrNetmask(numberOfMaskBits: Int) = IntRange(1, 32)
+                .fold(StringBuilder()) { bitStr, bit ->
+                    bitStr.append(
+                            if (bit <= numberOfMaskBits) {
+                                '1'
+                            } else {
+                                '0'
+                            }
+                    )
+                }.toString()
+                .toLong(2)
 
         @JvmStatic
         fun computeWildcardMask(numberOfAddressBits: Int) = ""
