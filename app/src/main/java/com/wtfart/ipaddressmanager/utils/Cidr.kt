@@ -23,7 +23,12 @@ class Cidr {
         fun computeWildcardMask(numberOfAddressBits: Int) = ""
 
         @JvmStatic
-        fun computeAvailableIpAddresses(ipAddress: String, numberOfAddressBits: Array<Int>) = arrayOf("")
+        fun computeAvailableIpAddresses(initialIpAddress: Long, numberOfAddressBits: Int) =
+                LongRange(initialIpAddress,
+                        initialIpAddress
+                                + Math.pow(2.0, numberOfAddressBits.toDouble()).toLong() - 1)
+                        .toList()
+                        .toTypedArray()
 
         @JvmStatic
         fun compute(ipAddress: String, numberOfRequestedAddresses: Int) = arrayOf(Cidr())
