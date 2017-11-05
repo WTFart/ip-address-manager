@@ -24,9 +24,10 @@ class Cidr {
 
         @JvmStatic
         fun computeAvailableIpAddresses(initialIpAddress: Long, numberOfAddressBits: Int) =
-                (initialIpAddress until initialIpAddress
-                        + Math.pow(2.0, numberOfAddressBits.toDouble()).toLong())
-                        .map { address -> address }
+                LongRange(initialIpAddress,
+                        initialIpAddress
+                                + Math.pow(2.0, numberOfAddressBits.toDouble()).toLong() - 1)
+                        .toList()
                         .toTypedArray()
 
         @JvmStatic
