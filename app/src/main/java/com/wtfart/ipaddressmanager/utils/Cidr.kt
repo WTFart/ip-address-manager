@@ -13,7 +13,18 @@ data class Cidr(
     companion object {
 
         @JvmStatic
-        fun computeAddressBitsCombination(numberOfRequestedAddresses: Int) = arrayOf(0)
+        fun computeAddressBitsCombination(numberOfRequestedAddresses: Int): Array<Int> {
+            val binaryStr = numberOfRequestedAddresses.toString(2)
+            return binaryStr.mapIndexed { power, digit ->
+                        if (digit.toInt() - '0'.toInt() > 0) {
+                            binaryStr.length - power - 1
+                        } else {
+                            -1
+                        }
+                    }.filter { bit ->
+                        bit > -1
+                    }.toTypedArray()
+        }
 
         @JvmStatic
         fun computeInitialIpAddresses(addressBitsCombination: Array<Int>) = arrayOf("")
