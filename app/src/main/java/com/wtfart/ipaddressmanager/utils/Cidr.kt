@@ -3,7 +3,12 @@ package com.wtfart.ipaddressmanager.utils
 /**
  * Created by mickeycj on 11/2/2017 AD.
  */
-class Cidr {
+data class Cidr(
+        val notation: String,
+        val netmask: Long,
+        val wildcard: Long,
+        val addresses: Array<Long>
+) {
 
     companion object {
 
@@ -26,6 +31,17 @@ class Cidr {
         fun computeAvailableIpAddresses(ipAddress: String, numberOfAddressBits: Array<Int>) = arrayOf("")
 
         @JvmStatic
-        fun compute(ipAddress: String, numberOfRequestedAddresses: Int) = arrayOf(Cidr())
+        fun compute(ipAddress: String, numberOfRequestedAddresses: Int) = arrayOf(
+                Cidr(
+                        "",
+                        0b0,
+                        0b0,
+                        arrayOf(0b0)
+                )
+        )
     }
+
+    override fun equals(other: Any?) = notation == (other as Cidr).notation
+
+    override fun hashCode() = notation.hashCode()
 }
