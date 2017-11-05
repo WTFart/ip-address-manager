@@ -20,7 +20,17 @@ class Cidr {
         fun computeCidrNetmask(numberOfMaskBits: Int) = ""
 
         @JvmStatic
-        fun computeWildcardMask(numberOfAddressBits: Int) = 0b0
+        fun computeWildcardMask(numberOfAddressBits: Int) = IntRange(1, 32)
+                .fold(StringBuilder()) { bitStr, bit ->
+                    bitStr.append(
+                            if (bit > 32 - numberOfAddressBits) {
+                                '1'
+                            } else {
+                                '0'
+                            }
+                    )
+                }.toString()
+                .toLong(2)
 
         @JvmStatic
         fun computeAvailableIpAddresses(ipAddress: String, numberOfAddressBits: Array<Int>) = arrayOf("")
