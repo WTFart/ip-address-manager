@@ -27,7 +27,28 @@ data class Cidr(
         }
 
         @JvmStatic
-        fun computeInitialIpAddresses(addressBitsCombination: Array<Int>) = arrayOf("")
+        fun computeInitialIpAddresses(ipAddress: Long, addressBitsCombination: Array<Int>): Array<Long> {
+            val reducedIpAddress =
+                    ipAddress and IntRange(1, 32)
+                            .fold(StringBuilder()) { bitStr, bit ->
+                                bitStr.append(
+                                        if (bit <= 32 - addressBitsCombination[0]) {
+                                            '1'
+                                        } else {
+                                            '0'
+                                        }
+                                )
+                            }.toString()
+                            .toLong(2)
+            return (0 until addressBitsCombination.size).map { address ->
+                        reducedIpAddress + (0 until address).fold(0L) { offset, index ->
+                            offset + Math.pow(
+                                    2.0,
+                                    addressBitsCombination[index].toDouble()
+                            ).toLong()
+                        }
+                    }.toTypedArray()
+        }
 
         @JvmStatic
         fun computeCidrNotation(ipAddress: String, numberOfMaskBits: Int) = ""
