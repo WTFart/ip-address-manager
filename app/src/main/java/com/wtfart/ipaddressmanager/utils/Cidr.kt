@@ -51,7 +51,8 @@ data class Cidr(
         }
 
         @JvmStatic
-        fun computeCidrNotation(ipAddress: String, numberOfMaskBits: Int) = ""
+        fun computeCidrNotation(ipAddress: String, numberOfMaskBits: Int) =
+                "$ipAddress/$numberOfMaskBits"
 
         @JvmStatic
         fun computeCidrNetmask(numberOfMaskBits: Int) = ""
