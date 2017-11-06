@@ -81,9 +81,8 @@ data class Cidr(
                 .toLong(2)
 
         @JvmStatic
-        fun computeAvailableIpAddresses(initialIpAddress: Long, numberOfAddressBits: Int): Array<Long> {
-            val lastIpAddress =
-                    initialIpAddress + Math.pow(2.0, numberOfAddressBits.toDouble()).toLong() - 1
+        fun computeAvailableIpAddresses(initialIpAddress: Long, wildcardMask: Long): Array<Long> {
+            val lastIpAddress = initialIpAddress + wildcardMask
             return if (initialIpAddress == lastIpAddress) {
                 arrayOf(initialIpAddress)
             } else {
