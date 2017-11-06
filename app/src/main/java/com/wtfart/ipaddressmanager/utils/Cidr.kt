@@ -23,12 +23,15 @@ class Cidr {
         fun computeWildcardMask(numberOfAddressBits: Int) = ""
 
         @JvmStatic
-        fun computeAvailableIpAddresses(initialIpAddress: Long, numberOfAddressBits: Int) =
-                LongRange(initialIpAddress,
-                        initialIpAddress
-                                + Math.pow(2.0, numberOfAddressBits.toDouble()).toLong() - 1)
-                        .toList()
-                        .toTypedArray()
+        fun computeAvailableIpAddresses(initialIpAddress: Long, numberOfAddressBits: Int): Array<Long> {
+            val lastIpAddress =
+                    initialIpAddress + Math.pow(2.0, numberOfAddressBits.toDouble()).toLong() - 1
+            return if (initialIpAddress == lastIpAddress) {
+                arrayOf(initialIpAddress)
+            } else {
+                arrayOf(initialIpAddress, lastIpAddress)
+            }
+        }
 
         @JvmStatic
         fun compute(ipAddress: String, numberOfRequestedAddresses: Int) = arrayOf(Cidr())
