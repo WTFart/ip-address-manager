@@ -1088,7 +1088,7 @@ class CidrTest {
 
     @Test
     fun `Requesting IP address of 192|30|12|15 with 65536 addresses should result in 1 CIDR notation of 192|30|0|0,16`() {
-        val cidrNotations = Cidr.compute("192.30.12.15", 128)
+        val cidrNotations = Cidr.compute("192.30.12.15", 65536)
         assertArrayEquals(
                 arrayOf(
                         Cidr(
