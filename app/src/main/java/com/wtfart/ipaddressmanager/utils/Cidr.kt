@@ -55,7 +55,17 @@ data class Cidr(
                 "$ipAddress/$numberOfMaskBits"
 
         @JvmStatic
-        fun computeCidrNetmask(numberOfMaskBits: Int) = ""
+        fun computeCidrNetmask(numberOfMaskBits: Int) = IntRange(1, 32)
+                .fold(StringBuilder()) { bitStr, bit ->
+                    bitStr.append(
+                            if (bit <= numberOfMaskBits) {
+                                '1'
+                            } else {
+                                '0'
+                            }
+                    )
+                }.toString()
+                .toLong(2)
 
         @JvmStatic
         fun computeWildcardMask(numberOfAddressBits: Int) = ""
