@@ -85,14 +85,18 @@ data class Cidr(
                 Pair(initialIpAddress, initialIpAddress + wildcardMask)
 
         @JvmStatic
-        fun compute(ipAddress: String, numberOfRequestedAddresses: Int) = arrayOf(
-                Cidr(
-                        "",
-                        0b0,
-                        0b0,
-                        Pair(0b0, 0b0)
-                )
-        )
+        fun compute(ipAddress: String, numberOfRequestedAddresses: Int): Array<Cidr> {
+            val addressBitsCombination = computeAddressBitsCombination(numberOfRequestedAddresses)
+            val initialIpAddresses = computeInitialIpAddresses(IpConverter.toBinary(ipAddress), addressBitsCombination)
+            return initialIpAddresses.zip(addressBitsCombination).map { (initialIpAddress, numberOfAddressBits) ->
+                val numberOfMaskBits = 32 - numberOfAddressBits
+                val notation = computeCidrNotation(IpConverter.toIpAddress(initialIpAddress), numberOfMaskBits)
+                val netmask = computeCidrNetmask(numberOfMaskBits)
+                val wildcard = computeWildcardMask(numberOfAddressBits)
+                val addresses = computeIpAddressRange(initialIpAddress, wildcard)
+                Cidr(notation, netmask, wildcard, addresses)
+            }.toTypedArray()
+        }
     }
 
     override fun equals(other: Any?): Boolean {
