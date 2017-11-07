@@ -1,7 +1,5 @@
 package com.wtfart.ipaddressmanager.utils
 
-import java.util.*
-
 /**
  * Created by mickeycj on 11/2/2017 AD.
  */
@@ -9,7 +7,7 @@ data class Cidr(
         val notation: String,
         val netmask: Long,
         val wildcard: Long,
-        val addresses: Array<Long>
+        val addresses: Pair<Long, Long>
 ) {
 
     companion object {
@@ -92,7 +90,7 @@ data class Cidr(
                         "",
                         0b0,
                         0b0,
-                        arrayOf(0b0)
+                        Pair(0b0, 0b0)
                 )
         )
     }
@@ -106,7 +104,7 @@ data class Cidr(
         if (notation != other.notation) return false
         if (netmask != other.netmask) return false
         if (wildcard != other.wildcard) return false
-        if (!Arrays.equals(addresses, other.addresses)) return false
+        if (addresses != other.addresses) return false
 
         return true
     }
@@ -115,7 +113,7 @@ data class Cidr(
         var result = notation.hashCode()
         result = 31 * result + netmask.hashCode()
         result = 31 * result + wildcard.hashCode()
-        result = 31 * result + Arrays.hashCode(addresses)
+        result = 31 * result + addresses.hashCode()
         return result
     }
 }
