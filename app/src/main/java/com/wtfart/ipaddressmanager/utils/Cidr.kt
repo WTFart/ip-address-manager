@@ -1,5 +1,7 @@
 package com.wtfart.ipaddressmanager.utils
 
+import java.util.*
+
 /**
  * Created by mickeycj on 11/2/2017 AD.
  */
@@ -81,9 +83,8 @@ data class Cidr(
                 .toLong(2)
 
         @JvmStatic
-        fun computeAvailableIpAddresses(initialIpAddress: Long, numberOfAddressBits: Int): Array<Long> {
-            val lastIpAddress =
-                    initialIpAddress + Math.pow(2.0, numberOfAddressBits.toDouble()).toLong() - 1
+        fun computeAvailableIpAddresses(initialIpAddress: Long, wildcardMask: Long): Array<Long> {
+            val lastIpAddress = initialIpAddress + wildcardMask
             return if (initialIpAddress == lastIpAddress) {
                 arrayOf(initialIpAddress)
             } else {
@@ -102,7 +103,25 @@ data class Cidr(
         )
     }
 
-    override fun equals(other: Any?) = notation == (other as Cidr).notation
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
 
-    override fun hashCode() = notation.hashCode()
+        other as Cidr
+
+        if (notation != other.notation) return false
+        if (netmask != other.netmask) return false
+        if (wildcard != other.wildcard) return false
+        if (!Arrays.equals(addresses, other.addresses)) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = notation.hashCode()
+        result = 31 * result + netmask.hashCode()
+        result = 31 * result + wildcard.hashCode()
+        result = 31 * result + Arrays.hashCode(addresses)
+        return result
+    }
 }
