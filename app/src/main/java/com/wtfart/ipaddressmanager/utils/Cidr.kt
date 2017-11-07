@@ -71,17 +71,18 @@ data class Cidr(
         }
 
         @JvmStatic
-        fun computeWildcardMask(numberOfAddressBits: Int) = IntRange(1, 32)
-                .fold(StringBuilder()) { bitStr, bit ->
-                    bitStr.append(
-                            if (bit > 32 - numberOfAddressBits) {
-                                '1'
-                            } else {
-                                '0'
-                            }
-                    )
-                }.toString()
-                .toLong(2)
+        fun computeWildcardMask(numberOfAddressBits: Int): Long {
+            return IntRange(1, 32).fold(StringBuilder()) { bitStr, bit ->
+                bitStr.append(
+                        if (bit > 32 - numberOfAddressBits) {
+                            '1'
+                        } else {
+                            '0'
+                        }
+                )
+            }.toString()
+            .toLong(2)
+        }
 
         @JvmStatic
         fun computeIpAddressRange(initialIpAddress: Long, wildcardMask: Long) =
