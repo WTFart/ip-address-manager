@@ -15,15 +15,16 @@ data class Cidr(
         @JvmStatic
         fun computeAddressBitsCombination(numberOfRequestedAddresses: Int): Array<Int> {
             val binaryStr = numberOfRequestedAddresses.toString(2)
+            val length = binaryStr.length
             return binaryStr.mapIndexed { power, digit ->
-                        if (digit.toInt() - '0'.toInt() > 0) {
-                            binaryStr.length - power - 1
-                        } else {
-                            -1
-                        }
-                    }.filter { bit ->
-                        bit > -1
-                    }.toTypedArray()
+                if (digit.toInt() - '0'.toInt() > 0) {
+                    length - power - 1
+                } else {
+                    -1
+                }
+            }.filter { bit ->
+                bit > -1
+            }.toTypedArray()
         }
 
         @JvmStatic
