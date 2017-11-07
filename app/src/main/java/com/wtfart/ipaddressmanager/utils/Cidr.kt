@@ -1,7 +1,5 @@
 package com.wtfart.ipaddressmanager.utils
 
-import java.util.*
-
 /**
  * Created by mickeycj on 11/2/2017 AD.
  */
@@ -9,7 +7,7 @@ data class Cidr(
         val notation: String,
         val netmask: Long,
         val wildcard: Long,
-        val addresses: Array<Long>
+        val addresses: Pair<Long, Long>
 ) {
 
     companion object {
@@ -87,14 +85,18 @@ data class Cidr(
                 Pair(initialIpAddress, initialIpAddress + wildcardMask)
 
         @JvmStatic
-        fun compute(ipAddress: String, numberOfRequestedAddresses: Int) = arrayOf(
-                Cidr(
-                        "",
-                        0b0,
-                        0b0,
-                        arrayOf(0b0)
-                )
-        )
+        fun compute(ipAddress: String, numberOfRequestedAddresses: Int): Array<Cidr> {
+            val addressBitsCombination = computeAddressBitsCombination(numberOfRequestedAddresses)
+            val initialIpAddresses = computeInitialIpAddresses(IpConverter.toBinary(ipAddress), addressBitsCombination)
+            return initialIpAddresses.zip(addressBitsCombination).map { (initialIpAddress, numberOfAddressBits) ->
+                val numberOfMaskBits = 32 - numberOfAddressBits
+                val notation = computeCidrNotation(IpConverter.toIpAddress(initialIpAddress), numberOfMaskBits)
+                val netmask = computeCidrNetmask(numberOfMaskBits)
+                val wildcard = computeWildcardMask(numberOfAddressBits)
+                val addresses = computeIpAddressRange(initialIpAddress, wildcard)
+                Cidr(notation, netmask, wildcard, addresses)
+            }.toTypedArray()
+        }
     }
 
     override fun equals(other: Any?): Boolean {
@@ -106,7 +108,7 @@ data class Cidr(
         if (notation != other.notation) return false
         if (netmask != other.netmask) return false
         if (wildcard != other.wildcard) return false
-        if (!Arrays.equals(addresses, other.addresses)) return false
+        if (addresses != other.addresses) return false
 
         return true
     }
@@ -115,7 +117,7 @@ data class Cidr(
         var result = notation.hashCode()
         result = 31 * result + netmask.hashCode()
         result = 31 * result + wildcard.hashCode()
-        result = 31 * result + Arrays.hashCode(addresses)
+        result = 31 * result + addresses.hashCode()
         return result
     }
 }
