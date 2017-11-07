@@ -83,7 +83,7 @@ data class Cidr(
                 .toLong(2)
 
         @JvmStatic
-        fun computeAvailableIpAddresses(initialIpAddress: Long, wildcardMask: Long) =
+        fun computeIpAddressRange(initialIpAddress: Long, wildcardMask: Long) =
                 Pair(initialIpAddress, initialIpAddress + wildcardMask)
 
         @JvmStatic
