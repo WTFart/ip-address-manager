@@ -31,6 +31,7 @@ class CidrTest {
                         0b11000000000111100000110000000011
                 )
         )
+
         assertTrue(cidr1 == cidr2)
     }
 
@@ -54,6 +55,7 @@ class CidrTest {
                         0b11000000000111100000110000000011
                 )
         )
+
         assertTrue(cidr1.hashCode() == cidr2.hashCode())
     }
 
@@ -77,6 +79,7 @@ class CidrTest {
                         0b11000000000111100000110000000001
                 )
         )
+
         assertFalse(cidr1 == cidr2)
     }
 
@@ -100,6 +103,7 @@ class CidrTest {
                         0b11000000000111100000110000000001
                 )
         )
+
         assertFalse(cidr1.hashCode() == cidr2.hashCode())
     }
 
