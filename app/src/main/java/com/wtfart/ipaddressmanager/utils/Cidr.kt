@@ -16,6 +16,7 @@ data class Cidr(
         fun computeAddressBitsCombination(numberOfRequestedAddresses: Int): Array<Int> {
             val binaryStr = numberOfRequestedAddresses.toString(2)
             val length = binaryStr.length
+
             return binaryStr.mapIndexed { power, digit ->
                 if (digit.toInt() - '0'.toInt() > 0) {
                     length - power - 1
@@ -40,6 +41,7 @@ data class Cidr(
                         )
                     }.toString()
                     .toLong(2)
+
             return (0 until addressBitsCombination.size).map { address ->
                 reducedIpAddress +
                         (0 until address).fold(0L) { offset, index ->
@@ -96,6 +98,7 @@ data class Cidr(
                     IpConverter.toBinary(ipAddress),
                     addressBitsCombination
             )
+
             return initialIpAddresses.zip(addressBitsCombination)
                     .map { (initialIpAddress, numberOfAddressBits) ->
                         val numberOfMaskBits = 32 - numberOfAddressBits
@@ -106,6 +109,7 @@ data class Cidr(
                         val netmask = computeCidrNetmask(numberOfMaskBits)
                         val wildcardMask = computeWildcardMask(numberOfAddressBits)
                         val ipAddressRange = computeIpAddressRange(initialIpAddress, wildcardMask)
+
                         Cidr(notation, netmask, wildcardMask, ipAddressRange)
                     }.toTypedArray()
         }
@@ -130,6 +134,7 @@ data class Cidr(
         result = 31 * result + netmask.hashCode()
         result = 31 * result + wildcardMask.hashCode()
         result = 31 * result + ipAddressRange.hashCode()
+
         return result
     }
 }
