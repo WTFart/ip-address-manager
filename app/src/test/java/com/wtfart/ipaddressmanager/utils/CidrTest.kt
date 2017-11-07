@@ -893,7 +893,8 @@ class CidrTest {
 
     @Test
     fun `Requesting IP address of 192|30|12|15 with 1 address should result in 1 CIDR notation of 192|30|12|15,32`() {
-        val cidrNotations = Cidr.compute("192.30.12.15", 1)
+        val notations = Cidr.compute("192.30.12.15", 1)
+
         assertArrayEquals(
                 arrayOf(
                         Cidr(
@@ -906,13 +907,14 @@ class CidrTest {
                                 )
                         )
                 ),
-                cidrNotations
+                notations
         )
     }
 
     @Test
     fun `Requesting IP address of 192|30|12|15 with 2 addresses should result in 1 CIDR notation of 192|30|12|14,31`() {
-        val cidrNotations = Cidr.compute("192.30.12.15", 2)
+        val notations = Cidr.compute("192.30.12.15", 2)
+
         assertArrayEquals(
                 arrayOf(
                         Cidr(
@@ -925,13 +927,14 @@ class CidrTest {
                                 )
                         )
                 ),
-                cidrNotations
+                notations
         )
     }
 
     @Test
     fun `Requesting IP address of 192|30|12|15 with 3 addresses should result in 2 CIDR notations of 192|30|12|14,31 and 192|30|12|16,32`() {
-        val cidrNotations = Cidr.compute("192.30.12.15", 3)
+        val notations = Cidr.compute("192.30.12.15", 3)
+
         assertArrayEquals(
                 arrayOf(
                         Cidr(
@@ -953,13 +956,14 @@ class CidrTest {
                                 )
                         )
                 ),
-                cidrNotations
+                notations
         )
     }
 
     @Test
     fun `Requesting IP address of 192|30|12|15 with 8 addresses should result in 1 CIDR notation of 192|30|12|8,29`() {
-        val cidrNotations = Cidr.compute("192.30.12.15", 8)
+        val notations = Cidr.compute("192.30.12.15", 8)
+
         assertArrayEquals(
                 arrayOf(
                         Cidr(
@@ -972,13 +976,14 @@ class CidrTest {
                                 )
                         )
                 ),
-                cidrNotations
+                notations
         )
     }
 
     @Test
     fun `Requesting IP address of 192|30|12|15 with 11 addresses should result in 3 CIDR notations of 192|30|12|8,29, 192|30|12|16,31, and 192|30|12|18,32`() {
-        val cidrNotations = Cidr.compute("192.30.12.15", 11)
+        val notations = Cidr.compute("192.30.12.15", 11)
+
         assertArrayEquals(
                 arrayOf(
                         Cidr(
@@ -1009,13 +1014,14 @@ class CidrTest {
                                 )
                         )
                 ),
-                cidrNotations
+                notations
         )
     }
 
     @Test
     fun `Requesting IP address of 192|30|12|15 with 108 addresses should result in 4 CIDR notations of 192|30|12|0,26, 192|30|12|64,27, 192|30|12|96,29, and 192|30|12|104,30`() {
-        val cidrNotations = Cidr.compute("192.30.12.15", 108)
+        val notations = Cidr.compute("192.30.12.15", 108)
+
         assertArrayEquals(
                 arrayOf(
                         Cidr(
@@ -1055,13 +1061,14 @@ class CidrTest {
                                 )
                         )
                 ),
-                cidrNotations
+                notations
         )
     }
 
     @Test
     fun `Requesting IP address of 192|30|12|15 with 121 addresses should result in 5 CIDR notations of 192|30|12|0,26, 192|30|12|64,27, 192|30|12|96,28, 192|30|12|112,29, and 192|30|12|120,32`() {
-        val cidrNotations = Cidr.compute("192.30.12.15", 121)
+        val notations = Cidr.compute("192.30.12.15", 121)
+
         assertArrayEquals(
                 arrayOf(
                         Cidr(
@@ -1110,13 +1117,14 @@ class CidrTest {
                                 )
                         )
                 ),
-                cidrNotations
+                notations
         )
     }
 
     @Test
     fun `Requesting IP address of 192|30|12|15 with 128 addresses should result in 1 CIDR notation of 192|30|12|0,25`() {
-        val cidrNotations = Cidr.compute("192.30.12.15", 128)
+        val notations = Cidr.compute("192.30.12.15", 128)
+
         assertArrayEquals(
                 arrayOf(
                         Cidr(
@@ -1129,13 +1137,14 @@ class CidrTest {
                                 )
                         )
                 ),
-                cidrNotations
+                notations
         )
     }
 
     @Test
     fun `Requesting IP address of 192|30|12|15 with 591 addresses should result in 6 CIDR notations of 192|30|12|0,23, 192|30|14|0,26, 192|30|14|64,29, 192|30|14|72,30, 192|30|14|76,31, and 192|30|14|78,32`() {
-        val cidrNotations = Cidr.compute("192.30.12.15", 591)
+        val notations = Cidr.compute("192.30.12.15", 591)
+
         assertArrayEquals(
                 arrayOf(
                         Cidr(
@@ -1193,13 +1202,14 @@ class CidrTest {
                                 )
                         )
                 ),
-                cidrNotations
+                notations
         )
     }
 
     @Test
     fun `Requesting IP address of 192|30|12|15 with 1367 addresses should result in 7 CIDR notations of 192|30|12|0,22, 192|30|16|0,24, 192|30|17|0,26, 192|30|17|64,28, 192|30|17|80,30, 192|30|17|84,31, and 192|30|17|86,32`() {
-        val cidrNotations = Cidr.compute("192.30.12.15", 1367)
+        val notations = Cidr.compute("192.30.12.15", 1367)
+
         assertArrayEquals(
                 arrayOf(
                         Cidr(
@@ -1266,13 +1276,14 @@ class CidrTest {
                                 )
                         )
                 ),
-                cidrNotations
+                notations
         )
     }
 
     @Test
     fun `Requesting IP address of 192|30|12|15 with 10682 addresses should result in 8 CIDR notations of 192|30|0|0,19, 192|30|32|0,21, 192|30|40|0,24, 192|30|41|0,25, 192|30|41|128,27, 192|30|41|160,28, 192|30|41|176,29, and 192|30|41|184,31`() {
-        val cidrNotations = Cidr.compute("192.30.12.15", 10682)
+        val notations = Cidr.compute("192.30.12.15", 10682)
+
         assertArrayEquals(
                 arrayOf(
                         Cidr(
@@ -1348,13 +1359,14 @@ class CidrTest {
                                 )
                         )
                 ),
-                cidrNotations
+                notations
         )
     }
 
     @Test
     fun `Requesting IP address of 192|30|12|15 with 65536 addresses should result in 1 CIDR notation of 192|30|0|0,16`() {
-        val cidrNotations = Cidr.compute("192.30.12.15", 65536)
+        val notations = Cidr.compute("192.30.12.15", 65536)
+
         assertArrayEquals(
                 arrayOf(
                         Cidr(
@@ -1367,7 +1379,7 @@ class CidrTest {
                                 )
                         )
                 ),
-                cidrNotations
+                notations
         )
     }
 }
