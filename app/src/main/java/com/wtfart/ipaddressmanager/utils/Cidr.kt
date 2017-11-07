@@ -54,12 +54,12 @@ data class Cidr(
         }
 
         @JvmStatic
-        fun computeCidrNotation(ipAddress: String, numberOfMaskBits: Int): String {
+        fun computeNotation(ipAddress: String, numberOfMaskBits: Int): String {
             return "$ipAddress/$numberOfMaskBits"
         }
 
         @JvmStatic
-        fun computeCidrNetmask(numberOfMaskBits: Int): Long {
+        fun computeNetmask(numberOfMaskBits: Int): Long {
             return IntRange(1, 32).fold(StringBuilder()) { bitStr, bit ->
                 bitStr.append(
                         if (bit <= numberOfMaskBits) {
@@ -102,11 +102,11 @@ data class Cidr(
             return initialIpAddresses.zip(addressBitsCombination)
                     .map { (initialIpAddress, numberOfAddressBits) ->
                         val numberOfMaskBits = 32 - numberOfAddressBits
-                        val notation = computeCidrNotation(
+                        val notation = computeNotation(
                                 IpConverter.toIpAddress(initialIpAddress),
                                 numberOfMaskBits
                         )
-                        val netmask = computeCidrNetmask(numberOfMaskBits)
+                        val netmask = computeNetmask(numberOfMaskBits)
                         val wildcardMask = computeWildcardMask(numberOfAddressBits)
                         val ipAddressRange = computeIpAddressRange(initialIpAddress, wildcardMask)
 
