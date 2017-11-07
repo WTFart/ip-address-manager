@@ -376,100 +376,100 @@ class CidrTest {
 
     @Test
     fun `IP Address of 192|30|12|15 and 32 mask bits should result in 192|30|12|15,32 CIDR notation`() {
-        val cidrNotation = Cidr.computeNotation("192.30.12.15", 32)
+        val notation = Cidr.computeNotation("192.30.12.15", 32)
 
-        assertEquals("192.30.12.15/32", cidrNotation)
+        assertEquals("192.30.12.15/32", notation)
     }
 
     @Test
     fun `IP Address of 192|30|12|15 and 31 mask bits should result in 192|30|12|14,31 CIDR notation`() {
-        val cidrNotation = Cidr.computeNotation("192.30.12.14", 31)
+        val notation = Cidr.computeNotation("192.30.12.14", 31)
 
-        assertEquals("192.30.12.14/31", cidrNotation)
+        assertEquals("192.30.12.14/31", notation)
     }
 
     @Test
     fun `IP Address of 192|30|14|72 and 30 mask bits should result in 192|30|14|72,30 CIDR notation`() {
-        val cidrNotation = Cidr.computeNotation("192.30.14.72", 30)
+        val notation = Cidr.computeNotation("192.30.14.72", 30)
 
-        assertEquals("192.30.14.72/30", cidrNotation)
+        assertEquals("192.30.14.72/30", notation)
     }
 
     @Test
     fun `IP Address of 192|30|12|8 and 29 mask bits should result in 192|30|12|8,29 CIDR notation`() {
-        val cidrNotation = Cidr.computeNotation("192.30.12.8", 29)
+        val notation = Cidr.computeNotation("192.30.12.8", 29)
 
-        assertEquals("192.30.12.8/29", cidrNotation)
+        assertEquals("192.30.12.8/29", notation)
     }
 
     @Test
     fun `IP Address of 192|30|12|96 and 28 mask bits should result in 192|30|12|96,28 CIDR notation`() {
-        val cidrNotation = Cidr.computeNotation("192.30.12.96", 28)
+        val notation = Cidr.computeNotation("192.30.12.96", 28)
 
-        assertEquals("192.30.12.96/28", cidrNotation)
+        assertEquals("192.30.12.96/28", notation)
     }
 
     @Test
     fun `IP Address of 192|30|12|64 and 27 mask bits should result in 192|30|12|64,27 CIDR notation`() {
-        val cidrNotation = Cidr.computeNotation("192.30.12.64", 27)
+        val notation = Cidr.computeNotation("192.30.12.64", 27)
 
-        assertEquals("192.30.12.64/27", cidrNotation)
+        assertEquals("192.30.12.64/27", notation)
     }
 
     @Test
     fun `IP Address of 192|30|12|0 and 26 mask bits should result in 192|30|12|0,26 CIDR notation`() {
-        val cidrNotation = Cidr.computeNotation("192.30.12.0", 26)
+        val notation = Cidr.computeNotation("192.30.12.0", 26)
 
-        assertEquals("192.30.12.0/26", cidrNotation)
+        assertEquals("192.30.12.0/26", notation)
     }
 
     @Test
     fun `IP Address of 192|30|12|0 and 25 mask bits should result in 192|30|12|0,25 CIDR notation`() {
-        val cidrNotation = Cidr.computeNotation("192.30.12.0", 25)
+        val notation = Cidr.computeNotation("192.30.12.0", 25)
 
-        assertEquals("192.30.12.0/25", cidrNotation)
+        assertEquals("192.30.12.0/25", notation)
     }
 
     @Test
     fun `IP Address of 192|30|16|0 and 24 mask bits should result in 192|30|16|0,24 CIDR notation`() {
-        val cidrNotation = Cidr.computeNotation("192.30.16.0", 24)
+        val notation = Cidr.computeNotation("192.30.16.0", 24)
 
-        assertEquals("192.30.16.0/24", cidrNotation)
+        assertEquals("192.30.16.0/24", notation)
     }
 
     @Test
     fun `IP Address of 192|30|12|0 and 23 mask bits should result in 192|30|12|0,23 CIDR notation`() {
-        val cidrNotation = Cidr.computeNotation("192.30.12.0", 23)
+        val notation = Cidr.computeNotation("192.30.12.0", 23)
 
-        assertEquals("192.30.12.0/23", cidrNotation)
+        assertEquals("192.30.12.0/23", notation)
     }
 
     @Test
     fun `IP Address of 192|30|12|0 and 22 mask bits should result in 192|30|12|0,22 CIDR notation`() {
-        val cidrNotation = Cidr.computeNotation("192.30.12.0", 22)
+        val notation = Cidr.computeNotation("192.30.12.0", 22)
 
-        assertEquals("192.30.12.0/22", cidrNotation)
+        assertEquals("192.30.12.0/22", notation)
     }
 
     @Test
     fun `IP Address of 192|30|32|0 and 21 mask bits should result in 192|30|32|0,21 CIDR notation`() {
-        val cidrNotation = Cidr.computeNotation("192.30.32.0", 21)
+        val notation = Cidr.computeNotation("192.30.32.0", 21)
 
-        assertEquals("192.30.32.0/21", cidrNotation)
+        assertEquals("192.30.32.0/21", notation)
     }
 
     @Test
     fun `IP Address of 192|30|0|0 and 19 mask bits should result in 192|30|0|0,19 CIDR notation`() {
-        val cidrNotation = Cidr.computeNotation("192.30.0.0", 19)
+        val notation = Cidr.computeNotation("192.30.0.0", 19)
 
-        assertEquals("192.30.0.0/19", cidrNotation)
+        assertEquals("192.30.0.0/19", notation)
     }
 
     @Test
     fun `IP Address of 192|30|0|0 and 16 mask bits should result in 192|30|0|0,16 CIDR notation`() {
-        val cidrNotation = Cidr.computeNotation("192.30.0.0", 16)
+        val notation = Cidr.computeNotation("192.30.0.0", 16)
 
-        assertEquals("192.30.0.0/16", cidrNotation)
+        assertEquals("192.30.0.0/16", notation)
     }
 
     @Test
