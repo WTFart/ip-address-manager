@@ -1,8 +1,9 @@
 package com.wtfart.ipaddressmanager
 
-import android.support.v7.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.support.v7.app.AppCompatActivity
 
 class SplashActivity : AppCompatActivity() {
 
@@ -17,7 +18,11 @@ class SplashActivity : AppCompatActivity() {
 
         mHandler = Handler()
         mRunnable = Runnable {
-            TODO("Implement an entry point for the next activity - MainActivity")
+            //Uncomment the lines below to enable an entry point to MainActivity
+
+            //startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+            //finish()
+            //overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
         }
     }
 
