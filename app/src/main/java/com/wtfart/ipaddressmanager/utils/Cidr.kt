@@ -6,8 +6,8 @@ package com.wtfart.ipaddressmanager.utils
 data class Cidr(
         val notation: String,
         val netmask: Long,
-        val wildcard: Long,
-        val addresses: Pair<Long, Long>
+        val wildcardMask: Long,
+        val ipAddressRange: Pair<Long, Long>
 ) {
 
     companion object {
@@ -107,8 +107,8 @@ data class Cidr(
 
         if (notation != other.notation) return false
         if (netmask != other.netmask) return false
-        if (wildcard != other.wildcard) return false
-        if (addresses != other.addresses) return false
+        if (wildcardMask != other.wildcardMask) return false
+        if (ipAddressRange != other.ipAddressRange) return false
 
         return true
     }
@@ -116,8 +116,8 @@ data class Cidr(
     override fun hashCode(): Int {
         var result = notation.hashCode()
         result = 31 * result + netmask.hashCode()
-        result = 31 * result + wildcard.hashCode()
-        result = 31 * result + addresses.hashCode()
+        result = 31 * result + wildcardMask.hashCode()
+        result = 31 * result + ipAddressRange.hashCode()
         return result
     }
 }
