@@ -85,8 +85,9 @@ data class Cidr(
         }
 
         @JvmStatic
-        fun computeIpAddressRange(initialIpAddress: Long, wildcardMask: Long) =
-                Pair(initialIpAddress, initialIpAddress + wildcardMask)
+        fun computeIpAddressRange(initialIpAddress: Long, wildcardMask: Long): Pair<Long, Long> {
+            return Pair(initialIpAddress, initialIpAddress + wildcardMask)
+        }
 
         @JvmStatic
         fun compute(ipAddress: String, numberOfRequestedAddresses: Int): Array<Cidr> {
