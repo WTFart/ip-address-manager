@@ -13,8 +13,8 @@ data class Cidr(
     companion object {
 
         @JvmStatic
-        fun computeAddressBitsCombination(numberOfRequestedAddresses: Int): Array<Int> {
-            val binaryStr = numberOfRequestedAddresses.toString(2)
+        fun computeAddressBitsCombination(requestedAddresses: Int): Array<Int> {
+            val binaryStr = requestedAddresses.toString(2)
             val length = binaryStr.length
 
             return binaryStr.mapIndexed { power, digit ->
@@ -54,15 +54,13 @@ data class Cidr(
         }
 
         @JvmStatic
-        fun computeNotation(ipAddress: String, numberOfMaskBits: Int): String {
-            return "$ipAddress/$numberOfMaskBits"
-        }
+        fun computeNotation(ipAddress: String, maskBits: Int) = "$ipAddress/$maskBits"
 
         @JvmStatic
-        fun computeNetmask(numberOfMaskBits: Int): Long {
+        fun computeNetmask(maskBits: Int): Long {
             return IntRange(1, 32).fold(StringBuilder()) { bitStr, bit ->
                 bitStr.append(
-                        if (bit <= numberOfMaskBits) {
+                        if (bit <= maskBits) {
                             '1'
                         } else {
                             '0'
@@ -73,10 +71,10 @@ data class Cidr(
         }
 
         @JvmStatic
-        fun computeWildcardMask(numberOfAddressBits: Int): Long {
+        fun computeWildcardMask(addressBits: Int): Long {
             return IntRange(1, 32).fold(StringBuilder()) { bitStr, bit ->
                 bitStr.append(
-                        if (bit > 32 - numberOfAddressBits) {
+                        if (bit > 32 - addressBits) {
                             '1'
                         } else {
                             '0'
@@ -92,8 +90,8 @@ data class Cidr(
         }
 
         @JvmStatic
-        fun compute(ipAddress: String, numberOfRequestedAddresses: Int): Array<Cidr> {
-            val addressBitsCombination = computeAddressBitsCombination(numberOfRequestedAddresses)
+        fun compute(ipAddress: String, requestedAddresses: Int): Array<Cidr> {
+            val addressBitsCombination = computeAddressBitsCombination(requestedAddresses)
             val initialIpAddresses = computeInitialIpAddresses(
                     IpConverter.toBinary(ipAddress),
                     addressBitsCombination
