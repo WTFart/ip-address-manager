@@ -1,13 +1,12 @@
 package com.wtfart.ipaddressmanager
 
-import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 
 class SplashActivity : AppCompatActivity() {
 
-    private val DELAY_TIME = 3000L
+    private val delayTime = 3000L
 
     private lateinit var mHandler: Handler
     private lateinit var mRunnable: Runnable
@@ -28,7 +27,7 @@ class SplashActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        mHandler.postDelayed(mRunnable, DELAY_TIME)
+        mHandler.postDelayed(mRunnable, delayTime)
     }
 
     override fun onPause() {
