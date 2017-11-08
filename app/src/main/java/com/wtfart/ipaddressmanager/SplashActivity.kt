@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity
 
 class SplashActivity : AppCompatActivity() {
 
-    private val delayTime = 3000L
+    private val mDelayTime = 3000L
 
     private lateinit var mHandler: Handler
     private lateinit var mRunnable: Runnable
@@ -27,7 +27,7 @@ class SplashActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-        mHandler.postDelayed(mRunnable, delayTime)
+        mHandler.postDelayed(mRunnable, mDelayTime)
     }
 
     override fun onPause() {
