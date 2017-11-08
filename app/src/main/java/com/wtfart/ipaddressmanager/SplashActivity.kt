@@ -18,11 +18,9 @@ class SplashActivity : AppCompatActivity() {
 
         mHandler = Handler()
         mRunnable = Runnable {
-            //Uncomment the lines below to enable an entry point to MainActivity
-
-            //startActivity(Intent(this@SplashActivity, MainActivity::class.java))
-            //finish()
-            //overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+            startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+            finish()
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
         }
     }
 
