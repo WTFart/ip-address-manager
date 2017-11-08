@@ -27,11 +27,13 @@ class SplashActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+
         mHandler.postDelayed(mRunnable, delayTime)
     }
 
     override fun onPause() {
         super.onPause()
+
         mHandler.removeCallbacks(mRunnable)
     }
 }
