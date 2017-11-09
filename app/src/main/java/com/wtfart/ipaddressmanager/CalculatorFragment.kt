@@ -8,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
+import kotlinx.android.synthetic.main.fragment_calculator.*
+
 class CalculatorFragment : Fragment() {
 
     companion object {
@@ -34,5 +36,14 @@ class CalculatorFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        button_calculate.setOnClickListener {
+            //TODO Implement CIDR calculation here
+
+        }
+        button_clear.setOnClickListener {
+            //TODO Clear EditTexts
+
+        }
     }
 }
