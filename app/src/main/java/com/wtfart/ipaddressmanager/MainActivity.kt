@@ -10,10 +10,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //supportFragmentManager
-        //        .beginTransaction()
-        //        .add(R.id.fragment_container, CalculatorFragment.newInstance())
-        //        .commit()
+        supportFragmentManager
+                .beginTransaction()
+                .add(R.id.fragment_container, CalculatorFragment.newInstance())
+                .commit()
     }
 
     fun switchFragment(fragment: Fragment) {
