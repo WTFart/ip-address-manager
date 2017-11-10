@@ -16,10 +16,12 @@ class DetailFragment : Fragment() {
 
     companion object {
 
+        private val CIDR_KEY = "CIDR"
+
         @JvmStatic
         fun newInstance(cidr: Cidr): DetailFragment {
             val args = Bundle()
-            args.putSerializable("CIDR", cidr)
+            args.putSerializable(CIDR_KEY, cidr)
             val fragment = DetailFragment()
             fragment.arguments = args
 
@@ -40,7 +42,9 @@ class DetailFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mCidr = arguments.getSerializable("CIDR") as Cidr
+        mCidr = arguments.getSerializable(CIDR_KEY) as Cidr
+
+        mListener.title = mCidr.notation
     }
 
     override fun onCreateView(
@@ -54,8 +58,18 @@ class DetailFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        textview_cidr_notation.text = mCidr.notation
-        textview_cidr_netmask.text = IpConverter.toIpAddress(mCidr.netmask)
+        textview_notation.text = mCidr.notation
+        textview_netmask.text = IpConverter.toIpAddress(mCidr.netmask)
         textview_wildcard_mask.text = IpConverter.toIpAddress(mCidr.wildcardMask)
+        val (initialIpAddress, lastIpAddress) = mCidr.ipAddressRange
+        textview_ip_address_range.text = if (initialIpAddress == lastIpAddress) {
+            IpConverter.toIpAddress(initialIpAddress)
+        } else {
+            getString(
+                    R.string.detail_format_ip_address_range,
+                    IpConverter.toIpAddress(initialIpAddress),
+                    IpConverter.toIpAddress(lastIpAddress)
+            )
+        }
     }
 }

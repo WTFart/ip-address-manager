@@ -41,12 +41,19 @@ class CalculatorFragment : Fragment() {
         return inflater?.inflate(R.layout.fragment_calculator, container, false)
     }
 
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        mListener.setTitle(R.string.calculator_name)
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
         button_calculate.setOnClickListener {
             try {
                 calculate()
+                mListener.requestFocus()
             } catch (e: IllegalArgumentException) {
                 Toast.makeText(mListener, getString(R.string.calculator_error_input), Toast.LENGTH_LONG).show()
             }
@@ -77,8 +84,7 @@ class CalculatorFragment : Fragment() {
                 edittext_input_num_addresses.text.toString().toInt()
         )
 
-        textview_required_cidr_notations.text =
-                getString(R.string.calculator_info_required_cidr_notations, mCidrNotations.size)
+        textview_required_cidr_notations.text = mCidrNotations.size.toString()
         mCidrNotationsAdapter = ArrayAdapter(
                 mListener,
                 android.R.layout.simple_list_item_1,
