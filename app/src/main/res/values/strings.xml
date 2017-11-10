@@ -1,6 +1,6 @@
 <resources>
     <!--Application Name-->
-    <string name="app_name">IP Address Manager</string>
+    <string name="app_name">CIDR Calculator</string>
 
     <!--Calculator Fragment-->
     <string name="calculator_hint_ip_address">IP Address</string>
