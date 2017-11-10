@@ -16,10 +16,12 @@ class DetailFragment : Fragment() {
 
     companion object {
 
+        private val CIDR_KEY = "CIDR"
+
         @JvmStatic
         fun newInstance(cidr: Cidr): DetailFragment {
             val args = Bundle()
-            args.putSerializable("CIDR", cidr)
+            args.putSerializable(CIDR_KEY, cidr)
             val fragment = DetailFragment()
             fragment.arguments = args
 
@@ -40,7 +42,7 @@ class DetailFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mCidr = arguments.getSerializable("CIDR") as Cidr
+        mCidr = arguments.getSerializable(CIDR_KEY) as Cidr
     }
 
     override fun onCreateView(
