@@ -7,7 +7,7 @@
     android:weightSum="1.0">
 
     <LinearLayout
-        android:id="@+id/layout_input"
+        android:id="@+id/layout_calculator_input"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.30"
@@ -48,7 +48,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/layout_output"
+        android:id="@+id/layout_calculator_output"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -56,8 +56,8 @@
         android:visibility="invisible">
 
         <TextView
-            android:id="@+id/textview_cidr"
-            android:text="Require CIDR Notations:"
+            android:id="@+id/textview_required_cidr_notations"
+            android:text="Require CIDR Notations: "
             android:textSize="16sp"
             android:textColor="@color/Black"
             android:layout_marginStart="16dp"
@@ -66,7 +66,7 @@
             android:layout_height="wrap_content" />
 
         <ListView
-            android:id="@+id/listview_result"
+            android:id="@+id/listview_cidr_notations"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>
