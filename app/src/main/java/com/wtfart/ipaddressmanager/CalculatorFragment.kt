@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 
 import kotlinx.android.synthetic.main.fragment_calculator.*
 
@@ -45,20 +46,24 @@ class CalculatorFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         button_calculate.setOnClickListener {
-            mCidrNotations = Cidr.compute(
-                    edittext_input_ip_address.text.toString(),
-                    edittext_input_num_addresses.text.toString().toInt()
-            )
+            try {
+                mCidrNotations = Cidr.compute(
+                        edittext_input_ip_address.text.toString(),
+                        edittext_input_num_addresses.text.toString().toInt()
+                )
 
-            textview_required_cidr_notations.text =
-                    getString(R.string.calculator_info_required_cidr_notations, mCidrNotations.size)
-            mCidrNotationsAdapter = ArrayAdapter(
-                    mListener,
-                    android.R.layout.simple_list_item_1,
-                    mCidrNotations.map { cidrNotation -> cidrNotation.notation }
-            )
-            listview_cidr_notations.adapter = mCidrNotationsAdapter
-            layout_calculator_output.visibility = View.VISIBLE
+                textview_required_cidr_notations.text =
+                        getString(R.string.calculator_info_required_cidr_notations, mCidrNotations.size)
+                mCidrNotationsAdapter = ArrayAdapter(
+                        mListener,
+                        android.R.layout.simple_list_item_1,
+                        mCidrNotations.map { cidrNotation -> cidrNotation.notation }
+                )
+                listview_cidr_notations.adapter = mCidrNotationsAdapter
+                layout_calculator_output.visibility = View.VISIBLE
+            } catch (e: IllegalArgumentException) {
+                Toast.makeText(mListener, getString(R.string.calculator_error_input), Toast.LENGTH_LONG).show()
+            }
         }
         button_clear.setOnClickListener {
             edittext_input_ip_address.setText("")
