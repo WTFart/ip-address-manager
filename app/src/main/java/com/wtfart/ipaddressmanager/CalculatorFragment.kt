@@ -63,6 +63,7 @@ class CalculatorFragment : Fragment() {
         button_clear.setOnClickListener {
             edittext_input_ip_address.setText("")
             edittext_input_num_addresses.setText("")
+            layout_calculator_output.visibility = View.INVISIBLE
         }
     }
 }
