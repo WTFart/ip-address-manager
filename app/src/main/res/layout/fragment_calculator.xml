@@ -3,6 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
     android:orientation="vertical"
     android:weightSum="1.0">
 
@@ -11,8 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.30"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
         android:orientation="vertical">
 
         <EditText
@@ -53,21 +53,29 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.70"
+        android:paddingTop="8dp"
         android:visibility="invisible">
 
         <TextView
             android:id="@+id/textview_required_cidr_notations"
             android:text="@string/calculator_info_required_cidr_notations"
             android:textSize="16sp"
-            android:textColor="@color/Black"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_grey_line" />
 
         <ListView
             android:id="@+id/listview_cidr_notations"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_marginStart="-16dp"
+            android:layout_marginEnd="-16dp" />
     </LinearLayout>
 </LinearLayout>
