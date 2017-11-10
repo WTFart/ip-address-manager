@@ -1,4 +1,8 @@
-package com.wtfart.ipaddressmanager.utils
+package com.wtfart.ipaddressmanager.model
+
+import com.wtfart.ipaddressmanager.util.IpConverter
+
+import java.io.Serializable
 
 /**
  * Created by mickeycj on 11/2/2017 AD.
@@ -8,7 +12,7 @@ data class Cidr(
         val netmask: Long,
         val wildcardMask: Long,
         val ipAddressRange: Pair<Long, Long>
-) {
+) : Serializable {
 
     companion object {
 
