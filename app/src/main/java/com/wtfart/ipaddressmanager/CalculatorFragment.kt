@@ -3,7 +3,6 @@ package com.wtfart.ipaddressmanager
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,7 +21,7 @@ class CalculatorFragment : Fragment() {
         fun newInstance() = CalculatorFragment()
     }
 
-    private lateinit var mListener: AppCompatActivity
+    private lateinit var mListener: MainActivity
 
     private lateinit var mCidrNotationsAdapter: ArrayAdapter<String>
 
@@ -31,7 +30,7 @@ class CalculatorFragment : Fragment() {
     override fun onAttach(context: Context?) {
         super.onAttach(context)
 
-        mListener = context as AppCompatActivity
+        mListener = context as MainActivity
     }
 
     override fun onCreateView(
@@ -70,5 +69,8 @@ class CalculatorFragment : Fragment() {
             edittext_input_num_addresses.setText("")
             layout_calculator_output.visibility = View.INVISIBLE
         }
+        //listview_cidr_notations.setOnItemClickListener { _, _, i, _ ->
+        //    mListener.switchFragment(DetailFragment.newInstance(mCidrNotations[i]))
+        //}
     }
 }
