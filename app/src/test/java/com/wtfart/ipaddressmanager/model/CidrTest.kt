@@ -1,4 +1,4 @@
-package com.wtfart.ipaddressmanager.utils
+package com.wtfart.ipaddressmanager.model
 
 import org.junit.Assert.assertArrayEquals
 import org.junit.Assert.assertEquals

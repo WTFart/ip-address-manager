@@ -1,4 +1,4 @@
-package com.wtfart.ipaddressmanager.utils
+package com.wtfart.ipaddressmanager.util
 
 /**
  * Created by mickeycj on 11/5/2017 AD.
