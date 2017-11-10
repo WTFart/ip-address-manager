@@ -19,6 +19,6 @@
     <string name="detail_placeholder_cidr_notation">0.0.0.0/00</string>
     <string name="detail_placeholder_cidr_netmask">0.0.0.0</string>
     <string name="detail_placeholder_wildcard_mask">0.0.0.0</string>
-    <string name="detail_placeholder_ip_address_range">0.0.0.0\t-\t0.0.0.0</string>
-    <string name="detail_format_ip_address_range">%1$s\t-\t%2$s</string>
+    <string name="detail_placeholder_ip_address_range">0.0.0.0  –  0.0.0.0</string>
+    <string name="detail_format_ip_address_range">%1$s  –  %2$s</string>
 </resources>
