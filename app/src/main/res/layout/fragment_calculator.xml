@@ -17,15 +17,15 @@
 
         <EditText
             android:id="@+id/edittext_input_ip_address"
+            android:hint="IP Address"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="IP Address" />
+            android:layout_height="wrap_content" />
 
         <EditText
             android:id="@+id/edittext_input_num_addresses"
+            android:hint="Number of Addresses"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Number of Addresses" />
+            android:layout_height="wrap_content" />
 
         <LinearLayout
             android:layout_marginTop="8dp"
@@ -34,16 +34,16 @@
 
             <Button
                 android:id="@+id/button_calculate"
+                android:text="Calculate"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Calculate" />
+                android:layout_height="wrap_content" />
 
             <Button
                 android:id="@+id/button_clear"
+                android:text="Clear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:text="Clear" />
+                android:layout_marginStart="4dp" />
         </LinearLayout>
     </LinearLayout>
 
@@ -52,10 +52,21 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.70">
+        android:layout_weight="0.70"
+        android:visibility="invisible">
+
+        <TextView
+            android:id="@+id/textview_cidr"
+            android:text="Require CIDR Notations:"
+            android:textSize="16sp"
+            android:textColor="@color/Black"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <ListView
-            android:id="@+id/result"
+            android:id="@+id/listview_result"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>
