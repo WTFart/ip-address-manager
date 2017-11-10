@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">IP Address Manager</string>
+
+    <string name="calculator_hint_ip_address">IP Address</string>
+    <string name="calculator_hint_number_of_addresses">Number of Addresses</string>
+    <string name="calculator_button_calculate">Calculate</string>
+    <string name="calculator_button_clear">Clear</string>
+    <string name="calculator_info_required_cidr_notations">Required CIDR Notations: %1$d</string>
+    <string name="calculator_error_input">Invalid Inputs!</string>
 </resources>

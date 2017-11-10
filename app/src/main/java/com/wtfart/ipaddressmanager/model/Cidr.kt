@@ -1,4 +1,9 @@
-package com.wtfart.ipaddressmanager.utils
+package com.wtfart.ipaddressmanager.model
+
+import com.wtfart.ipaddressmanager.util.IpConverter
+
+import java.io.Serializable
+import java.util.regex.Pattern
 
 /**
  * Created by mickeycj on 11/2/2017 AD.
@@ -8,30 +13,35 @@ data class Cidr(
         val netmask: Long,
         val wildcardMask: Long,
         val ipAddressRange: Pair<Long, Long>
-) {
+) : Serializable {
 
     companion object {
+
+        private val PATTERN = Pattern.compile(
+                "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\$"
+        )
 
         @JvmStatic
         fun computeAddressBitsCombination(requestedAddresses: Int): Array<Int> {
             val binaryStr = requestedAddresses.toString(2)
             val length = binaryStr.length
 
-            return binaryStr.mapIndexed { power, digit ->
-                if (digit.toInt() - '0'.toInt() > 0) {
-                    length - power - 1
-                } else {
-                    -1
-                }
-            }.filter { bit ->
-                bit > -1
-            }.toTypedArray()
+            return binaryStr
+                    .mapIndexed { power, digit ->
+                        if (digit.toInt() - '0'.toInt() > 0) {
+                            length - power - 1
+                        } else {
+                            -1
+                        }
+                    }.filter { bit ->
+                        bit > -1
+                    }.toTypedArray()
         }
 
         @JvmStatic
         fun computeInitialIpAddresses(ipAddress: Long, addressBitsCombination: Array<Int>): Array<Long> {
-            val reducedIpAddress = ipAddress and
-                    IntRange(1, 32).fold(StringBuilder()) { bitStr, bit ->
+            val initialIpAddress = ipAddress and IntRange(1, 32)
+                    .fold(StringBuilder()) { bitStr, bit ->
                         bitStr.append(
                                 if (bit <= 32 - addressBitsCombination[0]) {
                                     '1'
@@ -42,15 +52,16 @@ data class Cidr(
                     }.toString()
                     .toLong(2)
 
-            return (0 until addressBitsCombination.size).map { address ->
-                reducedIpAddress +
-                        (0 until address).fold(0L) { offset, index ->
-                            offset + Math.pow(
-                                    2.0,
-                                    addressBitsCombination[index].toDouble()
-                            ).toLong()
-                        }
-            }.toTypedArray()
+            return (0 until addressBitsCombination.size)
+                    .map { address ->
+                        initialIpAddress + (0 until address)
+                                .fold(0L) { offset, index ->
+                                    offset + Math.pow(
+                                            2.0,
+                                            addressBitsCombination[index].toDouble()
+                                    ).toLong()
+                                }
+                    }.toTypedArray()
         }
 
         @JvmStatic
@@ -58,30 +69,32 @@ data class Cidr(
 
         @JvmStatic
         fun computeNetmask(maskBits: Int): Long {
-            return IntRange(1, 32).fold(StringBuilder()) { bitStr, bit ->
-                bitStr.append(
-                        if (bit <= maskBits) {
-                            '1'
-                        } else {
-                            '0'
-                        }
-                )
-            }.toString()
-            .toLong(2)
+            return IntRange(1, 32)
+                    .fold(StringBuilder()) { bitStr, bit ->
+                        bitStr.append(
+                                if (bit <= maskBits) {
+                                    '1'
+                                } else {
+                                    '0'
+                                }
+                        )
+                    }.toString()
+                    .toLong(2)
         }
 
         @JvmStatic
         fun computeWildcardMask(addressBits: Int): Long {
-            return IntRange(1, 32).fold(StringBuilder()) { bitStr, bit ->
-                bitStr.append(
-                        if (bit > 32 - addressBits) {
-                            '1'
-                        } else {
-                            '0'
-                        }
-                )
-            }.toString()
-            .toLong(2)
+            return IntRange(1, 32)
+                    .fold(StringBuilder()) { bitStr, bit ->
+                        bitStr.append(
+                                if (bit > 32 - addressBits) {
+                                    '1'
+                                } else {
+                                    '0'
+                                }
+                        )
+                    }.toString()
+                    .toLong(2)
         }
 
         @JvmStatic
@@ -91,13 +104,18 @@ data class Cidr(
 
         @JvmStatic
         fun compute(ipAddress: String, requestedAddresses: Int): Array<Cidr> {
+            if (!PATTERN.matcher(ipAddress).matches() || requestedAddresses < 1) {
+                throw IllegalArgumentException()
+            }
+
             val addressBitsCombination = computeAddressBitsCombination(requestedAddresses)
             val initialIpAddresses = computeInitialIpAddresses(
                     IpConverter.toBinary(ipAddress),
                     addressBitsCombination
             )
 
-            return initialIpAddresses.zip(addressBitsCombination)
+            return initialIpAddresses
+                    .zip(addressBitsCombination)
                     .map { (initialIpAddress, numberOfAddressBits) ->
                         val numberOfMaskBits = 32 - numberOfAddressBits
                         val notation = computeNotation(
