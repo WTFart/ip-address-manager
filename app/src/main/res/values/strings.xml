@@ -6,5 +6,5 @@
     <string name="calculator_button_calculate">Calculate</string>
     <string name="calculator_button_clear">Clear</string>
     <string name="calculator_info_required_cidr_notations">Required CIDR Notations: %1$d</string>
-    <string name="calculator_error_input">Invalid Input!</string>
+    <string name="calculator_error_input">Invalid Inputs!</string>
 </resources>
