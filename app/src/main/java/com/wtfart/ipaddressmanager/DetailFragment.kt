@@ -59,5 +59,15 @@ class DetailFragment : Fragment() {
         textview_notation.text = mCidr.notation
         textview_netmask.text = IpConverter.toIpAddress(mCidr.netmask)
         textview_wildcard_mask.text = IpConverter.toIpAddress(mCidr.wildcardMask)
+        val (initialIpAddress, lastIpAddress) = mCidr.ipAddressRange
+        textview_ip_address_range.text = if (initialIpAddress == lastIpAddress) {
+            IpConverter.toIpAddress(initialIpAddress)
+        } else {
+            getString(
+                    R.string.detail_format_ip_address_range,
+                    IpConverter.toIpAddress(initialIpAddress),
+                    IpConverter.toIpAddress(lastIpAddress)
+            )
+        }
     }
 }
