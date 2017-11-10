@@ -20,7 +20,7 @@ class SplashActivity : AppCompatActivity() {
         mRunnable = Runnable {
             startActivity(Intent(this@SplashActivity, MainActivity::class.java))
             finish()
-            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
     }
 
