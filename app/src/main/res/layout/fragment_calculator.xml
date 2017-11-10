@@ -10,7 +10,7 @@
         android:id="@+id/layout_input"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.35"
+        android:layout_weight="0.30"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:orientation="vertical">
@@ -28,6 +28,7 @@
             android:hint="Number of Addresses" />
 
         <LinearLayout
+            android:layout_marginTop="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -51,6 +52,11 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.65"
-        android:visibility="gone" />
+        android:layout_weight="0.70">
+
+        <ListView
+            android:id="@+id/result"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
 </LinearLayout>
