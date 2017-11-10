@@ -1382,4 +1382,14 @@ class CidrTest {
                 notations
         )
     }
+
+    @Test(expected = IllegalArgumentException::class)
+    fun `Requesting IP address of 192|30|255|256 should throw IllegalArgumentException`() {
+        Cidr.compute("192.30.255.256", 1)
+    }
+
+    @Test(expected = IllegalArgumentException::class)
+    fun `Requesting less than 1 address should throw IllegalArgumentException`() {
+        Cidr.compute("192.30.12.15", 0)
+    }
 }

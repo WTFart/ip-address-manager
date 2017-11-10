@@ -3,6 +3,7 @@ package com.wtfart.ipaddressmanager.model
 import com.wtfart.ipaddressmanager.util.IpConverter
 
 import java.io.Serializable
+import java.util.regex.Pattern
 
 /**
  * Created by mickeycj on 11/2/2017 AD.
@@ -15,6 +16,10 @@ data class Cidr(
 ) : Serializable {
 
     companion object {
+
+        private val PATTERN = Pattern.compile(
+                "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\$"
+        )
 
         @JvmStatic
         fun computeAddressBitsCombination(requestedAddresses: Int): Array<Int> {
@@ -99,6 +104,10 @@ data class Cidr(
 
         @JvmStatic
         fun compute(ipAddress: String, requestedAddresses: Int): Array<Cidr> {
+            if (!PATTERN.matcher(ipAddress).matches() || requestedAddresses < 1) {
+                throw IllegalArgumentException()
+            }
+
             val addressBitsCombination = computeAddressBitsCombination(requestedAddresses)
             val initialIpAddresses = computeInitialIpAddresses(
                     IpConverter.toBinary(ipAddress),
