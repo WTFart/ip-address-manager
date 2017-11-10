@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:layout_marginStart="16dp"
     android:layout_marginEnd="16dp"
-    android:paddingTop="24dp"
+    android:paddingTop="16dp"
     android:orientation="vertical">
 
     <LinearLayout
@@ -17,6 +17,7 @@
 
         <TextView
             android:text="@string/detail_info_cidr_notation"
+            android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:layout_width="0dp"
@@ -26,6 +27,7 @@
         <TextView
             android:id="@+id/textview_notation"
             android:text="@string/detail_placeholder_cidr_notation"
+            android:textSize="16sp"
             android:textColor="@color/black"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -41,6 +43,7 @@
 
         <TextView
             android:text="@string/detail_info_cidr_netmask"
+            android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:layout_width="0dp"
@@ -50,6 +53,7 @@
         <TextView
             android:id="@+id/textview_netmask"
             android:text="@string/detail_placeholder_cidr_netmask"
+            android:textSize="16sp"
             android:textColor="@color/black"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -65,6 +69,7 @@
 
         <TextView
             android:text="@string/detail_info_wildcard_mask"
+            android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:layout_width="0dp"
@@ -74,6 +79,7 @@
         <TextView
             android:id="@+id/textview_wildcard_mask"
             android:text="@string/detail_placeholder_wildcard_mask"
+            android:textSize="16sp"
             android:textColor="@color/black"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -98,6 +104,7 @@
 
         <TextView
             android:text="@string/detail_info_ip_address_range"
+            android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:layout_width="wrap_content"
@@ -107,6 +114,7 @@
         <TextView
             android:id="@+id/textview_ip_address_range"
             android:text="@string/detail_placeholder_ip_address_range"
+            android:textSize="16sp"
             android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
