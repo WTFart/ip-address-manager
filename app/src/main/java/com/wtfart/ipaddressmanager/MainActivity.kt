@@ -3,6 +3,7 @@ package com.wtfart.ipaddressmanager
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import android.view.MenuItem
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,7 +17,31 @@ class MainActivity : AppCompatActivity() {
                 .commit()
     }
 
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                return true
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+
+        if (supportFragmentManager.backStackEntryCount == 0) {
+            supportActionBar?.setHomeButtonEnabled(false)
+            supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        }
+    }
+
     fun switchFragment(fragment: Fragment) {
+        if (supportFragmentManager.backStackEntryCount == 0) {
+            supportActionBar?.setHomeButtonEnabled(true)
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        }
         supportFragmentManager
                 .beginTransaction()
                 .setCustomAnimations(
