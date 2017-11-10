@@ -46,20 +46,7 @@ class CalculatorFragment : Fragment() {
 
         button_calculate.setOnClickListener {
             try {
-                mCidrNotations = Cidr.compute(
-                        edittext_input_ip_address.text.toString(),
-                        edittext_input_num_addresses.text.toString().toInt()
-                )
-
-                textview_required_cidr_notations.text =
-                        getString(R.string.calculator_info_required_cidr_notations, mCidrNotations.size)
-                mCidrNotationsAdapter = ArrayAdapter(
-                        mListener,
-                        android.R.layout.simple_list_item_1,
-                        mCidrNotations.map { cidrNotation -> cidrNotation.notation }
-                )
-                listview_cidr_notations.adapter = mCidrNotationsAdapter
-                layout_calculator_output.visibility = View.VISIBLE
+                calculate()
             } catch (e: IllegalArgumentException) {
                 Toast.makeText(mListener, getString(R.string.calculator_error_input), Toast.LENGTH_LONG).show()
             }
@@ -69,8 +56,35 @@ class CalculatorFragment : Fragment() {
             edittext_input_num_addresses.setText("")
             layout_calculator_output.visibility = View.INVISIBLE
         }
-        //listview_cidr_notations.setOnItemClickListener { _, _, i, _ ->
-        //    mListener.switchFragment(DetailFragment.newInstance(mCidrNotations[i]))
-        //}
+        listview_cidr_notations.setOnItemClickListener { _, _, i, _ ->
+            mListener.switchFragment(DetailFragment.newInstance(mCidrNotations[i]))
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        try {
+            calculate()
+        } catch (e: IllegalArgumentException) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun calculate() {
+        mCidrNotations = Cidr.compute(
+                edittext_input_ip_address.text.toString(),
+                edittext_input_num_addresses.text.toString().toInt()
+        )
+
+        textview_required_cidr_notations.text =
+                getString(R.string.calculator_info_required_cidr_notations, mCidrNotations.size)
+        mCidrNotationsAdapter = ArrayAdapter(
+                mListener,
+                android.R.layout.simple_list_item_1,
+                mCidrNotations.map { cidrNotation -> cidrNotation.notation }
+        )
+        listview_cidr_notations.adapter = mCidrNotationsAdapter
+        layout_calculator_output.visibility = View.VISIBLE
     }
 }
