@@ -42,8 +42,8 @@ class CalculatorFragment : Fragment() {
 
         }
         button_clear.setOnClickListener {
-            //TODO Clear EditTexts
-
+            edittext_input_ip_address.setText("")
+            edittext_input_num_addresses.setText("")
         }
     }
 }
