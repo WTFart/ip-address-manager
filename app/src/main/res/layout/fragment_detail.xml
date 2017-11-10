@@ -94,7 +94,7 @@
         android:padding="24dp"
         android:orientation="vertical"
         android:gravity="center"
-        android:background="@color/gray">
+        android:background="@color/light_grey">
 
         <TextView
             android:text="@string/detail_info_ip_address_range"
