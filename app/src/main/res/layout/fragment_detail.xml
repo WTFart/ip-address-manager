@@ -16,7 +16,7 @@
         android:weightSum="1.0">
 
         <TextView
-            android:text="CIDR Notation:"
+            android:text="@string/detail_info_cidr_notation"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:layout_width="0dp"
@@ -25,7 +25,7 @@
 
         <TextView
             android:id="@+id/textview_notation"
-            android:text="0.0.0.0/00"
+            android:text="@string/detail_placeholder_cidr_notation"
             android:textColor="@color/black"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -40,7 +40,7 @@
         android:weightSum="1.0">
 
         <TextView
-            android:text="CIDR Netmask:"
+            android:text="@string/detail_info_cidr_netmask"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:layout_width="0dp"
@@ -48,9 +48,9 @@
             android:layout_weight="0.4" />
 
         <TextView
-            android:text="0.0.0.0"
-            android:textColor="@color/black"
             android:id="@+id/textview_netmask"
+            android:text="@string/detail_placeholder_cidr_netmask"
+            android:textColor="@color/black"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.6" />
@@ -64,7 +64,7 @@
         android:weightSum="1.0">
 
         <TextView
-            android:text="Wildcard Mask:"
+            android:text="@string/detail_info_wildcard_mask"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:layout_width="0dp"
@@ -73,7 +73,7 @@
 
         <TextView
             android:id="@+id/textview_wildcard_mask"
-            android:text="0.0.0.0"
+            android:text="@string/detail_placeholder_wildcard_mask"
             android:textColor="@color/black"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -97,7 +97,7 @@
         android:background="@color/gray">
 
         <TextView
-            android:text="IP Address Range:"
+            android:text="@string/detail_info_ip_address_range"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:layout_width="wrap_content"
@@ -106,7 +106,7 @@
 
         <TextView
             android:id="@+id/textview_ip_range"
-            android:text="0.0.0.0  -  0.0.0.0"
+            android:text="@string/detail_placeholder_ip_address_range"
             android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
