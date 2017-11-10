@@ -77,8 +77,7 @@ class CalculatorFragment : Fragment() {
                 edittext_input_num_addresses.text.toString().toInt()
         )
 
-        textview_required_cidr_notations.text =
-                getString(R.string.calculator_info_required_cidr_notations, mCidrNotations.size)
+        textview_required_cidr_notations.text = mCidrNotations.size.toString()
         mCidrNotationsAdapter = ArrayAdapter(
                 mListener,
                 android.R.layout.simple_list_item_1,
