@@ -49,12 +49,12 @@
 
     <LinearLayout
         android:id="@+id/layout_calculator_output"
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.70"
         android:paddingTop="8dp"
-        android:visibility="invisible">
+        android:orientation="vertical"
+        android:visibility="visible">
 
         <TextView
             android:id="@+id/textview_required_cidr_notations"
@@ -75,7 +75,7 @@
             android:id="@+id/listview_cidr_notations"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="-16dp"
-            android:layout_marginEnd="-16dp" />
+            android:layout_marginStart="-8dp"
+            android:layout_marginEnd="-8dp" />
     </LinearLayout>
 </LinearLayout>

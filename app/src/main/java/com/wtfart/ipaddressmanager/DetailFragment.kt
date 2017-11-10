@@ -56,8 +56,8 @@ class DetailFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        textview_cidr_notation.text = mCidr.notation
-        textview_cidr_netmask.text = IpConverter.toIpAddress(mCidr.netmask)
+        textview_notation.text = mCidr.notation
+        textview_netmask.text = IpConverter.toIpAddress(mCidr.netmask)
         textview_wildcard_mask.text = IpConverter.toIpAddress(mCidr.wildcardMask)
     }
 }
