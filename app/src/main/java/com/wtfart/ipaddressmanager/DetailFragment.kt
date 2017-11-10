@@ -43,6 +43,8 @@ class DetailFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         mCidr = arguments.getSerializable(CIDR_KEY) as Cidr
+
+        mListener.title = mCidr.notation
     }
 
     override fun onCreateView(

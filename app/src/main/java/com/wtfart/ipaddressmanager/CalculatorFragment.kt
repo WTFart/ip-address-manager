@@ -41,6 +41,12 @@ class CalculatorFragment : Fragment() {
         return inflater?.inflate(R.layout.fragment_calculator, container, false)
     }
 
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        mListener.setTitle(R.string.calculator_name)
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
