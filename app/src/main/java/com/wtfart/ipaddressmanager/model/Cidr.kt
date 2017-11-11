@@ -137,12 +137,10 @@ data class Cidr(
 
         other as Cidr
 
-        if (notation != other.notation) return false
-        if (netmask != other.netmask) return false
-        if (wildcardMask != other.wildcardMask) return false
-        if (ipAddressRange != other.ipAddressRange) return false
-
-        return true
+        return notation == other.notation
+                || netmask == other.netmask
+                || wildcardMask == other.wildcardMask
+                || ipAddressRange == other.ipAddressRange
     }
 
     override fun hashCode(): Int {
