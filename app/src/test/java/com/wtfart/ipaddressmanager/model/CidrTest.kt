@@ -2,8 +2,7 @@ package com.wtfart.ipaddressmanager.model
 
 import org.junit.Assert.assertArrayEquals
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertFalse
-import org.junit.Assert.assertTrue
+import org.junit.Assert.assertNotEquals
 import org.junit.Test
 
 /**
@@ -32,7 +31,7 @@ class CidrTest {
                 )
         )
 
-        assertTrue(cidr1 == cidr2)
+        assertEquals(cidr2, cidr1)
     }
 
     @Test
@@ -56,7 +55,7 @@ class CidrTest {
                 )
         )
 
-        assertTrue(cidr1.hashCode() == cidr2.hashCode())
+        assertEquals(cidr2.hashCode(), cidr1.hashCode())
     }
 
     @Test
@@ -80,7 +79,7 @@ class CidrTest {
                 )
         )
 
-        assertFalse(cidr1 == cidr2)
+        assertNotEquals(cidr2, cidr1)
     }
 
     @Test
@@ -104,7 +103,7 @@ class CidrTest {
                 )
         )
 
-        assertFalse(cidr1.hashCode() == cidr2.hashCode())
+        assertNotEquals(cidr2.hashCode(), cidr1.hashCode())
     }
 
     @Test
