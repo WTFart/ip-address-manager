@@ -1,9 +1,9 @@
 package com.wtfart.ipaddressmanager.model
 
-import com.wtfart.ipaddressmanager.util.IpConverter
-
 import java.io.Serializable
 import java.util.regex.Pattern
+
+import com.wtfart.ipaddressmanager.util.IpConverter
 
 /**
  * Created by mickeycj on 11/2/2017 AD.
