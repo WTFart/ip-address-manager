@@ -1,5 +1,5 @@
 <resources>
-    <!--Application Name-->
+    <!--Application Names-->
     <string name="app_name">IP Address Manager</string>
     <string name="calculator_name">CIDR Calculator</string>
 
