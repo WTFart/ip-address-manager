@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginStart="16dp"
     android:layout_marginEnd="16dp"
-    android:orientation="vertical"
-    android:weightSum="1.0">
+    android:paddingTop="8dp">
 
     <LinearLayout
         android:id="@+id/layout_calculator_input"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.30"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <EditText
@@ -29,7 +27,7 @@
 
         <LinearLayout
             android:layout_marginTop="8dp"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
             <Button
@@ -50,9 +48,9 @@
     <LinearLayout
         android:id="@+id/layout_calculator_output"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.70"
-        android:paddingTop="8dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_calculator_input"
+        android:paddingTop="16dp"
         android:orientation="vertical"
         android:visibility="invisible">
 
@@ -92,4 +90,4 @@
             android:layout_marginStart="-8dp"
             android:layout_marginEnd="-8dp" />
     </LinearLayout>
-</LinearLayout>
+</RelativeLayout>

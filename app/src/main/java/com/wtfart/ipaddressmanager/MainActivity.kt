@@ -33,10 +33,7 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
 
-        if (supportFragmentManager.backStackEntryCount == 0) {
-            supportActionBar?.setHomeButtonEnabled(false)
-            supportActionBar?.setDisplayHomeAsUpEnabled(false)
-        }
+        setupHomeButton(false)
     }
 
     fun requestFocus() {
@@ -44,10 +41,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun switchFragment(fragment: Fragment) {
-        if (supportFragmentManager.backStackEntryCount == 0) {
-            supportActionBar?.setHomeButtonEnabled(true)
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        }
+        setupHomeButton(true)
         supportFragmentManager
                 .beginTransaction()
                 .setCustomAnimations(
@@ -59,5 +53,12 @@ class MainActivity : AppCompatActivity() {
                 .replace(R.id.fragment_container, fragment)
                 .addToBackStack(null)
                 .commit()
+    }
+
+    private fun setupHomeButton(status: Boolean) {
+        if (supportFragmentManager.backStackEntryCount == 0) {
+            supportActionBar?.setHomeButtonEnabled(status)
+            supportActionBar?.setDisplayHomeAsUpEnabled(status)
+        }
     }
 }

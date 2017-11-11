@@ -1,9 +1,9 @@
 package com.wtfart.ipaddressmanager.model
 
-import com.wtfart.ipaddressmanager.util.IpConverter
-
 import java.io.Serializable
 import java.util.regex.Pattern
+
+import com.wtfart.ipaddressmanager.util.IpConverter
 
 /**
  * Created by mickeycj on 11/2/2017 AD.
@@ -137,12 +137,10 @@ data class Cidr(
 
         other as Cidr
 
-        if (notation != other.notation) return false
-        if (netmask != other.netmask) return false
-        if (wildcardMask != other.wildcardMask) return false
-        if (ipAddressRange != other.ipAddressRange) return false
-
-        return true
+        return notation == other.notation
+                || netmask == other.netmask
+                || wildcardMask == other.wildcardMask
+                || ipAddressRange == other.ipAddressRange
     }
 
     override fun hashCode(): Int {

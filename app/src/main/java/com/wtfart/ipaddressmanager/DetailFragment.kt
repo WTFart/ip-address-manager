@@ -58,10 +58,12 @@ class DetailFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        textview_notation.text = mCidr.notation
-        textview_netmask.text = IpConverter.toIpAddress(mCidr.netmask)
-        textview_wildcard_mask.text = IpConverter.toIpAddress(mCidr.wildcardMask)
-        val (initialIpAddress, lastIpAddress) = mCidr.ipAddressRange
+        val (notation, netmask, wildcardMask, ipAddressRange) = mCidr
+        val (initialIpAddress, lastIpAddress) = ipAddressRange
+
+        textview_notation.text = notation
+        textview_netmask.text = IpConverter.toIpAddress(netmask)
+        textview_wildcard_mask.text = IpConverter.toIpAddress(wildcardMask)
         textview_ip_address_range.text = if (initialIpAddress == lastIpAddress) {
             IpConverter.toIpAddress(initialIpAddress)
         } else {
