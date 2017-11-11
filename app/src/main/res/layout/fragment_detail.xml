@@ -9,7 +9,6 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/layout_notation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -21,7 +20,7 @@
             android:textStyle="bold"
             android:textColor="@color/black"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="0.4" />
 
         <TextView
@@ -30,12 +29,11 @@
             android:textSize="16sp"
             android:textColor="@color/black"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="0.6" />
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/layout_netmask"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -47,7 +45,7 @@
             android:textStyle="bold"
             android:textColor="@color/black"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="0.4" />
 
         <TextView
@@ -56,12 +54,11 @@
             android:textSize="16sp"
             android:textColor="@color/black"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="0.6" />
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/layout_wildcard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -73,7 +70,7 @@
             android:textStyle="bold"
             android:textColor="@color/black"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="0.4" />
 
         <TextView
@@ -82,7 +79,7 @@
             android:textSize="16sp"
             android:textColor="@color/black"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="0.6" />
     </LinearLayout>
 
