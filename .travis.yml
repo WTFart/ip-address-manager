@@ -18,6 +18,8 @@ android:
     - android-$ANDROID_API_LEVEL
     - sys-img-armeabi-v7a-android-$EMULATOR_API_LEVEL
     - extra-android-m2repository
+    - extra-google-m2repository
+    - extra-google-google_play_services
 
 before_install:
   - mkdir "$ANDROID_HOME/licenses" || true
