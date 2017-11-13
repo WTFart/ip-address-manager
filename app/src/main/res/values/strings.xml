@@ -22,4 +22,7 @@
     <string name="detail_placeholder_wildcard_mask">0.0.0.0</string>
     <string name="detail_placeholder_ip_address_range">0.0.0.0  –  0.0.0.0</string>
     <string name="detail_format_ip_address_range">%1$s  –  %2$s</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
