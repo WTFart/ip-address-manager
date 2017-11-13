@@ -28,7 +28,7 @@ class CalculatorFragment : Fragment() {
         super.onAttach(context)
 
         mListener = context as MainActivity
-        //mCidrListFragment = CidrListFragment.newInstance()
+        mCidrListFragment = CidrListFragment.newInstance()
     }
 
     override fun onCreateView(
@@ -43,6 +43,11 @@ class CalculatorFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         mListener.setTitle(R.string.calculator_name)
+
+        childFragmentManager
+                .beginTransaction()
+                .add(R.id.fragment_container, mCidrListFragment)
+                .commit()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -61,9 +66,6 @@ class CalculatorFragment : Fragment() {
             edittext_input_num_addresses.setText("")
             fragment_container.visibility = View.INVISIBLE
         }
-        //mCidrListFragment.setOnItemClickListener { _, _, i, _ ->
-        //    mListener.switchFragment(DetailFragment.newInstance(mCidrNotations[i]))
-        //}
     }
 
     override fun onResume() {
@@ -77,19 +79,12 @@ class CalculatorFragment : Fragment() {
     }
 
     private fun calculate() {
-        //TODO: Update CIDR List Fragment
-        //mCidrNotations = Cidr.compute(
-        //        edittext_input_ip_address.text.toString(),
-        //        edittext_input_num_addresses.text.toString().toInt()
-        //)
-        //
-        //textview_required_cidr_notations.text = mCidrNotations.size.toString()
-        //mCidrNotationsAdapter = ArrayAdapter(
-        //        mListener,
-        //        android.R.layout.simple_list_item_1,
-        //        mCidrNotations.map { cidrNotation -> cidrNotation.notation }
-        //)
-        //listview_cidr_notations.adapter = mCidrNotationsAdapter
-        //layout_calculator_output.visibility = View.VISIBLE
+        mCidrListFragment.setCidrNotations(
+                Cidr.compute(
+                        edittext_input_ip_address.text.toString(),
+                        edittext_input_num_addresses.text.toString().toInt()
+                )
+        )
+        fragment_container.visibility = View.VISIBLE
     }
 }

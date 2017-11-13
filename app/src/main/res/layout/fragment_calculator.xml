@@ -8,6 +8,7 @@
     android:paddingTop="8dp">
 
     <LinearLayout
+        android:id="@+id/layout_calculator_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -47,5 +48,7 @@
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_calculator_input"
+        android:visibility="invisible" />
 </RelativeLayout>
