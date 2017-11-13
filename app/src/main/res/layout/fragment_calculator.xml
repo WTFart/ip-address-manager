@@ -45,49 +45,10 @@
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/layout_calculator_output"
+    <FrameLayout
+        android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/layout_calculator_input"
-        android:paddingTop="16dp"
-        android:orientation="vertical"
-        android:visibility="invisible">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:text="@string/calculator_info_required_cidr_notations"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/textview_required_cidr_notations"
-                android:text="@string/calculator_placeholder_required_cidr_notaitons"
-                android:textSize="16sp"
-                android:textColor="@color/black"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp" />
-        </LinearLayout>
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/bg_grey_line" />
-
-        <ListView
-            android:id="@+id/listview_cidr_notations"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="-8dp"
-            android:layout_marginEnd="-8dp" />
-    </LinearLayout>
+        android:visibility="invisible" />
 </RelativeLayout>

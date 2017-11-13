@@ -22,15 +22,13 @@ class CalculatorFragment : Fragment() {
     }
 
     private lateinit var mListener: MainActivity
-
-    private lateinit var mCidrNotationsAdapter: ArrayAdapter<String>
-
-    private lateinit var mCidrNotations: Array<Cidr>
+    private lateinit var mCidrListFragment: CidrListFragment
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
 
         mListener = context as MainActivity
+        mCidrListFragment = CidrListFragment.newInstance()
     }
 
     override fun onCreateView(
@@ -45,6 +43,11 @@ class CalculatorFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         mListener.setTitle(R.string.calculator_name)
+
+        childFragmentManager
+                .beginTransaction()
+                .replace(R.id.fragment_container, mCidrListFragment)
+                .commit()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -61,10 +64,7 @@ class CalculatorFragment : Fragment() {
         button_clear.setOnClickListener {
             edittext_input_ip_address.setText("")
             edittext_input_num_addresses.setText("")
-            layout_calculator_output.visibility = View.INVISIBLE
-        }
-        listview_cidr_notations.setOnItemClickListener { _, _, i, _ ->
-            mListener.switchFragment(DetailFragment.newInstance(mCidrNotations[i]))
+            fragment_container.visibility = View.INVISIBLE
         }
     }
 
@@ -79,18 +79,12 @@ class CalculatorFragment : Fragment() {
     }
 
     private fun calculate() {
-        mCidrNotations = Cidr.compute(
-                edittext_input_ip_address.text.toString(),
-                edittext_input_num_addresses.text.toString().toInt()
+        mCidrListFragment.setCidrNotations(
+                Cidr.compute(
+                        edittext_input_ip_address.text.toString(),
+                        edittext_input_num_addresses.text.toString().toInt()
+                )
         )
-
-        textview_required_cidr_notations.text = mCidrNotations.size.toString()
-        mCidrNotationsAdapter = ArrayAdapter(
-                mListener,
-                android.R.layout.simple_list_item_1,
-                mCidrNotations.map { cidrNotation -> cidrNotation.notation }
-        )
-        listview_cidr_notations.adapter = mCidrNotationsAdapter
-        layout_calculator_output.visibility = View.VISIBLE
+        fragment_container.visibility = View.VISIBLE
     }
 }

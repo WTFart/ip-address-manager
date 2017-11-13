@@ -8,9 +8,7 @@
     <string name="calculator_hint_number_of_addresses">Number of Addresses</string>
     <string name="calculator_button_calculate">Calculate</string>
     <string name="calculator_button_clear">Clear</string>
-    <string name="calculator_info_required_cidr_notations">Required CIDR Notations:</string>
     <string name="calculator_error_input">Invalid Input!</string>
-    <string name="calculator_placeholder_required_cidr_notaitons">999</string>
 
     <!--Detail Fragment-->
     <string name="detail_info_cidr_notation">CIDR Notation:</string>
@@ -22,4 +20,8 @@
     <string name="detail_placeholder_wildcard_mask">0.0.0.0</string>
     <string name="detail_placeholder_ip_address_range">0.0.0.0  –  0.0.0.0</string>
     <string name="detail_format_ip_address_range">%1$s  –  %2$s</string>
+
+    <!--CIDR List Fragment-->
+    <string name="cidr_list_info_cidr_notations">CIDR Notations:</string>
+    <string name="cidr_list_placeholder_num_cidr_notaitons">999</string>
 </resources>
