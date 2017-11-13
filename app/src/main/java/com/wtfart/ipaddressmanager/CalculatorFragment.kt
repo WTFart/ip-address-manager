@@ -46,7 +46,7 @@ class CalculatorFragment : Fragment() {
 
         childFragmentManager
                 .beginTransaction()
-                .add(R.id.fragment_container, mCidrListFragment)
+                .replace(R.id.fragment_container, mCidrListFragment)
                 .commit()
     }
 
