@@ -1,9 +1,6 @@
 package com.wtfart.ipaddressmanager.util.firebase
 
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import com.wtfart.ipaddressmanager.model.Cidr
 
 import com.wtfart.ipaddressmanager.model.Network
@@ -22,19 +19,25 @@ class Database {
 
         @JvmStatic
         fun retrieveIpAddresses(uid: String) {
-            getDatabaseReference(uid).addValueEventListener(object : ValueEventListener {
+            getDatabaseReference(uid).addChildEventListener(object : ChildEventListener {
 
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    networkRepository.clear()
-
-                    dataSnapshot
-                            .children
-                            .mapNotNullTo(networkRepository.networks) { network ->
-                                network.getValue<Network>(Network::class.java)
-                            }
+                override fun onChildAdded(dataSnapshot: DataSnapshot, p1: String) {
+                    updateNetworkRepository(dataSnapshot)
                 }
 
-                override fun onCancelled(databaseError: DatabaseError) {
+                override fun onChildRemoved(dataSnapshot: DataSnapshot) {
+                    updateNetworkRepository(dataSnapshot)
+                }
+
+                override fun onChildChanged(dataSnapshot: DataSnapshot, p1: String) {
+                    updateNetworkRepository(dataSnapshot)
+                }
+
+                override fun onChildMoved(dataSnapshot: DataSnapshot, p1: String) {
+                    updateNetworkRepository(dataSnapshot)
+                }
+
+                override fun onCancelled(dataSnapshot: DatabaseError) {
                 }
             })
         }
@@ -57,5 +60,14 @@ class Database {
                     .reference
                     .child(USERS_KEY)
                     .child(uid)
+
+        private fun updateNetworkRepository(dataSnapshot: DataSnapshot) {
+            networkRepository.clear()
+            dataSnapshot
+                    .children
+                    .mapNotNullTo(networkRepository.networks) { network ->
+                        network.getValue<Network>(Network::class.java)
+                    }
+        }
     }
 }
