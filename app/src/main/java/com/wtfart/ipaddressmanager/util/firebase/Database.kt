@@ -43,7 +43,7 @@ class Database {
         }
 
         @JvmStatic
-        fun registerIpAddress(uid: String, name: String, cidrNotations: Array<Cidr>) {
+        fun registerIpAddress(uid: String, name: String, cidrNotations: List<Cidr>) {
             val key = getDatabaseReference(uid).push().key
 
             getDatabaseReference(uid).child(key).setValue(Network(key, name, cidrNotations))
