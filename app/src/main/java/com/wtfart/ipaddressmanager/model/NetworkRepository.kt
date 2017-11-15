@@ -14,6 +14,8 @@ data class NetworkRepository(
         val repository = NetworkRepository()
     }
 
+    fun contains(ipAddressRange: Pair) = false
+
     fun clearNetworks() {
         networks.clear()
     }

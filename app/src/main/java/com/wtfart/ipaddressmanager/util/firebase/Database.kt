@@ -7,6 +7,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.wtfart.ipaddressmanager.model.Cidr
 import com.wtfart.ipaddressmanager.model.Network
 import com.wtfart.ipaddressmanager.model.NetworkRepository
+import com.wtfart.ipaddressmanager.model.Pair
 
 /**
  * Created by mickeycj on 11/15/2017.
@@ -34,17 +35,23 @@ class Database {
         fun registerIpAddress(uid: String, name: String, cidrNotations: List<Cidr>) {
             val key = getUserReference(uid).push().key
 
-            getUserReference(uid)
-                    .child(key)
-                    .setValue(Network(key, name, cidrNotations))
-            getIpAddressRangesReference()
-                    .child(key)
-                    .setValue(
-                        Pair(
-                                cidrNotations.first().ipAddressRange.first,
-                                cidrNotations.last().ipAddressRange.second
+            val ipAddressRange = Pair(
+                    cidrNotations.first().ipAddressRange.first,
+                    cidrNotations.last().ipAddressRange.second
+            )
+            if (!networkRepository.contains(ipAddressRange)) {
+                getUserReference(uid)
+                        .child(key)
+                        .setValue(Network(key, name, cidrNotations))
+                getIpAddressRangeReference()
+                        .child(key)
+                        .setValue(
+                                Pair(
+                                        cidrNotations.first().ipAddressRange.first,
+                                        cidrNotations.last().ipAddressRange.second
+                                )
                         )
-                    )
+            }
         }
 
         @JvmStatic
@@ -52,7 +59,7 @@ class Database {
             getUserReference(uid)
                     .child(key)
                     .setValue(null)
-            getIpAddressRangesReference()
+            getIpAddressRangeReference()
                     .child(key)
                     .setValue(null)
         }
@@ -72,21 +79,25 @@ class Database {
         @JvmStatic
         fun updateIpAddressesRanges(dataSnapshot: DataSnapshot) {
             networkRepository.clearIpAddressRanges()
-//            dataSnapshot
-//                    .children
-//                    .mapNotNullTo(networkRepository.ipAddressRanges) { ipAddressRange ->
-//                        ipAddressRange.getValue<Pair<Long, Long>>(Pair::class.java)
-//                    }
+            if (dataSnapshot.key == IP_ADDRESS_RANGES_KEY) {
+                dataSnapshot
+                        .children
+                        .mapNotNullTo(networkRepository.ipAddressRanges) { ipAddressRange ->
+                            ipAddressRange.getValue<Pair>(Pair::class.java)
+                        }
+            }
         }
 
         @JvmStatic
         fun getUsersReference(): DatabaseReference = getDatabaseReference().child(USERS_KEY)
 
         @JvmStatic
-        fun getIpAddressRangesReference(): DatabaseReference = getDatabaseReference().child(IP_ADDRESS_RANGES_KEY)
+        fun getIpAddressRangesReference(): DatabaseReference = getDatabaseReference()
 
         private fun getDatabaseReference() = FirebaseDatabase.getInstance().reference
 
         private fun getUserReference(uid: String): DatabaseReference = getDatabaseReference().child(USERS_KEY).child(uid)
+
+        private fun getIpAddressRangeReference(): DatabaseReference = getDatabaseReference().child(IP_ADDRESS_RANGES_KEY)
     }
 }
