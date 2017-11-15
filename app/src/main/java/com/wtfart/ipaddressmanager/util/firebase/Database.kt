@@ -21,7 +21,7 @@ class Database {
         fun retrieveIpAddresses(uid: String) {
             getDatabaseReference(uid).addChildEventListener(object : ChildEventListener {
 
-                override fun onChildAdded(dataSnapshot: DataSnapshot, p1: String) {
+                override fun onChildAdded(dataSnapshot: DataSnapshot, s: String) {
                     updateNetworkRepository(dataSnapshot)
                 }
 
@@ -29,11 +29,11 @@ class Database {
                     updateNetworkRepository(dataSnapshot)
                 }
 
-                override fun onChildChanged(dataSnapshot: DataSnapshot, p1: String) {
+                override fun onChildChanged(dataSnapshot: DataSnapshot, s: String) {
                     updateNetworkRepository(dataSnapshot)
                 }
 
-                override fun onChildMoved(dataSnapshot: DataSnapshot, p1: String) {
+                override fun onChildMoved(dataSnapshot: DataSnapshot, s: String) {
                     updateNetworkRepository(dataSnapshot)
                 }
 
