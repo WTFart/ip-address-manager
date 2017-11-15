@@ -3,7 +3,10 @@ package com.wtfart.ipaddressmanager.model
 /**
  * Created by mickeycj on 11/15/2017.
  */
-data class NetworkRepository(val networks: MutableList<Network> = mutableListOf()) {
+data class NetworkRepository(
+        val networks: MutableList<Network> = mutableListOf(),
+        val ipAddressRanges: MutableList<Pair<Long, Long>> = mutableListOf()
+) {
 
     companion object {
 
@@ -11,7 +14,11 @@ data class NetworkRepository(val networks: MutableList<Network> = mutableListOf(
         val repository = NetworkRepository()
     }
 
-    fun clear() {
+    fun clearNetworks() {
         networks.clear()
+    }
+
+    fun clearIpAddressRanges() {
+        ipAddressRanges.clear()
     }
 }
