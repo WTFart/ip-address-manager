@@ -13,9 +13,9 @@ class Database {
 
     companion object {
 
-        private val networkRepository = NetworkRepository.repository
-
         private val USERS_KEY = "users"
+
+        private val networkRepository = NetworkRepository.repository
 
         @JvmStatic
         fun retrieveIpAddresses(uid: String) {
