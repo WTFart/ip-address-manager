@@ -144,9 +144,9 @@ data class Cidr(
         other as Cidr
 
         return notation == other.notation
-                || netmask == other.netmask
-                || wildcardMask == other.wildcardMask
-                || ipAddressRange == other.ipAddressRange
+                && netmask == other.netmask
+                && wildcardMask == other.wildcardMask
+                && ipAddressRange == other.ipAddressRange
     }
 
     override fun hashCode(): Int {
