@@ -25,5 +25,18 @@ class Firebase {
                     .signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(activity, onCompleteListener)
         }
+
+        @JvmStatic
+        fun registerUser(
+                activity: AppCompatActivity,
+                email: String,
+                password: String,
+                onCompleteListener: (Task<AuthResult>) -> Unit
+        ) {
+            FirebaseAuth
+                    .getInstance()
+                    .createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(activity, onCompleteListener)
+        }
     }
 }
