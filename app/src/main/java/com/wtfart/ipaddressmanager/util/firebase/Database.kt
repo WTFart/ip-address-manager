@@ -1,8 +1,12 @@
 package com.wtfart.ipaddressmanager.util.firebase
 
-import com.google.firebase.database.*
-import com.wtfart.ipaddressmanager.model.Cidr
+import com.google.firebase.database.ChildEventListener
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.FirebaseDatabase
 
+import com.wtfart.ipaddressmanager.model.Cidr
 import com.wtfart.ipaddressmanager.model.Network
 import com.wtfart.ipaddressmanager.model.NetworkRepository
 
@@ -20,34 +24,57 @@ class Database {
 
         @JvmStatic
         fun retrieveIpAddresses(uid: String) {
-            getUsersReference(uid).addChildEventListener(object : ChildEventListener {
+            getUserReference(uid).addChildEventListener(object : ChildEventListener {
 
-                override fun onChildAdded(dataSnapshot: DataSnapshot, s: String) {
-                    updateNetworkRepository(dataSnapshot)
+                override fun onChildAdded(dataSnapshot: DataSnapshot?, s: String) {
+                    updateIpAddresses(dataSnapshot)
                 }
 
-                override fun onChildRemoved(dataSnapshot: DataSnapshot) {
-                    updateNetworkRepository(dataSnapshot)
+                override fun onChildRemoved(dataSnapshot: DataSnapshot?) {
+                    updateIpAddresses(dataSnapshot)
                 }
 
-                override fun onChildChanged(dataSnapshot: DataSnapshot, s: String) {
-                    updateNetworkRepository(dataSnapshot)
+                override fun onChildChanged(dataSnapshot: DataSnapshot?, s: String) {
+                    updateIpAddresses(dataSnapshot)
                 }
 
-                override fun onChildMoved(dataSnapshot: DataSnapshot, s: String) {
-                    updateNetworkRepository(dataSnapshot)
+                override fun onChildMoved(dataSnapshot: DataSnapshot?, s: String) {
+                    updateIpAddresses(dataSnapshot)
                 }
 
-                override fun onCancelled(dataSnapshot: DatabaseError) {
+                override fun onCancelled(databaseError: DatabaseError?) = Unit
+            })
+        }
+
+        @JvmStatic
+        fun retrieveIpAddressesRanges() {
+            getIpAddressRangesReference().addChildEventListener(object : ChildEventListener {
+
+                override fun onChildAdded(dataSnapshot: DataSnapshot?, s: String) {
+                    updateIpAddressesRanges(dataSnapshot)
                 }
+
+                override fun onChildRemoved(dataSnapshot: DataSnapshot?) {
+                    updateIpAddressesRanges(dataSnapshot)
+                }
+
+                override fun onChildChanged(dataSnapshot: DataSnapshot?, s: String) {
+                    updateIpAddressesRanges(dataSnapshot)
+                }
+
+                override fun onChildMoved(dataSnapshot: DataSnapshot?, s: String) {
+                    updateIpAddressesRanges(dataSnapshot)
+                }
+
+                override fun onCancelled(databaseError: DatabaseError?) = Unit
             })
         }
 
         @JvmStatic
         fun registerIpAddress(uid: String, name: String, cidrNotations: List<Cidr>) {
-            val key = getUsersReference(uid).push().key
+            val key = getUserReference(uid).push().key
 
-            getUsersReference(uid)
+            getUserReference(uid)
                     .child(key)
                     .setValue(Network(key, name, cidrNotations))
             getIpAddressRangesReference()
@@ -62,7 +89,7 @@ class Database {
 
         @JvmStatic
         fun revokeIpAddress(uid: String, key: String) {
-            getUsersReference(uid)
+            getUserReference(uid)
                     .child(key)
                     .setValue(null)
             getIpAddressRangesReference()
@@ -70,23 +97,31 @@ class Database {
                     .setValue(null)
         }
 
-        private fun updateNetworkRepository(dataSnapshot: DataSnapshot) {
-            networkRepository.clear()
+        private fun updateIpAddresses(dataSnapshot: DataSnapshot?) {
+            networkRepository.clearNetworks()
             dataSnapshot
-                    .children
-                    .mapNotNullTo(networkRepository.networks) { network ->
+                    ?.children
+                    ?.mapNotNullTo(networkRepository.networks) { network ->
                         network.getValue<Network>(Network::class.java)
                     }
         }
 
-        private fun getUsersReference(uid: String): DatabaseReference {
+        private fun updateIpAddressesRanges(dataSnapshot: DataSnapshot?) {
+            networkRepository.clearIpAddressRanges()
+//            dataSnapshot
+//                    ?.children
+//                    ?.mapNotNullTo(networkRepository.ipAddressRanges) { ipAddressRange ->
+//                        ipAddressRange.getValue<Pair<Long, Long>>(Pair::class.java)
+//                    }
+        }
+
+        private fun getUserReference(uid: String): DatabaseReference {
             return FirebaseDatabase
                     .getInstance()
                     .reference
                     .child(USERS_KEY)
                     .child(uid)
         }
-
 
         private fun getIpAddressRangesReference(): DatabaseReference {
             return FirebaseDatabase
