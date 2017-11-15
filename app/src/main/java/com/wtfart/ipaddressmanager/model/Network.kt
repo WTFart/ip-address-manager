@@ -7,10 +7,13 @@ import com.google.firebase.database.PropertyName
  */
 data class Network(
         @get:PropertyName("network_id")
+        @set:PropertyName("network_id")
         var id: String,
         @get:PropertyName("name")
+        @set:PropertyName("name")
         var name: String,
         @get:PropertyName("cidr_notations")
+        @set:PropertyName("cidr_notations")
         var cidrNotations: List<Cidr>
 ) {
 

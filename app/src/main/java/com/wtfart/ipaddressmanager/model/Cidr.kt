@@ -12,12 +12,16 @@ import com.wtfart.ipaddressmanager.util.IpConverter
  */
 data class Cidr(
         @get:PropertyName("notation")
+        @set:PropertyName("notation")
         var notation: String,
         @get:PropertyName("netmask")
+        @set:PropertyName("netmask")
         var netmask: Long,
         @get:PropertyName("wildcard_mask")
+        @set:PropertyName("wildcard_mask")
         var wildcardMask: Long,
         @get:PropertyName("ip_address_range")
+        @set:PropertyName("ip_address_range")
         var ipAddressRange: Pair
 ) : Serializable {
 

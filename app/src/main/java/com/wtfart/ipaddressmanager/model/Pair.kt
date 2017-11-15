@@ -1,9 +1,18 @@
 package com.wtfart.ipaddressmanager.model
 
+import com.google.firebase.database.PropertyName
+
 /**
  * Created by mickeycj on 11/16/2017.
  */
-data class Pair(var first: Long, var second: Long) {
+data class Pair(
+        @get:PropertyName("first")
+        @set:PropertyName("first")
+        var first: Long,
+        @get:PropertyName("second")
+        @set:PropertyName("second")
+        var second: Long
+) {
 
     constructor() : this(0b0, 0b0)
 
