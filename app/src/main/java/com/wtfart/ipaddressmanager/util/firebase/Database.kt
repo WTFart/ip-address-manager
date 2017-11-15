@@ -14,12 +14,13 @@ class Database {
     companion object {
 
         private val USERS_KEY = "users"
+        private val IP_ADDRESS_RANGES_KEY = "ip_address_ranges"
 
         private val networkRepository = NetworkRepository.repository
 
         @JvmStatic
         fun retrieveIpAddresses(uid: String) {
-            getDatabaseReference(uid).addChildEventListener(object : ChildEventListener {
+            getUsersReference(uid).addChildEventListener(object : ChildEventListener {
 
                 override fun onChildAdded(dataSnapshot: DataSnapshot, s: String) {
                     updateNetworkRepository(dataSnapshot)
@@ -44,22 +45,15 @@ class Database {
 
         @JvmStatic
         fun registerIpAddress(uid: String, name: String, cidrNotations: List<Cidr>) {
-            val key = getDatabaseReference(uid).push().key
+            val key = getUsersReference(uid).push().key
 
-            getDatabaseReference(uid).child(key).setValue(Network(key, name, cidrNotations))
+            getUsersReference(uid).child(key).setValue(Network(key, name, cidrNotations))
         }
 
         @JvmStatic
         fun revokeIpAddress(uid: String, key: String) {
-            getDatabaseReference(uid).child(key).setValue(null)
+            getUsersReference(uid).child(key).setValue(null)
         }
-
-        private fun getDatabaseReference(uid: String) =
-            FirebaseDatabase
-                    .getInstance()
-                    .reference
-                    .child(USERS_KEY)
-                    .child(uid)
 
         private fun updateNetworkRepository(dataSnapshot: DataSnapshot) {
             networkRepository.clear()
@@ -68,6 +62,22 @@ class Database {
                     .mapNotNullTo(networkRepository.networks) { network ->
                         network.getValue<Network>(Network::class.java)
                     }
+        }
+
+        private fun getUsersReference(uid: String): DatabaseReference {
+            return FirebaseDatabase
+                    .getInstance()
+                    .reference
+                    .child(USERS_KEY)
+                    .child(uid)
+        }
+
+
+        private fun getIpAddressRangesReference(): DatabaseReference {
+            return FirebaseDatabase
+                    .getInstance()
+                    .reference
+                    .child(IP_ADDRESS_RANGES_KEY)
         }
     }
 }
