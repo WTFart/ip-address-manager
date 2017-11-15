@@ -47,12 +47,27 @@ class Database {
         fun registerIpAddress(uid: String, name: String, cidrNotations: List<Cidr>) {
             val key = getUsersReference(uid).push().key
 
-            getUsersReference(uid).child(key).setValue(Network(key, name, cidrNotations))
+            getUsersReference(uid)
+                    .child(key)
+                    .setValue(Network(key, name, cidrNotations))
+            getIpAddressRangesReference()
+                    .child(key)
+                    .setValue(
+                        Pair(
+                                cidrNotations.first().ipAddressRange.first,
+                                cidrNotations.last().ipAddressRange.second
+                        )
+                    )
         }
 
         @JvmStatic
         fun revokeIpAddress(uid: String, key: String) {
-            getUsersReference(uid).child(key).setValue(null)
+            getUsersReference(uid)
+                    .child(key)
+                    .setValue(null)
+            getIpAddressRangesReference()
+                    .child(key)
+                    .setValue(null)
         }
 
         private fun updateNetworkRepository(dataSnapshot: DataSnapshot) {
