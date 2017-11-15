@@ -46,6 +46,11 @@ class Database {
             getDatabaseReference(uid).child(key).setValue(Network(key, name, cidrNotations))
         }
 
+        @JvmStatic
+        fun revokeIpAddress(uid: String, key: String) {
+            getDatabaseReference(uid).child(key).setValue(null)
+        }
+
         private fun getDatabaseReference(uid: String) =
             FirebaseDatabase
                     .getInstance()
