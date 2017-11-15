@@ -9,7 +9,7 @@ import com.google.firebase.auth.FirebaseAuth
 /**
  * Created by mickeycj on 11/15/2017.
  */
-class Firebase {
+class Auth {
 
     companion object {
 
@@ -20,9 +20,9 @@ class Firebase {
                 password: String,
                 onCompleteListener: (Task<AuthResult>) -> Unit
         ) {
-            firebaseAuthHelper(
+            authHelper(
                     activity,
-                    { getFirebaseAuthInstance().signInWithEmailAndPassword(email, password) },
+                    { getAuthInstance().signInWithEmailAndPassword(email, password) },
                     onCompleteListener
             )
         }
@@ -34,17 +34,17 @@ class Firebase {
                 password: String,
                 onCompleteListener: (Task<AuthResult>) -> Unit
         ) {
-            firebaseAuthHelper(
+            authHelper(
                     activity,
-                    { getFirebaseAuthInstance().createUserWithEmailAndPassword(email, password) },
+                    { getAuthInstance().createUserWithEmailAndPassword(email, password) },
                     onCompleteListener
             )
         }
 
         @JvmStatic
-        fun isLoggedIn() = getFirebaseAuthInstance().currentUser != null
+        fun isLoggedIn() = getAuthInstance().currentUser != null
 
-        private fun firebaseAuthHelper(
+        private fun authHelper(
                 activity: AppCompatActivity,
                 action: () -> Task<AuthResult>,
                 onCompleteListener: (Task<AuthResult>) -> Unit
@@ -52,6 +52,6 @@ class Firebase {
             action().addOnCompleteListener(activity, onCompleteListener)
         }
 
-        private fun getFirebaseAuthInstance() = FirebaseAuth.getInstance()
+        private fun getAuthInstance() = FirebaseAuth.getInstance()
     }
 }
