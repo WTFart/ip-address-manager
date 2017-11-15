@@ -1,4 +1,4 @@
-package com.wtfart.ipaddressmanager.util
+package com.wtfart.ipaddressmanager.util.firebase
 
 import android.support.v7.app.AppCompatActivity
 
