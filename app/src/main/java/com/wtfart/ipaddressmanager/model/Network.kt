@@ -7,11 +7,18 @@ import com.google.firebase.database.PropertyName
  */
 data class Network(
         @get:PropertyName("network_id")
-        val id: String,
+        var id: String,
         @get:PropertyName("name")
-        val name: String,
+        var name: String,
         @get:PropertyName("cidr_notations")
-        val cidrNotations: List<Cidr>) {
+        var cidrNotations: List<Cidr>
+) {
+
+    constructor() : this(
+            "",
+            "",
+            mutableListOf()
+    )
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

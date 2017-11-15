@@ -12,14 +12,21 @@ import com.wtfart.ipaddressmanager.util.IpConverter
  */
 data class Cidr(
         @get:PropertyName("notation")
-        val notation: String,
+        var notation: String,
         @get:PropertyName("netmask")
-        val netmask: Long,
+        var netmask: Long,
         @get:PropertyName("wildcard_mask")
-        val wildcardMask: Long,
+        var wildcardMask: Long,
         @get:PropertyName("ip_address_range")
-        val ipAddressRange: Pair<Long, Long>
+        var ipAddressRange: Pair<Long, Long>
 ) : Serializable {
+
+    constructor() : this(
+            "",
+            0b0,
+            0b0,
+            Pair(0b0, 0b0)
+    )
 
     companion object {
 
