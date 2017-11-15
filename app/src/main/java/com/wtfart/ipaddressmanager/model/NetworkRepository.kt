@@ -14,7 +14,13 @@ data class NetworkRepository(
         val repository = NetworkRepository()
     }
 
-    fun contains(ipAddressRange: Pair) = false
+    fun contains(range: Pair): Boolean {
+        return ipAddressRanges.any { (initial, last) ->
+            val (first, second) = range
+            (first <= initial || first in initial..last)
+                    && (second in initial..last || second >= last)
+        }
+    }
 
     fun clearNetworks() {
         networks.clear()
