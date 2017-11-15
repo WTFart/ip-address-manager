@@ -38,5 +38,8 @@ class Firebase {
                     .createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(activity, onCompleteListener)
         }
+
+        @JvmStatic
+        fun isLoggedIn() = FirebaseAuth.getInstance().currentUser != null
     }
 }
