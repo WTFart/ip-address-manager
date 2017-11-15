@@ -18,7 +18,7 @@ data class Cidr(
         @get:PropertyName("wildcard_mask")
         var wildcardMask: Long,
         @get:PropertyName("ip_address_range")
-        var ipAddressRange: Pair<Long, Long>
+        var ipAddressRange: Pair
 ) : Serializable {
 
     constructor() : this(
@@ -111,7 +111,7 @@ data class Cidr(
         }
 
         @JvmStatic
-        fun computeIpAddressRange(initialIpAddress: Long, wildcardMask: Long): Pair<Long, Long> {
+        fun computeIpAddressRange(initialIpAddress: Long, wildcardMask: Long): Pair {
             return Pair(initialIpAddress, initialIpAddress + wildcardMask)
         }
 

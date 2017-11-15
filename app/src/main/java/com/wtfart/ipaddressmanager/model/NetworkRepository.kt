@@ -5,7 +5,7 @@ package com.wtfart.ipaddressmanager.model
  */
 data class NetworkRepository(
         val networks: MutableList<Network> = mutableListOf(),
-        val ipAddressRanges: MutableList<Pair<Long, Long>> = mutableListOf()
+        val ipAddressRanges: MutableList<Pair> = mutableListOf()
 ) {
 
     companion object {
