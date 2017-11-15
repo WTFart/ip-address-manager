@@ -20,10 +20,11 @@ class Firebase {
                 password: String,
                 onCompleteListener: (Task<AuthResult>) -> Unit
         ) {
-            FirebaseAuth
-                    .getInstance()
-                    .signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(activity, onCompleteListener)
+            firebaseAuthHelper(
+                    activity,
+                    { getFirebaseAuthInstance().signInWithEmailAndPassword(email, password) },
+                    onCompleteListener
+            )
         }
 
         @JvmStatic
@@ -33,13 +34,24 @@ class Firebase {
                 password: String,
                 onCompleteListener: (Task<AuthResult>) -> Unit
         ) {
-            FirebaseAuth
-                    .getInstance()
-                    .createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(activity, onCompleteListener)
+            firebaseAuthHelper(
+                    activity,
+                    { getFirebaseAuthInstance().createUserWithEmailAndPassword(email, password) },
+                    onCompleteListener
+            )
         }
 
         @JvmStatic
-        fun isLoggedIn() = FirebaseAuth.getInstance().currentUser != null
+        fun isLoggedIn() = getFirebaseAuthInstance().currentUser != null
+
+        private fun firebaseAuthHelper(
+                activity: AppCompatActivity,
+                action: () -> Task<AuthResult>,
+                onCompleteListener: (Task<AuthResult>) -> Unit
+        ) {
+            action().addOnCompleteListener(activity, onCompleteListener)
+        }
+
+        private fun getFirebaseAuthInstance() = FirebaseAuth.getInstance()
     }
 }
