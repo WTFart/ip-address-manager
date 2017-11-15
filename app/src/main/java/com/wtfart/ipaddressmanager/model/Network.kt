@@ -1,11 +1,17 @@
 package com.wtfart.ipaddressmanager.model
 
-import java.util.Arrays
+import com.google.firebase.database.PropertyName
 
 /**
  * Created by mickeycj on 11/15/2017.
  */
-data class Network(val id: String, val name: String, val cidrNotations: List<Cidr>) {
+data class Network(
+        @get:PropertyName("network_id")
+        val id: String,
+        @get:PropertyName("name")
+        val name: String,
+        @get:PropertyName("cidr_notations")
+        val cidrNotations: List<Cidr>) {
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

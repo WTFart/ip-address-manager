@@ -3,15 +3,21 @@ package com.wtfart.ipaddressmanager.model
 import java.io.Serializable
 import java.util.regex.Pattern
 
+import com.google.firebase.database.PropertyName
+
 import com.wtfart.ipaddressmanager.util.IpConverter
 
 /**
  * Created by mickeycj on 11/2/2017 AD.
  */
 data class Cidr(
+        @get:PropertyName("notation")
         val notation: String,
+        @get:PropertyName("netmask")
         val netmask: Long,
+        @get:PropertyName("wildcard_mask")
         val wildcardMask: Long,
+        @get:PropertyName("ip_address_range")
         val ipAddressRange: Pair<Long, Long>
 ) : Serializable {
 
