@@ -65,7 +65,7 @@ class DetailFragment : Fragment() {
             IpConverter.toIpAddress(initialIpAddress)
         } else {
             getString(
-                    R.string.detail_format_ip_address_range,
+                    R.string.shared_format_range,
                     IpConverter.toIpAddress(initialIpAddress),
                     IpConverter.toIpAddress(lastIpAddress)
             )

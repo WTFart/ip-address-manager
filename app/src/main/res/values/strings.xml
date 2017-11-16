@@ -19,7 +19,6 @@
     <string name="detail_placeholder_cidr_notation">0.0.0.0/00</string>
     <string name="detail_placeholder_cidr_netmask">0.0.0.0</string>
     <string name="detail_placeholder_wildcard_mask">0.0.0.0</string>
-    <string name="detail_format_ip_address_range">%1$s  –  %2$s</string>
 
     <!--CIDR List Fragment-->
     <string name="cidr_list_info_cidr_notations">CIDR Notations:</string>
@@ -32,4 +31,7 @@
     <string name="registration_dialog_hint_name">Name</string>
     <string name="registration_dialog_button_cancel">Cancel</string>
     <string name="registration_dialog_button_confirm">Confirm</string>
+
+    <!--Shared Strings-->
+    <string name="shared_format_range">%1$s  –  %2$s</string>
 </resources>
