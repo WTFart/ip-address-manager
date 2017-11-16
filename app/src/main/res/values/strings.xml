@@ -15,13 +15,23 @@
     <string name="detail_info_cidr_netmask">CIDR Netmask:</string>
     <string name="detail_info_wildcard_mask">Wildcard Mask:</string>
     <string name="detail_info_ip_address_range">IP Address Range:</string>
+    <string name="detail_placeholder_ip_address_range">0.0.0.0  –  0.0.0.0</string>
     <string name="detail_placeholder_cidr_notation">0.0.0.0/00</string>
     <string name="detail_placeholder_cidr_netmask">0.0.0.0</string>
     <string name="detail_placeholder_wildcard_mask">0.0.0.0</string>
-    <string name="detail_placeholder_ip_address_range">0.0.0.0  –  0.0.0.0</string>
-    <string name="detail_format_ip_address_range">%1$s  –  %2$s</string>
 
     <!--CIDR List Fragment-->
     <string name="cidr_list_info_cidr_notations">CIDR Notations:</string>
     <string name="cidr_list_placeholder_num_cidr_notaitons">999</string>
+
+    <!--Registration Dialog-->
+    <string name="registration_title">Registration</string>
+    <string name="registration_content">Please enter the name for:</string>
+    <string name="registration_placeholder_cidr_notation_range">0.0.0.0/0  –  0.0.0.0/0</string>
+    <string name="registration_hint_name">Name</string>
+    <string name="registration_button_cancel">Cancel</string>
+    <string name="registration_button_confirm">Confirm</string>
+
+    <!--Shared Strings-->
+    <string name="shared_format_range">%1$s  –  %2$s</string>
 </resources>
