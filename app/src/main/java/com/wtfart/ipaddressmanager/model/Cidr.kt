@@ -50,9 +50,11 @@ data class Cidr(
                         } else {
                             -1
                         }
-                    }.filter { bit ->
+                    }
+                    .filter { bit ->
                         bit > -1
-                    }.toTypedArray()
+                    }
+                    .toTypedArray()
         }
 
         @JvmStatic
@@ -66,7 +68,8 @@ data class Cidr(
                                     '0'
                                 }
                         )
-                    }.toString()
+                    }
+                    .toString()
                     .toLong(2)
 
             return (0 until addressBitsCombination.size)
@@ -78,7 +81,8 @@ data class Cidr(
                                             addressBitsCombination[index].toDouble()
                                     ).toLong()
                                 }
-                    }.toTypedArray()
+                    }
+                    .toTypedArray()
         }
 
         @JvmStatic
@@ -95,7 +99,8 @@ data class Cidr(
                                     '0'
                                 }
                         )
-                    }.toString()
+                    }
+                    .toString()
                     .toLong(2)
         }
 
@@ -110,14 +115,13 @@ data class Cidr(
                                     '0'
                                 }
                         )
-                    }.toString()
+                    }
+                    .toString()
                     .toLong(2)
         }
 
         @JvmStatic
-        fun computeIpAddressRange(initialIpAddress: Long, wildcardMask: Long): Pair {
-            return Pair(initialIpAddress, initialIpAddress + wildcardMask)
-        }
+        fun computeIpAddressRange(initialIpAddress: Long, wildcardMask: Long) = Pair(initialIpAddress, initialIpAddress + wildcardMask)
 
         @JvmStatic
         fun compute(ipAddress: String, requestedAddresses: Int): Array<Cidr> {
@@ -144,7 +148,8 @@ data class Cidr(
                         val ipAddressRange = computeIpAddressRange(initialIpAddress, wildcardMask)
 
                         Cidr(notation, netmask, wildcardMask, ipAddressRange)
-                    }.toTypedArray()
+                    }
+                    .toTypedArray()
         }
     }
 
@@ -155,9 +160,9 @@ data class Cidr(
         other as Cidr
 
         return notation == other.notation
-                || netmask == other.netmask
-                || wildcardMask == other.wildcardMask
-                || ipAddressRange == other.ipAddressRange
+                && netmask == other.netmask
+                && wildcardMask == other.wildcardMask
+                && ipAddressRange == other.ipAddressRange
     }
 
     override fun hashCode(): Int {
