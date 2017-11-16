@@ -25,12 +25,12 @@
     <string name="cidr_list_placeholder_num_cidr_notaitons">999</string>
 
     <!--Registration Dialog-->
-    <string name="registration_dialog_title">Registration</string>
-    <string name="registration_dialog_subtitle">Please enter the name for:</string>
+    <string name="registration_title">Registration</string>
+    <string name="registration_content">Please enter the name for:</string>
     <string name="registration_placeholder_cidr_notation_range">0.0.0.0/0  –  0.0.0.0/0</string>
-    <string name="registration_dialog_hint_name">Name</string>
-    <string name="registration_dialog_button_cancel">Cancel</string>
-    <string name="registration_dialog_button_confirm">Confirm</string>
+    <string name="registration_hint_name">Name</string>
+    <string name="registration_button_cancel">Cancel</string>
+    <string name="registration_button_confirm">Confirm</string>
 
     <!--Shared Strings-->
     <string name="shared_format_range">%1$s  –  %2$s</string>
