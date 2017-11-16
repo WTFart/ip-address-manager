@@ -21,9 +21,11 @@ class IpConverter {
             return LongArray(4, { binary })
                     .mapIndexed { index, bin ->
                         bin / Math.pow(2.0, (24 - 8 * index).toDouble()).toLong()
-                    }.fold(StringBuilder()) { ipAddress, bin ->
+                    }
+                    .fold(StringBuilder()) { ipAddress, bin ->
                         ipAddress.append('.').append(bin % Math.pow(2.0, 8.0).toLong())
-                    }.substring(1)
+                    }
+                    .substring(1)
                     .toString()
         }
     }

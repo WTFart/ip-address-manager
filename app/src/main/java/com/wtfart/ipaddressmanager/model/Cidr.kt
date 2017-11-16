@@ -3,17 +3,34 @@ package com.wtfart.ipaddressmanager.model
 import java.io.Serializable
 import java.util.regex.Pattern
 
+import com.google.firebase.database.PropertyName
+
 import com.wtfart.ipaddressmanager.util.IpConverter
 
 /**
  * Created by mickeycj on 11/2/2017 AD.
  */
 data class Cidr(
-        val notation: String,
-        val netmask: Long,
-        val wildcardMask: Long,
-        val ipAddressRange: Pair<Long, Long>
+        @get:PropertyName("notation")
+        @set:PropertyName("notation")
+        var notation: String,
+        @get:PropertyName("netmask")
+        @set:PropertyName("netmask")
+        var netmask: Long,
+        @get:PropertyName("wildcard_mask")
+        @set:PropertyName("wildcard_mask")
+        var wildcardMask: Long,
+        @get:PropertyName("ip_address_range")
+        @set:PropertyName("ip_address_range")
+        var ipAddressRange: Pair
 ) : Serializable {
+
+    constructor() : this(
+            "",
+            0b0,
+            0b0,
+            Pair(0b0, 0b0)
+    )
 
     companion object {
 
@@ -33,9 +50,11 @@ data class Cidr(
                         } else {
                             -1
                         }
-                    }.filter { bit ->
+                    }
+                    .filter { bit ->
                         bit > -1
-                    }.toTypedArray()
+                    }
+                    .toTypedArray()
         }
 
         @JvmStatic
@@ -49,7 +68,8 @@ data class Cidr(
                                     '0'
                                 }
                         )
-                    }.toString()
+                    }
+                    .toString()
                     .toLong(2)
 
             return (0 until addressBitsCombination.size)
@@ -61,7 +81,8 @@ data class Cidr(
                                             addressBitsCombination[index].toDouble()
                                     ).toLong()
                                 }
-                    }.toTypedArray()
+                    }
+                    .toTypedArray()
         }
 
         @JvmStatic
@@ -78,7 +99,8 @@ data class Cidr(
                                     '0'
                                 }
                         )
-                    }.toString()
+                    }
+                    .toString()
                     .toLong(2)
         }
 
@@ -93,14 +115,13 @@ data class Cidr(
                                     '0'
                                 }
                         )
-                    }.toString()
+                    }
+                    .toString()
                     .toLong(2)
         }
 
         @JvmStatic
-        fun computeIpAddressRange(initialIpAddress: Long, wildcardMask: Long): Pair<Long, Long> {
-            return Pair(initialIpAddress, initialIpAddress + wildcardMask)
-        }
+        fun computeIpAddressRange(initialIpAddress: Long, wildcardMask: Long) = Pair(initialIpAddress, initialIpAddress + wildcardMask)
 
         @JvmStatic
         fun compute(ipAddress: String, requestedAddresses: Int): Array<Cidr> {
@@ -127,7 +148,8 @@ data class Cidr(
                         val ipAddressRange = computeIpAddressRange(initialIpAddress, wildcardMask)
 
                         Cidr(notation, netmask, wildcardMask, ipAddressRange)
-                    }.toTypedArray()
+                    }
+                    .toTypedArray()
         }
     }
 
@@ -138,9 +160,9 @@ data class Cidr(
         other as Cidr
 
         return notation == other.notation
-                || netmask == other.netmask
-                || wildcardMask == other.wildcardMask
-                || ipAddressRange == other.ipAddressRange
+                && netmask == other.netmask
+                && wildcardMask == other.wildcardMask
+                && ipAddressRange == other.ipAddressRange
     }
 
     override fun hashCode(): Int {
