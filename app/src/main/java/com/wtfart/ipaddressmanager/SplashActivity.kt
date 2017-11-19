@@ -18,7 +18,7 @@ class SplashActivity : AppCompatActivity() {
 
         mHandler = Handler()
         mRunnable = Runnable {
-            startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+            startActivity(Intent(this@SplashActivity, AuthActivity::class.java))
             finish()
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
