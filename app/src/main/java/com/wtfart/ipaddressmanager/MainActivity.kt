@@ -15,14 +15,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        supportFragmentManager
-//                .beginTransaction()
-//                .add(R.id.fragment_container, CalculatorFragment.newInstance())
-//                .commit()
-
-        Database.retrieveIpAddresses("test")
-        Database.retrieveIpAddressesRanges()
-
         supportFragmentManager
                 .beginTransaction()
                 .add(R.id.fragment_container, ListFragment.newInstance())

@@ -24,14 +24,15 @@ class ListFragment :Fragment() {
 
     private lateinit var mListener: MainActivity
     private lateinit var mSavedList: MutableList<Network>
+    private lateinit var mCidrListFragment: CidrListFragment
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
 
         mListener = context as MainActivity
+        mCidrListFragment = CidrListFragment.newInstance()
         mSavedList = NetworkRepository.repository.networks
 
-        setList()
     }
 
     override fun onCreateView(
@@ -43,24 +44,18 @@ class ListFragment :Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        fab.setOnClickListener {
-            tissue()
-        }
-
-        listview_list.setOnItemClickListener { _, _, i, _->
-//            mListener.switchFragment(NotationFragment.newInstance(mList[i]))
-        }
-    }
-
-    fun tissue() {
-
-    }
-
-    fun setList(){
         listview_list.adapter = ArrayAdapter(
                 mListener,
                 android.R.layout.simple_list_item_1,
-                NetworkRepository.repository.networks.map { Network -> Network.name }
+                mSavedList.map { Network -> Network.name }
         )
+
+        fab.setOnClickListener {
+            mListener.switchFragment(CalculatorFragment.newInstance())
+        }
+
+        listview_list.setOnItemClickListener { _, _, i, _->
+//            mListener.switchFragment(mCidrListFragment)
+        }
     }
 }
