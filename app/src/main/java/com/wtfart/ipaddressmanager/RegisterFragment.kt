@@ -3,7 +3,6 @@ package com.wtfart.ipaddressmanager
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
@@ -40,8 +39,9 @@ class RegisterFragment : Fragment() {
             if (password == edittext_input_confirm_password.text.toString()) {
                 Auth.registerUser(
                         mListener,
-                        edittext_input_username.text.toString(),
+                        edittext_input_email.text.toString(),
                         password) {
+
                     Toast.makeText(mListener, getString(R.string.register_success),Toast.LENGTH_LONG).show()
                     mListener.switchFragment(LoginFragment.newInstance())
                 }

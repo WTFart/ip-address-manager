@@ -37,7 +37,7 @@ class LoginFragment : Fragment() {
         button_login.setOnClickListener {
             Auth.logInUser(
                     mListener,
-                    edittext_input_username.text.toString(),
+                    edittext_input_email.text.toString(),
                     edittext_input_password.text.toString()) {
 
                 startActivity(Intent(mListener, MainActivity::class.java))
