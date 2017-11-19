@@ -42,6 +42,11 @@ class Auth {
         }
 
         @JvmStatic
+        fun logoutUser() {
+            getAuthInstance().signOut()
+        }
+
+        @JvmStatic
         fun isLoggedIn() = getAuthInstance().currentUser != null
 
         private fun authHelper(
