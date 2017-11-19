@@ -1,6 +1,7 @@
 package com.wtfart.ipaddressmanager
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -32,6 +33,16 @@ class LoginFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        button_login.setOnClickListener {
+            Auth.logInUser(
+                    mListener,
+                    edittext_input_username.text.toString(),
+                    edittext_input_password.text.toString()) {
+
+                startActivity(Intent(mListener, MainActivity::class.java))
+            }
+        }
 
         button_create_account.setOnClickListener {
            mListener.switchFragment(RegisterFragment.newInstance())
