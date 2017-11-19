@@ -34,4 +34,11 @@
 
     <!--Shared Strings-->
     <string name="shared_format_range">%1$s  –  %2$s</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_username">Username</string>
+    <string name="button_login">LOGIN</string>
+    <string name="button_create_account">CREATE ACCOUNT</string>
 </resources>
