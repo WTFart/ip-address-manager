@@ -4,18 +4,33 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
+import com.wtfart.ipaddressmanager.model.NetworkRepository
+import com.wtfart.ipaddressmanager.util.firebase.Database
 
 import kotlinx.android.synthetic.main.activity_main.layout_main_activity
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var mListFragment: ListFragment
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+//        supportFragmentManager
+//                .beginTransaction()
+//                .add(R.id.fragment_container, CalculatorFragment.newInstance())
+//                .commit()
+
+        Database.retrieveIpAddresses("test")
+        Database.retrieveIpAddressesRanges()
+
+        mListFragment = ListFragment.newInstance()
+
+        mListFragment.setList(NetworkRepository.repository.networks)
         supportFragmentManager
                 .beginTransaction()
-                .add(R.id.fragment_container, CalculatorFragment.newInstance())
+                .add(R.id.fragment_container, ListFragment.newInstance())
                 .commit()
     }
 
