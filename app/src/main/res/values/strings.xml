@@ -44,4 +44,5 @@
     <string name="hint_confirm_password">Confirm Password</string>
     <string name="register_error">Password is not match.</string>
     <string name="register_success">You have successfully registered</string>
+    <string name="error_input">Please fill the information</string>
 </resources>

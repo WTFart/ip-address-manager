@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_login.*
 
 import com.wtfart.ipaddressmanager.util.firebase.Auth
@@ -35,12 +36,16 @@ class LoginFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         button_login.setOnClickListener {
-            Auth.logInUser(
-                    mListener,
-                    edittext_input_email.text.toString(),
-                    edittext_input_password.text.toString()) {
-
-                startActivity(Intent(mListener, MainActivity::class.java))
+            try {
+                Auth.logInUser(
+                        mListener,
+                        edittext_input_email.text.toString(),
+                        edittext_input_password.text.toString()) {
+                    startActivity(Intent(mListener, MainActivity::class.java))
+                    mListener.finish()
+                }
+            } catch (e: IllegalArgumentException) {
+                Toast.makeText(mListener, getString(R.string.error_input), Toast.LENGTH_LONG).show()
             }
         }
 

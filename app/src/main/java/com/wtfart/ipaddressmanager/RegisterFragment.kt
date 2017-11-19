@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.wtfart.ipaddressmanager.util.firebase.Auth
 import kotlinx.android.synthetic.main.fragment_register.*
+import java.lang.IllegalArgumentException
 
 class RegisterFragment : Fragment() {
 
@@ -37,14 +38,19 @@ class RegisterFragment : Fragment() {
             val password = edittext_input_password.text.toString()
 
             if (password == edittext_input_confirm_password.text.toString()) {
-                Auth.registerUser(
+                try {
+                    Auth.registerUser(
                         mListener,
                         edittext_input_email.text.toString(),
                         password) {
 
-                    Toast.makeText(mListener, getString(R.string.register_success),Toast.LENGTH_LONG).show()
-                    mListener.switchFragment(LoginFragment.newInstance())
+                        Toast.makeText(mListener, getString(R.string.register_success),Toast.LENGTH_LONG).show()
+                        mListener.onBackPressed()
+                    }
+                } catch (e: IllegalArgumentException) {
+                    Toast.makeText(mListener, getString(R.string.error_input), Toast.LENGTH_LONG).show()
                 }
+
             } else {
                 Toast.makeText(mListener, getString(R.string.register_error), Toast.LENGTH_LONG).show()
             }
