@@ -17,9 +17,6 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-        Database.retrieveIpAddresses("test")
-        Database.retrieveIpAddressesRanges()
-
         mHandler = Handler()
         mRunnable = Runnable {
             startActivity(Intent(this@SplashActivity, MainActivity::class.java))
