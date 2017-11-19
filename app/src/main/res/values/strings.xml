@@ -41,4 +41,5 @@
     <string name="hint_username">Username</string>
     <string name="button_login">LOGIN</string>
     <string name="button_create_account">CREATE ACCOUNT</string>
+    <string name="hint_confirm_password">Confirm Password</string>
 </resources>
