@@ -60,8 +60,8 @@ class NotationsFragment: Fragment() {
                 .commit()
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onStart() {
+        super.onStart()
 
         mCidrListFragment.setCidrNotations(NetworkRepository.repository.networks[mNetworkIndex].cidrNotations.toTypedArray())
     }
