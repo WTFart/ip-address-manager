@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_login.*
 
+import com.wtfart.ipaddressmanager.util.firebase.Auth
+
 class LoginFragment : Fragment() {
 
     companion object {
@@ -30,6 +32,7 @@ class LoginFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
         button_create_account.setOnClickListener {
            mListener.switchFragment(RegisterFragment.newInstance())
         }
