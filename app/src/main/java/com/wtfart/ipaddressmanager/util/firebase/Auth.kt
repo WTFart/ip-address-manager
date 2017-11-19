@@ -14,7 +14,7 @@ class Auth {
     companion object {
 
         @JvmStatic
-        fun logInUser(
+        fun loginUser(
                 activity: AppCompatActivity,
                 email: String,
                 password: String,
