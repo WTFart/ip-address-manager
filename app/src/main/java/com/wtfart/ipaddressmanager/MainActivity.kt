@@ -11,8 +11,6 @@ import kotlinx.android.synthetic.main.activity_main.layout_main_activity
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var mListFragment: ListFragment
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -25,9 +23,6 @@ class MainActivity : AppCompatActivity() {
         Database.retrieveIpAddresses("test")
         Database.retrieveIpAddressesRanges()
 
-        mListFragment = ListFragment.newInstance()
-
-        mListFragment.setList(NetworkRepository.repository.networks)
         supportFragmentManager
                 .beginTransaction()
                 .add(R.id.fragment_container, ListFragment.newInstance())

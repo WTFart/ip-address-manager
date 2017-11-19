@@ -6,8 +6,8 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import com.wtfart.ipaddressmanager.model.Network
+import com.wtfart.ipaddressmanager.model.NetworkRepository
 
 import kotlinx.android.synthetic.main.fragment_list.*
 
@@ -23,12 +23,15 @@ class ListFragment :Fragment() {
     }
 
     private lateinit var mListener: MainActivity
-    private lateinit var mList: MutableList<Network>
+    private lateinit var mSavedList: MutableList<Network>
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
 
         mListener = context as MainActivity
+        mSavedList = NetworkRepository.repository.networks
+
+        setList()
     }
 
     override fun onCreateView(
@@ -53,12 +56,11 @@ class ListFragment :Fragment() {
 
     }
 
-    fun setList(listOfNotation: MutableList<Network>){
+    fun setList(){
         listview_list.adapter = ArrayAdapter(
                 mListener,
                 android.R.layout.simple_list_item_1,
-                listOfNotation.map { listOfNotation -> listOfNotation.name }
+                NetworkRepository.repository.networks.map { Network -> Network.name }
         )
-        mList = listOfNotation
     }
 }
