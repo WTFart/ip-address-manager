@@ -55,7 +55,7 @@ class ListFragment :Fragment() {
         }
 
         listview_list.setOnItemClickListener { _, _, i, _->
-//            mListener.switchFragment(mCidrListFragment)
+            mListener.switchFragment(NotationsFragment.newInstance(i))
         }
     }
 }
