@@ -9,10 +9,10 @@ class AuthActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
-//        supportFragmentManager
-//                .beginTransaction()
-//                .add(R.id.auth_container, LoginFragment.newInstance())
-//                .commit()
+        supportFragmentManager
+                .beginTransaction()
+                .add(R.id.auth_container, LoginFragment.newInstance())
+                .commit()
     }
 
     fun switchFragment(fragment: Fragment) {
