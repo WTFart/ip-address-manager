@@ -47,7 +47,7 @@ class LoginFragment : Fragment() {
                     mListener.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                 }
             } catch (e: IllegalArgumentException) {
-                Toast.makeText(mListener, getString(R.string.error_input), Toast.LENGTH_LONG).show()
+                Toast.makeText(mListener, getString(R.string.login_error_empty_input), Toast.LENGTH_LONG).show()
             }
         }
         button_create_account.setOnClickListener {

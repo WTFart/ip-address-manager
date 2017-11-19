@@ -47,10 +47,10 @@ class RegisterFragment : Fragment() {
                         mListener.onBackPressed()
                     }
                 } catch (e: IllegalArgumentException) {
-                    Toast.makeText(mListener, getString(R.string.error_input), Toast.LENGTH_LONG).show()
+                    Toast.makeText(mListener, getString(R.string.login_error_empty_input), Toast.LENGTH_LONG).show()
                 }
             } else {
-                Toast.makeText(mListener, getString(R.string.register_error), Toast.LENGTH_LONG).show()
+                Toast.makeText(mListener, getString(R.string.register_error_password_mismatch), Toast.LENGTH_LONG).show()
             }
         }
     }

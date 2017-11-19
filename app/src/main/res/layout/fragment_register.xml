@@ -21,28 +21,28 @@
 
         <EditText
             android:id="@+id/edittext_input_email"
-            android:hint="@string/hint_email"
+            android:hint="@string/login_hint_email"
             android:inputType="textEmailAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <EditText
             android:id="@+id/edittext_input_password"
-            android:hint="@string/hint_password"
+            android:hint="@string/login_hint_password"
             android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <EditText
             android:id="@+id/edittext_input_confirm_password"
-            android:hint="@string/hint_confirm_password"
+            android:hint="@string/register_hint_confirm_password"
             android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <Button
             android:id="@+id/button_create_account"
-            android:text="@string/button_create_account"
+            android:text="@string/shared_button_create_account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
