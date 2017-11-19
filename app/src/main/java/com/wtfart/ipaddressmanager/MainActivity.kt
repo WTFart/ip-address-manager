@@ -3,11 +3,10 @@ package com.wtfart.ipaddressmanager
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import android.view.Menu
 import android.view.MenuItem
-import com.wtfart.ipaddressmanager.model.NetworkRepository
-import com.wtfart.ipaddressmanager.util.firebase.Database
-
-import kotlinx.android.synthetic.main.activity_main.layout_main_activity
+import com.wtfart.ipaddressmanager.R.id.button_logout
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,10 +14,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        setSupportActionBar(my_toolbar)
+
         supportFragmentManager
                 .beginTransaction()
                 .add(R.id.fragment_container, ListFragment.newInstance())
                 .commit()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+//        return super.onCreateOptionsMenu(menu)
+
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -26,6 +34,10 @@ class MainActivity : AppCompatActivity() {
             android.R.id.home -> {
                 onBackPressed()
                 return true
+            }
+
+            button_logout -> {
+                // TODO implement logout here
             }
         }
 
