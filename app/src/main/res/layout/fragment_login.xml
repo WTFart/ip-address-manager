@@ -30,10 +30,12 @@
             android:layout_height="wrap_content"
             android:hint="@string/hint_password"/>
         <Button
+            android:id="@+id/button_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/button_login"/>
         <Button
+            android:id="@+id/button_create_account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/button_create_account"/>
