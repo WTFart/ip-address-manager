@@ -5,11 +5,22 @@
 
     <!--Menu Bar-->
     <string name="menu_bar_button_logout">Logout</string>
+    <!--Login Fragment-->
+    <string name="login_hint_email">Email</string>
+    <string name="login_hint_password">Password</string>
+    <string name="login_button_login">Login</string>
+    <string name="login_error_empty_input">Please fill in the information</string>
+
+    <!--Register Fragment-->
+    <string name="register_hint_confirm_password">Password Confirmation</string>
+    <string name="register_success">You have successfully registered</string>
+    <string name="register_error_password_mismatch">Password does not match.</string>
 
     <!--Calculator Fragment-->
     <string name="calculator_hint_ip_address">IP Address</string>
     <string name="calculator_hint_number_of_addresses">Number of Addresses</string>
     <string name="calculator_button_calculate">Calculate</string>
+    <string name="calculator_button_register">Register</string>
     <string name="calculator_button_clear">Clear</string>
     <string name="calculator_error_input">Invalid Input!</string>
 
@@ -37,4 +48,5 @@
 
     <!--Shared Strings-->
     <string name="shared_format_range">%1$s  –  %2$s</string>
+    <string name="shared_button_create_account">Create Account</string>
 </resources>

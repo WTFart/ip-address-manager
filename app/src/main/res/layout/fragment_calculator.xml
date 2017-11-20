@@ -25,21 +25,24 @@
 
         <LinearLayout
             android:layout_marginTop="8dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1.0">
 
             <Button
-                android:id="@+id/button_calculate"
+                android:id="@+id/button_calculate_and_register"
                 android:text="@string/calculator_button_calculate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5" />
 
             <Button
                 android:id="@+id/button_clear"
                 android:text="@string/calculator_button_clear"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp" />
+                android:layout_weight="0.5" />
         </LinearLayout>
     </LinearLayout>
 
