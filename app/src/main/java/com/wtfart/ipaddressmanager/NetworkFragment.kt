@@ -33,19 +33,18 @@ class NetworkFragment : Fragment() {
     private lateinit var mListener: MainActivity
     private lateinit var mCidrListFragment: CidrListFragment
 
-    private lateinit var mNetwork: Network
-
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         
         mListener = context as MainActivity
-        mCidrListFragment = CidrListFragment.newInstance()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mNetwork = NetworkRepository.repository.networks[arguments.getInt(NETWORK_INDEX_KEY)]
+        mCidrListFragment = CidrListFragment.newInstance(
+                NetworkRepository.repository.networks[arguments.getInt(NETWORK_INDEX_KEY)]
+        )
     }
 
     override fun onCreateView(
@@ -61,11 +60,5 @@ class NetworkFragment : Fragment() {
                 .beginTransaction()
                 .replace(R.id.fragment_container, mCidrListFragment)
                 .commit()
-    }
-
-    override fun onStart() {
-        super.onStart()
-
-        mCidrListFragment.setCidrNotations(mNetwork.cidrNotations.toTypedArray())
     }
 }
