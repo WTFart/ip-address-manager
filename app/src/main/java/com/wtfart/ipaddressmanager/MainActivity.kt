@@ -5,8 +5,10 @@ import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import com.wtfart.ipaddressmanager.R.id.button_logout
+
 import kotlinx.android.synthetic.main.activity_main.*
+
+import com.wtfart.ipaddressmanager.R.id.button_logout
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,7 +25,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
+        menuInflater.inflate(R.menu.menu_bar, menu)
         return true
     }
 
@@ -33,9 +35,9 @@ class MainActivity : AppCompatActivity() {
                 onBackPressed()
                 return true
             }
-
             button_logout -> {
-                // TODO implement logout here
+                //TODO: Implement logout here
+
             }
         }
 

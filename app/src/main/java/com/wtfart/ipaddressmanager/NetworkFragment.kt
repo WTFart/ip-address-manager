@@ -6,22 +6,24 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+
+import com.wtfart.ipaddressmanager.model.Network
 import com.wtfart.ipaddressmanager.model.NetworkRepository
 
 /**
  * Created by oatThanut on 19/11/2017 AD.
  */
-class NotationsFragment: Fragment() {
+class NetworkFragment : Fragment() {
 
     companion object {
 
-        private val NOTATION_KEY = "string"
+        private val NETWORK_INDEX_KEY = "NETWORK_INDEX"
 
         @JvmStatic
-        fun newInstance(i: Int): NotationsFragment {
+        fun newInstance(networkIndex: Int): NetworkFragment {
             val args = Bundle()
-            args.putInt(NOTATION_KEY, i)
-            val fragment = NotationsFragment()
+            args.putInt(NETWORK_INDEX_KEY, networkIndex)
+            val fragment = NetworkFragment()
             fragment.arguments = args
 
             return fragment
@@ -30,7 +32,8 @@ class NotationsFragment: Fragment() {
 
     private lateinit var mListener: MainActivity
     private lateinit var mCidrListFragment: CidrListFragment
-    private var mNetworkIndex: Int = -1
+
+    private lateinit var mNetwork: Network
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
@@ -42,14 +45,14 @@ class NotationsFragment: Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mNetworkIndex = arguments.getInt(NOTATION_KEY)
+        mNetwork = NetworkRepository.repository.networks[arguments.getInt(NETWORK_INDEX_KEY)]
     }
 
     override fun onCreateView(
             inflater: LayoutInflater?,
             container: ViewGroup?,
             savedInstanceState: Bundle?
-    ) = inflater?.inflate(R.layout.fragment_notations, container, false)
+    ) = inflater?.inflate(R.layout.fragment_networks, container, false)
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -63,6 +66,6 @@ class NotationsFragment: Fragment() {
     override fun onStart() {
         super.onStart()
 
-        mCidrListFragment.setCidrNotations(NetworkRepository.repository.networks[mNetworkIndex].cidrNotations.toTypedArray())
+        mCidrListFragment.setCidrNotations(mNetwork.cidrNotations.toTypedArray())
     }
 }

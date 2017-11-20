@@ -6,15 +6,16 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import com.wtfart.ipaddressmanager.model.Network
-import com.wtfart.ipaddressmanager.model.NetworkRepository
 
 import kotlinx.android.synthetic.main.fragment_list.*
+
+import com.wtfart.ipaddressmanager.model.Network
+import com.wtfart.ipaddressmanager.model.NetworkRepository
 
 /**
  * Created by oatThanut on 19/11/2017 AD.
  */
-class ListFragment :Fragment() {
+class ListFragment : Fragment() {
 
     companion object {
 
@@ -23,16 +24,19 @@ class ListFragment :Fragment() {
     }
 
     private lateinit var mListener: MainActivity
-    private lateinit var mSavedList: MutableList<Network>
-    private lateinit var mCidrListFragment: CidrListFragment
+
+    private lateinit var mNetworks: MutableList<Network>
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
 
         mListener = context as MainActivity
-        mCidrListFragment = CidrListFragment.newInstance()
-        mSavedList = NetworkRepository.repository.networks
+    }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        mNetworks = NetworkRepository.repository.networks
     }
 
     override fun onCreateView(
@@ -44,18 +48,16 @@ class ListFragment :Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        listview_list.adapter = ArrayAdapter(
+        listview_networks.adapter = ArrayAdapter(
                 mListener,
                 android.R.layout.simple_list_item_1,
-                mSavedList.map { Network -> Network.name }
+                mNetworks.map { Network -> Network.name }
         )
-
-        fab.setOnClickListener {
-            mListener.switchFragment(CalculatorFragment.newInstance())
+        listview_networks.setOnItemClickListener { _, _, i, _->
+            mListener.switchFragment(NetworkFragment.newInstance(i))
         }
-
-        listview_list.setOnItemClickListener { _, _, i, _->
-            mListener.switchFragment(NotationsFragment.newInstance(i))
+        fab_register.setOnClickListener {
+            mListener.switchFragment(CalculatorFragment.newInstance())
         }
     }
 }
