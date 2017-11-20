@@ -16,11 +16,12 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".AuthActivity"
+            android:windowSoftInputMode="adjustPan">
+        </activity>
+        <activity
             android:name=".MainActivity"
             android:windowSoftInputMode="adjustPan">
         </activity>
-        <activity android:name=".AuthActivity">
-        </activity>
     </application>
-
 </manifest>

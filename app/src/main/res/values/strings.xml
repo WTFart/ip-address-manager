@@ -5,16 +5,20 @@
 
     <!--Menu Bar-->
     <string name="menu_bar_button_logout">Logout</string>
+
     <!--Login Fragment-->
     <string name="login_hint_email">Email</string>
     <string name="login_hint_password">Password</string>
     <string name="login_button_login">Login</string>
-    <string name="login_error_empty_input">Please fill in the information</string>
+    <string name="login_error_empty_input">Please fill in the information.</string>
 
     <!--Register Fragment-->
     <string name="register_hint_confirm_password">Password Confirmation</string>
-    <string name="register_success">You have successfully registered</string>
+    <string name="register_successful">Registration Successful!</string>
     <string name="register_error_password_mismatch">Password does not match.</string>
+
+    <!--List Fragment-->
+    <string name="list_login_successful">Login Successful!</string>
 
     <!--Calculator Fragment-->
     <string name="calculator_hint_ip_address">IP Address</string>

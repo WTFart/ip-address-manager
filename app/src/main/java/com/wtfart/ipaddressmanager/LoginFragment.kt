@@ -42,6 +42,7 @@ class LoginFragment : Fragment() {
 
         mStartMainActivityRunnable = Runnable {
             startActivity(Intent(mListener, MainActivity::class.java))
+            mListener.dismissProgressDialog()
             mListener.finish()
             mListener.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
@@ -59,19 +60,24 @@ class LoginFragment : Fragment() {
             val email = edittext_input_email.text.toString()
             val password = edittext_input_password.text.toString()
 
+            mListener.showProgressDialog()
             try {
                 Auth.loginUser(mListener, email, password) {
                     Database.retrieveIpAddresses(Auth.getUid())
                     Database.retrieveIpAddressesRanges()
-
                     mHandler.postDelayed(mStartMainActivityRunnable, mStartMainActivityTime)
                 }
             } catch (e: IllegalArgumentException) {
-                Toast.makeText(mListener, getString(R.string.login_error_empty_input), Toast.LENGTH_LONG).show()
+                mListener.dismissProgressDialog()
+                Toast.makeText(
+                        mListener,
+                        getString(R.string.login_error_empty_input),
+                        Toast.LENGTH_LONG
+                ).show()
             }
         }
         button_create_account.setOnClickListener {
-           mListener.switchFragment(RegisterFragment.newInstance())
+           mListener.switchFragment(RegistrationFragment.newInstance())
         }
     }
 

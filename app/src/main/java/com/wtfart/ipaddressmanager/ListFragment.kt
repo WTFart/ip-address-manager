@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 
 import kotlinx.android.synthetic.main.fragment_list.*
 
@@ -59,6 +60,12 @@ class ListFragment : Fragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        Toast.makeText(
+                mListener,
+                getString(R.string.list_login_successful),
+                Toast.LENGTH_LONG
+        ).show()
 
         mRefreshRunnable = Runnable {
             listview_networks.adapter = ArrayAdapter(
