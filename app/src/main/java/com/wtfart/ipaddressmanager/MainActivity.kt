@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        setSupportActionBar(my_toolbar)
+        setSupportActionBar(action_bar)
 
         supportFragmentManager
                 .beginTransaction()

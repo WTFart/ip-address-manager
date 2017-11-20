@@ -45,7 +45,7 @@ class DetailFragment : Fragment() {
         mCidr = arguments.getSerializable(CIDR_KEY) as Cidr
 
 //        mListener.title = mCidr.notation
-        mListener.my_toolbar.title = mCidr.notation
+        mListener.action_bar.title = mCidr.notation
     }
 
     override fun onCreateView(

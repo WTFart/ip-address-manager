@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.wtfart.ipaddressmanager.model.Network
-import com.wtfart.ipaddressmanager.model.NetworkRepository
 import kotlinx.android.synthetic.main.activity_main.*
 
 /**
@@ -58,7 +57,7 @@ class NetworkFragment : Fragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mListener.my_toolbar.title = mNetwork.name
+        mListener.action_bar.title = mNetwork.name
 
         childFragmentManager
                 .beginTransaction()

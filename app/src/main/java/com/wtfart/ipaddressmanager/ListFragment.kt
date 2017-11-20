@@ -6,13 +6,12 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import com.wtfart.ipaddressmanager.R.string.app_name
 
+import kotlinx.android.synthetic.main.activity_main.action_bar
 import kotlinx.android.synthetic.main.fragment_list.*
 
 import com.wtfart.ipaddressmanager.model.Network
 import com.wtfart.ipaddressmanager.model.NetworkRepository
-import kotlinx.android.synthetic.main.activity_main.*
 
 /**
  * Created by oatThanut on 19/11/2017 AD.
@@ -51,7 +50,7 @@ class ListFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        mListener.my_toolbar.title = getString(R.string.app_name)
+        mListener.action_bar.title = getString(R.string.app_name)
 
         listview_networks.adapter = ArrayAdapter(
                 mListener,
