@@ -47,7 +47,7 @@ class Auth {
         }
 
         @JvmStatic
-        fun getUid() = getCurrentUser()?.uid
+        fun getUid() = getCurrentUser()!!.uid
 
         @JvmStatic
         fun isLoggedIn() = getCurrentUser() != null
