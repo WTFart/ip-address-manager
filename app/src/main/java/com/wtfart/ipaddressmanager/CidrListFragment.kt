@@ -69,7 +69,15 @@ class CidrListFragment : Fragment() {
             setCidrNotationsHelper(mCidrNotationsList.toTypedArray())
         }
         listview_cidr_notations.setOnItemClickListener { _, _, i, _ ->
-            mListener.switchFragment(DetailFragment.newInstance(mCidrNotationsArray[i]))
+            mListener.switchFragment(
+                    DetailFragment.newInstance(
+                            if (mCidrNotationsList.isNotEmpty()) {
+                                mCidrNotationsList[i]
+                            } else {
+                                mCidrNotationsArray[i]
+                            }
+                    )
+            )
         }
     }
 
