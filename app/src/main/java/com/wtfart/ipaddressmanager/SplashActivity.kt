@@ -14,6 +14,7 @@ class SplashActivity : AppCompatActivity() {
     private val mDelayTime = 3000L
 
     private lateinit var mHandler: Handler
+
     private lateinit var mStartMainActivityRunnable: Runnable
     private lateinit var mDelayRunnable: Runnable
 

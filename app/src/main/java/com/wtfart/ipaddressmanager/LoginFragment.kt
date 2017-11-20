@@ -3,6 +3,7 @@ package com.wtfart.ipaddressmanager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -21,12 +22,29 @@ class LoginFragment : Fragment() {
         fun newInstance() = LoginFragment()
     }
 
+    private val mStartMainActivityTime = 1500L
+
     private lateinit var mListener: AuthActivity
+
+    private lateinit var mHandler: Handler
+    private lateinit var mStartMainActivityRunnable: Runnable
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
 
         mListener = context as AuthActivity
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        mHandler = Handler()
+
+        mStartMainActivityRunnable = Runnable {
+            startActivity(Intent(mListener, MainActivity::class.java))
+            mListener.finish()
+            mListener.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater?,
@@ -46,9 +64,7 @@ class LoginFragment : Fragment() {
                     Database.retrieveIpAddresses(Auth.getUid())
                     Database.retrieveIpAddressesRanges()
 
-                    startActivity(Intent(mListener, MainActivity::class.java))
-                    mListener.finish()
-                    mListener.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                    mHandler.postDelayed(mStartMainActivityRunnable, mStartMainActivityTime)
                 }
             } catch (e: IllegalArgumentException) {
                 Toast.makeText(mListener, getString(R.string.login_error_empty_input), Toast.LENGTH_LONG).show()
@@ -57,5 +73,11 @@ class LoginFragment : Fragment() {
         button_create_account.setOnClickListener {
            mListener.switchFragment(RegisterFragment.newInstance())
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        mHandler.removeCallbacks(mStartMainActivityRunnable)
     }
 }
