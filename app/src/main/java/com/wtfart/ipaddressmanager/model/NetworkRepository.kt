@@ -16,9 +16,7 @@ data class NetworkRepository(
 
     fun contains(range: Pair): Boolean {
         return ipAddressRanges.any { (initial, last) ->
-            val (first, second) = range
-            (first <= initial || first in initial..last)
-                    && (second in initial..last || second >= last)
+            LongRange(initial, last).contains(LongRange(range.first, range.second))
         }
     }
 
@@ -28,5 +26,14 @@ data class NetworkRepository(
 
     fun clearIpAddressRanges() {
         ipAddressRanges.clear()
+    }
+
+    private fun LongRange.contains(values: LongRange): Boolean {
+        forEach { long ->
+            if (values.contains(long)) {
+                return true
+            }
+        }
+        return false
     }
 }
