@@ -20,6 +20,10 @@
     <!--List Fragment-->
     <string name="list_login_successful">Login Successful!</string>
 
+    <!--Network Fragment-->
+    <string name="network_button_delete">Delete</string>
+    <string name="network_delete_successful">Deletion Successful!</string>
+
     <!--CIDR List Fragment-->
     <string name="cidr_list_info_cidr_notations">CIDR Notations:</string>
     <string name="cidr_list_placeholder_num_cidr_notaitons">999</string>

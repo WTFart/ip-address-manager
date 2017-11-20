@@ -1,5 +1,6 @@
 package com.wtfart.ipaddressmanager
 
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -15,11 +16,15 @@ import com.wtfart.ipaddressmanager.util.firebase.Database
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var progressDialog: ProgressDialog
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         setSupportActionBar(action_bar)
+
+        progressDialog = ProgressDialog(this@MainActivity)
 
         supportFragmentManager
                 .beginTransaction()
@@ -55,6 +60,14 @@ class MainActivity : AppCompatActivity() {
         super.onBackPressed()
 
         setupHomeButton(false)
+    }
+
+    fun showProgressDialog() {
+        progressDialog.show()
+    }
+
+    fun dismissProgressDialog() {
+        progressDialog.dismiss()
     }
 
     fun requestFocus() {

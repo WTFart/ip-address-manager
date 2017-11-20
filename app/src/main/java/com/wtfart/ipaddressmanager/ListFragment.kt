@@ -50,6 +50,12 @@ class ListFragment : Fragment() {
         mNetworks = NetworkRepository.repository.networks
 
         mListener.setActionBarTitle(getString(R.string.app_name))
+
+        Toast.makeText(
+                mListener,
+                getString(R.string.list_login_successful),
+                Toast.LENGTH_LONG
+        ).show()
     }
 
     override fun onCreateView(
@@ -60,12 +66,6 @@ class ListFragment : Fragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        Toast.makeText(
-                mListener,
-                getString(R.string.list_login_successful),
-                Toast.LENGTH_LONG
-        ).show()
 
         mRefreshRunnable = Runnable {
             listview_networks.adapter = ArrayAdapter(

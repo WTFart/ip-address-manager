@@ -2,12 +2,18 @@ package com.wtfart.ipaddressmanager
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+
+import kotlinx.android.synthetic.main.fragment_network.*
 
 import com.wtfart.ipaddressmanager.model.Network
+import com.wtfart.ipaddressmanager.util.firebase.Auth
+import com.wtfart.ipaddressmanager.util.firebase.Database
 
 /**
  * Created by oatThanut on 19/11/2017 AD.
@@ -29,8 +35,14 @@ class NetworkFragment : Fragment() {
         }
     }
 
+    private val mDelayTime = 1000L
+
     private lateinit var mListener: MainActivity
     private lateinit var mCidrListFragment: CidrListFragment
+
+    private lateinit var mHandler: Handler
+
+    private lateinit var mDelayRunnable: Runnable
 
     private lateinit var mNetwork: Network
 
@@ -42,6 +54,18 @@ class NetworkFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        mHandler = Handler()
+
+        mDelayRunnable = Runnable {
+            mListener.dismissProgressDialog()
+            mListener.onBackPressed()
+            Toast.makeText(
+                    mListener,
+                    getString(R.string.network_delete_successful),
+                    Toast.LENGTH_LONG
+            ).show()
+        }
 
         mNetwork = arguments.getSerializable(NETWORK_INDEX_KEY) as Network
 
@@ -65,5 +89,23 @@ class NetworkFragment : Fragment() {
                 .beginTransaction()
                 .replace(R.id.fragment_container, mCidrListFragment)
                 .commit()
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        button_delete.setOnClickListener {
+            mListener.showProgressDialog()
+
+            Database.revokeIpAddress(Auth.getUid(), mNetwork.id)
+
+            mHandler.postDelayed(mDelayRunnable, mDelayTime)
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        mHandler.removeCallbacks(mDelayRunnable)
     }
 }
