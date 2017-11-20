@@ -14,7 +14,7 @@ class Auth {
     companion object {
 
         @JvmStatic
-        fun logInUser(
+        fun loginUser(
                 activity: AppCompatActivity,
                 email: String,
                 password: String,
@@ -39,6 +39,11 @@ class Auth {
                     { getAuthInstance().createUserWithEmailAndPassword(email, password) },
                     onCompleteListener
             )
+        }
+
+        @JvmStatic
+        fun logoutUser() {
+            getAuthInstance().signOut()
         }
 
         @JvmStatic
