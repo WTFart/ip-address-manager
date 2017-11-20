@@ -22,7 +22,7 @@ class LoginFragment : Fragment() {
         fun newInstance() = LoginFragment()
     }
 
-    private val mStartMainActivityTime = 1500L
+    private val mStartMainActivityTime = 2000L
 
     private lateinit var mListener: AuthActivity
 

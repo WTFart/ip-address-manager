@@ -10,8 +10,8 @@ import com.wtfart.ipaddressmanager.util.firebase.Database
 
 class SplashActivity : AppCompatActivity() {
 
-    private val mStartMainActivityTime = 1500L
-    private val mDelayTime = 1500L
+    private val mStartMainActivityTime = 2000L
+    private val mDelayTime = 1000L
 
     private lateinit var mHandler: Handler
 
