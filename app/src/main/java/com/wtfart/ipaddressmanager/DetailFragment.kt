@@ -10,6 +10,7 @@ import kotlinx.android.synthetic.main.fragment_detail.*
 
 import com.wtfart.ipaddressmanager.model.Cidr
 import com.wtfart.ipaddressmanager.util.IpConverter
+import kotlinx.android.synthetic.main.activity_main.*
 
 class DetailFragment : Fragment() {
 
@@ -43,7 +44,8 @@ class DetailFragment : Fragment() {
 
         mCidr = arguments.getSerializable(CIDR_KEY) as Cidr
 
-        mListener.title = mCidr.notation
+//        mListener.title = mCidr.notation
+        mListener.my_toolbar.title = mCidr.notation
     }
 
     override fun onCreateView(
