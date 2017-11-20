@@ -9,6 +9,7 @@ import android.view.ViewGroup
 
 import com.wtfart.ipaddressmanager.model.Network
 import com.wtfart.ipaddressmanager.model.NetworkRepository
+import kotlinx.android.synthetic.main.activity_main.*
 
 /**
  * Created by oatThanut on 19/11/2017 AD.
@@ -32,6 +33,7 @@ class NetworkFragment : Fragment() {
 
     private lateinit var mListener: MainActivity
     private lateinit var mCidrListFragment: CidrListFragment
+    private lateinit var mNetwork: Network
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
@@ -42,9 +44,9 @@ class NetworkFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mCidrListFragment = CidrListFragment.newInstance(
-                arguments.getSerializable(NETWORK_INDEX_KEY) as Network
-        )
+        mNetwork = arguments.getSerializable(NETWORK_INDEX_KEY) as Network
+
+        mCidrListFragment = CidrListFragment.newInstance(mNetwork)
     }
 
     override fun onCreateView(
@@ -55,6 +57,8 @@ class NetworkFragment : Fragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        mListener.my_toolbar.title = mNetwork.name
 
         childFragmentManager
                 .beginTransaction()
