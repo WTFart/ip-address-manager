@@ -10,39 +10,51 @@ import com.wtfart.ipaddressmanager.util.firebase.Database
 
 class SplashActivity : AppCompatActivity() {
 
-    private val mDelayTime = 3000L
+    private val mStartMainActivityTime = 2000L
+    private val mDelayTime = 1000L
 
     private lateinit var mHandler: Handler
-    private lateinit var mRunnable: Runnable
+
+    private lateinit var mStartMainActivityRunnable: Runnable
+    private lateinit var mDelayRunnable: Runnable
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
         mHandler = Handler()
-        mRunnable = Runnable {
+
+        mStartMainActivityRunnable = Runnable {
+            start(MainActivity::class.java)
+        }
+        mDelayRunnable = Runnable {
             if (Auth.isLoggedIn()) {
                 Database.retrieveIpAddresses(Auth.getUid())
                 Database.retrieveIpAddressesRanges()
 
-                startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+                mHandler.postDelayed(mStartMainActivityRunnable, mStartMainActivityTime)
             } else {
-                startActivity(Intent(this@SplashActivity, AuthActivity::class.java))
+                start(AuthActivity::class.java)
             }
-            finish()
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
     }
 
     override fun onResume() {
         super.onResume()
 
-        mHandler.postDelayed(mRunnable, mDelayTime)
+        mHandler.postDelayed(mDelayRunnable, mDelayTime)
     }
 
     override fun onPause() {
         super.onPause()
 
-        mHandler.removeCallbacks(mRunnable)
+        mHandler.removeCallbacks(mDelayRunnable)
+        mHandler.removeCallbacks(mStartMainActivityRunnable)
+    }
+
+    private fun start(cls: Class<*>) {
+        startActivity(Intent(this@SplashActivity, cls))
+        finish()
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
     }
 }

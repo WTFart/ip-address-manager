@@ -40,6 +40,8 @@ class CalculatorFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         mCidrNotations = arrayOf()
+
+        mListener.setActionBarTitle(getString(R.string.calculator_name))
     }
 
     override fun onCreateView(
@@ -51,7 +53,7 @@ class CalculatorFragment : Fragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mListener.setTitle(R.string.calculator_name)
+        mListener.setActionBarTitle(getString(R.string.calculator_name))
 
         childFragmentManager
                 .beginTransaction()

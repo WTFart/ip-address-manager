@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 
 import kotlinx.android.synthetic.main.fragment_detail.*
@@ -43,7 +44,7 @@ class DetailFragment : Fragment() {
 
         mCidr = arguments.getSerializable(CIDR_KEY) as Cidr
 
-        mListener.title = mCidr.notation
+        mListener.setActionBarTitle(mCidr.notation)
     }
 
     override fun onCreateView(
@@ -51,6 +52,12 @@ class DetailFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ) = inflater?.inflate(R.layout.fragment_detail, container, false)
+
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        mListener.setActionBarTitle(mCidr.notation)
+    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

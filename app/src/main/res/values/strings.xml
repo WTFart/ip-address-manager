@@ -3,6 +3,8 @@
     <string name="app_name">IP Address Manager</string>
     <string name="calculator_name">CIDR Calculator</string>
 
+    <!--Menu Bar-->
+    <string name="menu_bar_button_logout">Logout</string>
     <!--Login Fragment-->
     <string name="login_hint_email">Email</string>
     <string name="login_hint_password">Password</string>
