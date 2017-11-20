@@ -9,6 +9,7 @@ import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
 
 import com.wtfart.ipaddressmanager.R.id.button_logout
+import com.wtfart.ipaddressmanager.util.firebase.Auth
 
 class MainActivity : AppCompatActivity() {
 
@@ -36,8 +37,7 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
             button_logout -> {
-                //TODO: Implement logout here
-
+                Auth.logoutUser()
             }
         }
 
