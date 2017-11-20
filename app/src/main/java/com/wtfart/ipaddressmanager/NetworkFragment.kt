@@ -7,8 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
+import kotlinx.android.synthetic.main.activity_main.action_bar
+
 import com.wtfart.ipaddressmanager.model.Network
-import kotlinx.android.synthetic.main.activity_main.*
 
 /**
  * Created by oatThanut on 19/11/2017 AD.
@@ -32,6 +33,7 @@ class NetworkFragment : Fragment() {
 
     private lateinit var mListener: MainActivity
     private lateinit var mCidrListFragment: CidrListFragment
+
     private lateinit var mNetwork: Network
 
     override fun onAttach(context: Context?) {
@@ -52,7 +54,7 @@ class NetworkFragment : Fragment() {
             inflater: LayoutInflater?,
             container: ViewGroup?,
             savedInstanceState: Bundle?
-    ) = inflater?.inflate(R.layout.fragment_networks, container, false)
+    ) = inflater?.inflate(R.layout.fragment_network, container, false)
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

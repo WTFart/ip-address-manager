@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 
+import kotlinx.android.synthetic.main.activity_main.action_bar
 import kotlinx.android.synthetic.main.fragment_calculator.*
 
 import com.wtfart.ipaddressmanager.model.Cidr
@@ -51,7 +52,7 @@ class CalculatorFragment : Fragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mListener.setTitle(R.string.calculator_name)
+        mListener.action_bar.title = getString(R.string.calculator_name)
 
         childFragmentManager
                 .beginTransaction()

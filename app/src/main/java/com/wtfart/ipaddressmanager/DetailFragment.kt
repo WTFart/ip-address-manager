@@ -4,13 +4,14 @@ import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 
+import kotlinx.android.synthetic.main.activity_main.action_bar
 import kotlinx.android.synthetic.main.fragment_detail.*
 
 import com.wtfart.ipaddressmanager.model.Cidr
 import com.wtfart.ipaddressmanager.util.IpConverter
-import kotlinx.android.synthetic.main.activity_main.*
 
 class DetailFragment : Fragment() {
 
@@ -43,9 +44,6 @@ class DetailFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         mCidr = arguments.getSerializable(CIDR_KEY) as Cidr
-
-//        mListener.title = mCidr.notation
-        mListener.action_bar.title = mCidr.notation
     }
 
     override fun onCreateView(
@@ -53,6 +51,12 @@ class DetailFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ) = inflater?.inflate(R.layout.fragment_detail, container, false)
+
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        mListener.action_bar.title = mCidr.notation
+    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
