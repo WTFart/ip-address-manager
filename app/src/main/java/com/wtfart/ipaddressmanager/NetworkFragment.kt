@@ -20,9 +20,9 @@ class NetworkFragment : Fragment() {
         private val NETWORK_INDEX_KEY = "NETWORK_INDEX"
 
         @JvmStatic
-        fun newInstance(networkIndex: Int): NetworkFragment {
+        fun newInstance(network: Network): NetworkFragment {
             val args = Bundle()
-            args.putInt(NETWORK_INDEX_KEY, networkIndex)
+            args.putSerializable(NETWORK_INDEX_KEY, network)
             val fragment = NetworkFragment()
             fragment.arguments = args
 
@@ -43,7 +43,7 @@ class NetworkFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         mCidrListFragment = CidrListFragment.newInstance(
-                NetworkRepository.repository.networks[arguments.getInt(NETWORK_INDEX_KEY)]
+                arguments.getSerializable(NETWORK_INDEX_KEY) as Network
         )
     }
 

@@ -54,7 +54,7 @@ class ListFragment : Fragment() {
                 mNetworks.map { Network -> Network.name }
         )
         listview_networks.setOnItemClickListener { _, _, i, _->
-            mListener.switchFragment(NetworkFragment.newInstance(i))
+            mListener.switchFragment(NetworkFragment.newInstance(mNetworks[i]))
         }
         fab_register.setOnClickListener {
             mListener.switchFragment(CalculatorFragment.newInstance())
