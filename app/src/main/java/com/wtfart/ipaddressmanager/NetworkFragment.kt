@@ -7,8 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-import kotlinx.android.synthetic.main.activity_main.action_bar
-
 import com.wtfart.ipaddressmanager.model.Network
 
 /**
@@ -48,6 +46,8 @@ class NetworkFragment : Fragment() {
         mNetwork = arguments.getSerializable(NETWORK_INDEX_KEY) as Network
 
         mCidrListFragment = CidrListFragment.newInstance(mNetwork)
+
+        mListener.setActionBarTitle(mNetwork.name)
     }
 
     override fun onCreateView(
@@ -59,7 +59,7 @@ class NetworkFragment : Fragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mListener.action_bar.title = mNetwork.name
+        mListener.setActionBarTitle(mNetwork.name)
 
         childFragmentManager
                 .beginTransaction()

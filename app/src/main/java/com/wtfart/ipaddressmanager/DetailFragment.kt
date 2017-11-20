@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-import kotlinx.android.synthetic.main.activity_main.action_bar
 import kotlinx.android.synthetic.main.fragment_detail.*
 
 import com.wtfart.ipaddressmanager.model.Cidr
@@ -44,6 +43,8 @@ class DetailFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         mCidr = arguments.getSerializable(CIDR_KEY) as Cidr
+
+        mListener.setActionBarTitle(mCidr.notation)
     }
 
     override fun onCreateView(
@@ -55,7 +56,7 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mListener.action_bar.title = mCidr.notation
+        mListener.setActionBarTitle(mCidr.notation)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

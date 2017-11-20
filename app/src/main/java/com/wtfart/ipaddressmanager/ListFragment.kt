@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 
-import kotlinx.android.synthetic.main.activity_main.action_bar
 import kotlinx.android.synthetic.main.fragment_list.*
 
 import com.wtfart.ipaddressmanager.model.Network
@@ -39,6 +38,8 @@ class ListFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         mNetworks = NetworkRepository.repository.networks
+
+        mListener.setActionBarTitle(getString(R.string.app_name))
     }
 
     override fun onCreateView(
@@ -50,7 +51,7 @@ class ListFragment : Fragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mListener.action_bar.title = getString(R.string.app_name)
+        mListener.setActionBarTitle(getString(R.string.app_name))
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

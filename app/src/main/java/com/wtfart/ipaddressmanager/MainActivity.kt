@@ -61,6 +61,10 @@ class MainActivity : AppCompatActivity() {
         layout_main_activity.requestFocus()
     }
 
+    fun setActionBarTitle(title: String) {
+        action_bar.title = title
+    }
+
     fun switchFragment(fragment: Fragment) {
         setupHomeButton(true)
         supportFragmentManager
