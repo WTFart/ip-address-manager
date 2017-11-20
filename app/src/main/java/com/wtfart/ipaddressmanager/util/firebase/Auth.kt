@@ -47,7 +47,10 @@ class Auth {
         }
 
         @JvmStatic
-        fun isLoggedIn() = getAuthInstance().currentUser != null
+        fun getUid() = getCurrentUser()?.uid
+
+        @JvmStatic
+        fun isLoggedIn() = getCurrentUser() != null
 
         private fun authHelper(
                 activity: AppCompatActivity,
@@ -58,5 +61,7 @@ class Auth {
         }
 
         private fun getAuthInstance() = FirebaseAuth.getInstance()
+
+        private fun getCurrentUser() = getAuthInstance().currentUser
     }
 }
