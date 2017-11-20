@@ -18,6 +18,7 @@
     <string name="calculator_hint_ip_address">IP Address</string>
     <string name="calculator_hint_number_of_addresses">Number of Addresses</string>
     <string name="calculator_button_calculate">Calculate</string>
+    <string name="calculator_button_register">Register</string>
     <string name="calculator_button_clear">Clear</string>
     <string name="calculator_error_input">Invalid Input!</string>
 

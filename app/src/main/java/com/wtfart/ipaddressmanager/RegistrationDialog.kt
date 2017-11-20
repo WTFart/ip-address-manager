@@ -33,4 +33,6 @@ class RegistrationDialog(context: Context) : Dialog(context) {
 
         return this
     }
+
+    fun geInputName() = edittext_input_name.text.toString()
 }

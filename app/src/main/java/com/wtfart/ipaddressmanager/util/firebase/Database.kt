@@ -66,8 +66,8 @@ class Database {
 
         @JvmStatic
         fun updateIpAddresses(uid: String, dataSnapshot: DataSnapshot) {
-            networkRepository.clearNetworks()
             if (uid == dataSnapshot.key) {
+                networkRepository.clearNetworks()
                 dataSnapshot
                         .children
                         .mapNotNullTo(networkRepository.networks) { network ->
@@ -78,8 +78,8 @@ class Database {
 
         @JvmStatic
         fun updateIpAddressesRanges(dataSnapshot: DataSnapshot) {
-            networkRepository.clearIpAddressRanges()
             if (dataSnapshot.key == IP_ADDRESS_RANGES_KEY) {
+                networkRepository.clearIpAddressRanges()
                 dataSnapshot
                         .children
                         .mapNotNullTo(networkRepository.ipAddressRanges) { ipAddressRange ->

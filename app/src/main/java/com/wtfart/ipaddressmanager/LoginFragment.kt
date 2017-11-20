@@ -11,6 +11,7 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_login.*
 
 import com.wtfart.ipaddressmanager.util.firebase.Auth
+import com.wtfart.ipaddressmanager.util.firebase.Database
 
 class LoginFragment : Fragment() {
 
@@ -42,6 +43,9 @@ class LoginFragment : Fragment() {
 
             try {
                 Auth.loginUser(mListener, email, password) {
+                    Database.retrieveIpAddresses(Auth.getUid())
+                    Database.retrieveIpAddressesRanges()
+
                     startActivity(Intent(mListener, MainActivity::class.java))
                     mListener.finish()
                     mListener.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
