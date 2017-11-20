@@ -37,10 +37,10 @@ class LoginFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         button_login.setOnClickListener {
-            try {
-                val email = edittext_input_email.text.toString()
-                val password = edittext_input_password.text.toString()
+            val email = edittext_input_email.text.toString()
+            val password = edittext_input_password.text.toString()
 
+            try {
                 Auth.loginUser(mListener, email, password) {
                     startActivity(Intent(mListener, MainActivity::class.java))
                     mListener.finish()
@@ -53,6 +53,5 @@ class LoginFragment : Fragment() {
         button_create_account.setOnClickListener {
            mListener.switchFragment(RegisterFragment.newInstance())
         }
-
     }
 }

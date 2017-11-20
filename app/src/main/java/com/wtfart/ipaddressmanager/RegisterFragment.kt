@@ -36,11 +36,12 @@ class RegisterFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         button_create_account.setOnClickListener {
-            val email = edittext_input_email.text.toString()
             val password = edittext_input_password.text.toString()
             val passwordConfirmation = edittext_input_confirm_password.text.toString()
 
             if (password == passwordConfirmation) {
+                val email = edittext_input_email.text.toString()
+
                 try {
                     Auth.registerUser(mListener, email, password) {
                         Toast.makeText(mListener, getString(R.string.register_success),Toast.LENGTH_LONG).show()
