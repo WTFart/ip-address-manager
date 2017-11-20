@@ -41,7 +41,7 @@ class LoginFragment : Fragment() {
                 val email = edittext_input_email.text.toString()
                 val password = edittext_input_password.text.toString()
 
-                Auth.logInUser(mListener, email, password) {
+                Auth.loginUser(mListener, email, password) {
                     startActivity(Intent(mListener, MainActivity::class.java))
                     mListener.finish()
                     mListener.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
