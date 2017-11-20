@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 
+import com.wtfart.ipaddressmanager.util.firebase.Auth
+
 class SplashActivity : AppCompatActivity() {
 
     private val mDelayTime = 3000L
@@ -18,7 +20,16 @@ class SplashActivity : AppCompatActivity() {
 
         mHandler = Handler()
         mRunnable = Runnable {
-            startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+            startActivity(
+                    Intent(
+                            this@SplashActivity,
+                            if (Auth.isLoggedIn()) {
+                                MainActivity::class.java
+                            } else {
+                                AuthActivity::class.java
+                            }
+                    )
+            )
             finish()
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
