@@ -48,8 +48,12 @@ class CidrListFragment : Fragment() {
 
         mCidrNotationsArray = arrayOf()
 
-        val network = arguments.getSerializable(NETWORK_KEY) as? Network
-        mCidrNotationsList = network?.cidrNotations ?: listOf()
+
+        mCidrNotationsList = if (arguments != null && arguments.containsKey(NETWORK_KEY)) {
+            (arguments.getSerializable(NETWORK_KEY) as Network).cidrNotations
+        } else {
+            listOf()
+        }
     }
 
     override fun onCreateView(
