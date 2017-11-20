@@ -1,5 +1,6 @@
 package com.wtfart.ipaddressmanager
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
@@ -10,6 +11,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 import com.wtfart.ipaddressmanager.R.id.button_logout
 import com.wtfart.ipaddressmanager.util.firebase.Auth
+import com.wtfart.ipaddressmanager.util.firebase.Database
 
 class MainActivity : AppCompatActivity() {
 
@@ -38,6 +40,11 @@ class MainActivity : AppCompatActivity() {
             }
             button_logout -> {
                 Auth.logoutUser()
+                Database.clear()
+
+                startActivity(Intent(this@MainActivity, AuthActivity::class.java))
+                finish()
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
             }
         }
 

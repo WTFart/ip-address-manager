@@ -89,6 +89,13 @@ class Database {
         }
 
         @JvmStatic
+        fun clear() {
+            networkRepository.clearNetworks()
+            networkRepository.clearIpAddressRanges()
+            DatabaseDelegate.removeChildEventListeners()
+        }
+
+        @JvmStatic
         fun getUsersReference(): DatabaseReference = getDatabaseReference().child(USERS_KEY)
 
         @JvmStatic
