@@ -35,7 +35,7 @@ class CalculatorFragment : Fragment() {
 
     private lateinit var mCidrNotations: Array<Cidr>
 
-    private var isCalculated = false
+    private var mIsCalculated = false
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
@@ -82,7 +82,7 @@ class CalculatorFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         button_calculate_and_register.setOnClickListener {
-            if (isCalculated) {
+            if (mIsCalculated) {
                 mRegistrationDialog
                         .setCidrNotationRange(mCidrNotations)
                         .setOnConfirmClickedListener {
@@ -112,7 +112,7 @@ class CalculatorFragment : Fragment() {
             }
         }
         button_clear.setOnClickListener {
-            isCalculated = false
+            mIsCalculated = false
             edittext_input_ip_address.setText("")
             edittext_input_num_addresses.setText("")
             setEditTextsEnabled(true)
@@ -146,7 +146,7 @@ class CalculatorFragment : Fragment() {
         setEditTextsEnabled(false)
         button_calculate_and_register.text = getString(R.string.calculator_button_register)
         fragment_container.visibility = View.VISIBLE
-        isCalculated = true
+        mIsCalculated = true
     }
 
     private fun setEditTextsEnabled(status: Boolean) {
