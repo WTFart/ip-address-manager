@@ -63,8 +63,7 @@ class LoginFragment : Fragment() {
             mListener.showProgressDialog()
             try {
                 Auth.loginUser(mListener, email, password) {
-                    Database.retrieveIpAddresses(Auth.getUid())
-                    Database.retrieveIpAddressesRanges()
+                    Database.retrieveDatabase(Auth.getUid())
                     mHandler.postDelayed(mStartMainActivityRunnable, mStartMainActivityTime)
                 }
             } catch (e: IllegalArgumentException) {

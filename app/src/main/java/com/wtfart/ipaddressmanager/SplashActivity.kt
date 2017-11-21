@@ -31,8 +31,7 @@ class SplashActivity : AppCompatActivity() {
         }
         mDelayRunnable = Runnable {
             if (Auth.isLoggedIn()) {
-                Database.retrieveIpAddresses(Auth.getUid())
-                Database.retrieveIpAddressesRanges()
+                Database.retrieveDatabase(Auth.getUid())
 
                 mHandler.postDelayed(mStartMainActivityRunnable, mStartMainActivityTime)
             } else {

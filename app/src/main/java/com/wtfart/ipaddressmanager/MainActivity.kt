@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity() {
                 showProgressDialog()
 
                 Auth.logoutUser()
-                Database.clear()
+                Database.clearDatabase()
 
                 mHandler.postDelayed(mLogoutRunnable, mLogoutTime)
             }

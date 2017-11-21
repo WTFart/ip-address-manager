@@ -9,9 +9,6 @@ import com.wtfart.ipaddressmanager.model.Network
 import com.wtfart.ipaddressmanager.model.NetworkRepository
 import com.wtfart.ipaddressmanager.model.Pair
 
-/**
- * Created by mickeycj on 11/15/2017.
- */
 class Database {
 
     companion object {
@@ -25,14 +22,12 @@ class Database {
         private val IP_ADDRESS_RANGES_KEY = "ip_address_ranges"
 
         private val networkRepository = NetworkRepository.repository
+        private val networks = networkRepository.networks
+        private val ipAddressRanges = networkRepository.ipAddressRanges
 
         @JvmStatic
-        fun retrieveIpAddresses(uid: String) {
+        fun retrieveDatabase(uid: String) {
             DatabaseDelegate.retrieveIpAddresses(uid)
-        }
-
-        @JvmStatic
-        fun retrieveIpAddressesRanges() {
             DatabaseDelegate.retrieveIpAddressRanges()
         }
 
@@ -72,12 +67,12 @@ class Database {
         @JvmStatic
         fun updateIpAddresses(uid: String, dataSnapshot: DataSnapshot, action: String) {
             if (dataSnapshot.key == uid) {
-                val previousSize = networkRepository.networks.size
+                val previousSize = networks.size
                 networkRepository.clearNetworks()
                 if (action == RETRIEVE_ACTION || previousSize > 1) {
                     dataSnapshot
                             .children
-                            .mapNotNullTo(networkRepository.networks) { network ->
+                            .mapNotNullTo(networks) { network ->
                                 network.getValue<Network>(Network::class.java)
                             }
                 }
@@ -87,12 +82,12 @@ class Database {
         @JvmStatic
         fun updateIpAddressesRanges(dataSnapshot: DataSnapshot, action: String) {
             if (dataSnapshot.key == IP_ADDRESS_RANGES_KEY) {
-                val previousSize = networkRepository.ipAddressRanges.size
+                val previousSize = ipAddressRanges.size
                 networkRepository.clearIpAddressRanges()
                 if (action == RETRIEVE_ACTION || previousSize > 1) {
                     dataSnapshot
                             .children
-                            .mapNotNullTo(networkRepository.ipAddressRanges) { ipAddressRange ->
+                            .mapNotNullTo(ipAddressRanges) { ipAddressRange ->
                                 ipAddressRange.getValue<Pair>(Pair::class.java)
                             }
                 }
@@ -100,7 +95,7 @@ class Database {
         }
 
         @JvmStatic
-        fun clear() {
+        fun clearDatabase() {
             networkRepository.clearNetworks()
             networkRepository.clearIpAddressRanges()
             DatabaseDelegate.removeChildEventListeners()
