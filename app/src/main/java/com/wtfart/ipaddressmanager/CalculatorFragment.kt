@@ -2,6 +2,7 @@ package com.wtfart.ipaddressmanager
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -22,8 +23,15 @@ class CalculatorFragment : Fragment() {
         fun newInstance() = CalculatorFragment()
     }
 
+    private val mRegistrationTime = 2000L
+
     private lateinit var mListener: MainActivity
     private lateinit var mCidrListFragment: CidrListFragment
+    private lateinit var mRegistrationDialog: RegistrationDialog
+
+    private lateinit var mHandler: Handler
+
+    private lateinit var mRegistrationRunnable: Runnable
 
     private lateinit var mCidrNotations: Array<Cidr>
 
@@ -38,6 +46,15 @@ class CalculatorFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        mRegistrationDialog = RegistrationDialog(mListener)
+
+        mHandler = Handler()
+
+        mRegistrationRunnable = Runnable {
+            mListener.dismissProgressDialog()
+            mListener.onBackPressed()
+        }
 
         mCidrNotations = arrayOf()
 
@@ -66,16 +83,19 @@ class CalculatorFragment : Fragment() {
 
         button_calculate_and_register.setOnClickListener {
             if (isCalculated) {
-                val registrationDialog = RegistrationDialog(mListener)
-
-                registrationDialog
+                mRegistrationDialog
                         .setCidrNotationRange(mCidrNotations)
                         .setOnConfirmClickedListener {
+                            mListener.showProgressDialog()
+
                             Database.registerIpAddress(
                                     Auth.getUid(),
-                                    registrationDialog.geInputName(),
+                                    mRegistrationDialog.geInputName(),
                                     mCidrNotations.asList()
                             )
+
+                            mRegistrationDialog.dismiss()
+                            mHandler.postDelayed(mRegistrationRunnable, mRegistrationTime)
                         }
                         .show()
             } else {
@@ -91,6 +111,7 @@ class CalculatorFragment : Fragment() {
             isCalculated = false
             edittext_input_ip_address.setText("")
             edittext_input_num_addresses.setText("")
+            setEditTextsEnabled(true)
             button_calculate_and_register.text = getString(R.string.calculator_button_calculate)
             fragment_container.visibility = View.INVISIBLE
         }
@@ -106,14 +127,30 @@ class CalculatorFragment : Fragment() {
         }
     }
 
+    override fun onPause() {
+        super.onPause()
+
+        mHandler.removeCallbacks(mRegistrationRunnable)
+    }
+
     private fun calculate() {
         mCidrNotations = Cidr.compute(
                 edittext_input_ip_address.text.toString(),
                 edittext_input_num_addresses.text.toString().toInt()
         )
         mCidrListFragment.setCidrNotations(mCidrNotations)
+        setEditTextsEnabled(false)
         button_calculate_and_register.text = getString(R.string.calculator_button_register)
         fragment_container.visibility = View.VISIBLE
         isCalculated = true
+    }
+
+    private fun setEditTextsEnabled(status: Boolean) {
+        edittext_input_ip_address.isClickable = status
+        edittext_input_ip_address.isFocusable = status
+        edittext_input_ip_address.isFocusableInTouchMode = status
+        edittext_input_num_addresses.isClickable = status
+        edittext_input_num_addresses.isFocusable = status
+        edittext_input_num_addresses.isFocusableInTouchMode = status
     }
 }

@@ -8,15 +8,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 
 import kotlinx.android.synthetic.main.fragment_list.*
 
 import com.wtfart.ipaddressmanager.model.Network
 import com.wtfart.ipaddressmanager.model.NetworkRepository
 
-/**
- * Created by oatThanut on 19/11/2017 AD.
- */
 class ListFragment : Fragment() {
 
     companion object {
@@ -49,6 +47,12 @@ class ListFragment : Fragment() {
         mNetworks = NetworkRepository.repository.networks
 
         mListener.setActionBarTitle(getString(R.string.app_name))
+
+        Toast.makeText(
+                mListener,
+                getString(R.string.list_login_successful),
+                Toast.LENGTH_LONG
+        ).show()
     }
 
     override fun onCreateView(

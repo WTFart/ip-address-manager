@@ -17,22 +17,22 @@ public class DatabaseDelegate {
 
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Database.updateIpAddresses(uid, dataSnapshot);
+                Database.updateIpAddresses(uid, dataSnapshot, Database.RETRIEVE_ACTION);
             }
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-                Database.updateIpAddresses(uid, dataSnapshot);
+                Database.updateIpAddresses(uid, dataSnapshot, Database.REVOKE_ACTION);
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                Database.updateIpAddresses(uid, dataSnapshot);
+                Database.updateIpAddresses(uid, dataSnapshot, Database.RETRIEVE_ACTION);
             }
 
             @Override
             public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-                Database.updateIpAddresses(uid, dataSnapshot);
+                Database.updateIpAddresses(uid, dataSnapshot, Database.RETRIEVE_ACTION);
             }
 
             @Override
@@ -48,22 +48,22 @@ public class DatabaseDelegate {
 
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Database.updateIpAddressesRanges(dataSnapshot);
+                Database.updateIpAddressesRanges(dataSnapshot, Database.RETRIEVE_ACTION);
             }
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-                Database.updateIpAddressesRanges(dataSnapshot);
+                Database.updateIpAddressesRanges(dataSnapshot, Database.REVOKE_ACTION);
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                Database.updateIpAddressesRanges(dataSnapshot);
+                Database.updateIpAddressesRanges(dataSnapshot, Database.RETRIEVE_ACTION);
             }
 
             @Override
             public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-                Database.updateIpAddressesRanges(dataSnapshot);
+                Database.updateIpAddressesRanges(dataSnapshot, Database.RETRIEVE_ACTION);
             }
 
             @Override
