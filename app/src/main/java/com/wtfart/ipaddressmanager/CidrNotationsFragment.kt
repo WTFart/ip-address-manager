@@ -7,25 +7,25 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 
-import kotlinx.android.synthetic.main.fragment_cidr_list.*
+import kotlinx.android.synthetic.main.fragment_cidr_notations.*
 
 import com.wtfart.ipaddressmanager.model.Cidr
 import com.wtfart.ipaddressmanager.model.Network
 
-class CidrListFragment : Fragment() {
+class CidrNotationsFragment : Fragment() {
 
     companion object {
 
         private val NETWORK_KEY = "NETWORK"
 
         @JvmStatic
-        fun newInstance() = CidrListFragment()
+        fun newInstance() = CidrNotationsFragment()
 
         @JvmStatic
-        fun newInstance(network: Network): CidrListFragment {
+        fun newInstance(network: Network): CidrNotationsFragment {
             val args = Bundle()
             args.putSerializable(NETWORK_KEY, network)
-            val fragment = CidrListFragment()
+            val fragment = CidrNotationsFragment()
             fragment.arguments = args
 
             return fragment
@@ -48,7 +48,6 @@ class CidrListFragment : Fragment() {
 
         mCidrNotationsArray = arrayOf()
 
-
         mCidrNotationsList = if (arguments != null && arguments.containsKey(NETWORK_KEY)) {
             (arguments.getSerializable(NETWORK_KEY) as Network).cidrNotations
         } else {
@@ -60,7 +59,7 @@ class CidrListFragment : Fragment() {
             inflater: LayoutInflater?,
             container: ViewGroup?,
             savedInstanceState: Bundle?
-    ) = inflater?.inflate(R.layout.fragment_cidr_list, container, false)
+    ) = inflater?.inflate(R.layout.fragment_cidr_notations, container, false)
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

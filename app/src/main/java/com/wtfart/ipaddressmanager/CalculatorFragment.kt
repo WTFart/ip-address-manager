@@ -26,7 +26,7 @@ class CalculatorFragment : Fragment() {
     private val mRegistrationTime = 2000L
 
     private lateinit var mListener: MainActivity
-    private lateinit var mCidrListFragment: CidrListFragment
+    private lateinit var mCidrNotationsFragment: CidrNotationsFragment
     private lateinit var mRegistrationDialog: RegistrationDialog
 
     private lateinit var mHandler: Handler
@@ -41,7 +41,7 @@ class CalculatorFragment : Fragment() {
         super.onAttach(context)
 
         mListener = context as MainActivity
-        mCidrListFragment = CidrListFragment.newInstance()
+        mCidrNotationsFragment = CidrNotationsFragment.newInstance()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,7 +74,7 @@ class CalculatorFragment : Fragment() {
 
         childFragmentManager
                 .beginTransaction()
-                .replace(R.id.fragment_container, mCidrListFragment)
+                .replace(R.id.fragment_container, mCidrNotationsFragment)
                 .commit()
     }
 
@@ -138,7 +138,7 @@ class CalculatorFragment : Fragment() {
                 edittext_input_ip_address.text.toString(),
                 edittext_input_num_addresses.text.toString().toInt()
         )
-        mCidrListFragment.setCidrNotations(mCidrNotations)
+        mCidrNotationsFragment.setCidrNotations(mCidrNotations)
         setEditTextsEnabled(false)
         button_calculate_and_register.text = getString(R.string.calculator_button_register)
         fragment_container.visibility = View.VISIBLE
