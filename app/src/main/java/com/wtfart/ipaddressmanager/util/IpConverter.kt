@@ -1,8 +1,6 @@
 package com.wtfart.ipaddressmanager.util
 
-/**
- * Created by mickeycj on 11/5/2017 AD.
- */
+
 class IpConverter {
 
     companion object {
