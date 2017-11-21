@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--Application Names-->
     <string name="app_name">IP Address Manager</string>
@@ -13,12 +14,12 @@
     <string name="login_hint_email">Email</string>
     <string name="login_hint_password">Password</string>
     <string name="login_button_login">Login</string>
-    <string name="login_error_empty_input">Please fill in the information.</string>
+    <string name="login_failed">Login Failed!</string>
 
-    <!--Register Fragment-->
-    <string name="register_hint_confirm_password">Password Confirmation</string>
-    <string name="register_successful">Registration Successful!</string>
-    <string name="register_error_password_mismatch">Password does not match.</string>
+    <!--Registration Fragment-->
+    <string name="registration_hint_confirm_password">Password Confirmation</string>
+    <string name="registration_failed">Registration Failed!</string>
+    <string name="registration_error_password_mismatch">Password does not match.</string>
 
     <!--List Fragment-->
     <string name="list_login_successful">Login Successful!</string>
@@ -27,9 +28,9 @@
     <string name="network_button_delete">Delete</string>
     <string name="network_delete_successful">Deletion Successful!</string>
 
-    <!--CIDR List Fragment-->
-    <string name="cidr_list_info_cidr_notations">CIDR Notations:</string>
-    <string name="cidr_list_placeholder_num_cidr_notaitons">999</string>
+    <!--CIDR Notations Fragment-->
+    <string name="cidr_notations_info_cidr_notations">CIDR Notations:</string>
+    <string name="cidr_notations_placeholder_num_cidr_notaitons">999</string>
 
     <!--Calculator Fragment-->
     <string name="calculator_hint_ip_address">IP Address</string>
@@ -38,6 +39,15 @@
     <string name="calculator_button_register">Register</string>
     <string name="calculator_button_clear">Clear</string>
     <string name="calculator_error_input">Invalid Input!</string>
+    <string name="calculator_ip_addresses_taken">IP Addresses Taken!</string>
+
+    <!--Registration Dialog-->
+    <string name="registration_title">Registration</string>
+    <string name="registration_content">Please enter the name for:</string>
+    <string name="registration_placeholder_cidr_notation_range">0.0.0.0/0  –  0.0.0.0/0</string>
+    <string name="registration_hint_name">Name</string>
+    <string name="registration_button_cancel">Cancel</string>
+    <string name="registration_button_confirm">Confirm</string>
 
     <!--Detail Fragment-->
     <string name="detail_info_cidr_notation">CIDR Notation:</string>
@@ -49,15 +59,9 @@
     <string name="detail_placeholder_cidr_netmask">0.0.0.0</string>
     <string name="detail_placeholder_wildcard_mask">0.0.0.0</string>
 
-    <!--Registration Dialog-->
-    <string name="registration_title">Registration</string>
-    <string name="registration_content">Please enter the name for:</string>
-    <string name="registration_placeholder_cidr_notation_range">0.0.0.0/0  –  0.0.0.0/0</string>
-    <string name="registration_hint_name">Name</string>
-    <string name="registration_button_cancel">Cancel</string>
-    <string name="registration_button_confirm">Confirm</string>
-
     <!--Shared Strings-->
-    <string name="shared_format_range">%1$s  –  %2$s</string>
+    <string name="shared_registration_successful">Registration Successful!</string>
+    <string name="shared_error_empty_input">Please fill in the information.</string>
     <string name="shared_button_create_account">Create Account</string>
+    <string name="shared_format_range">%1$s  –  %2$s</string>
 </resources>

@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 
-import kotlinx.android.synthetic.main.fragment_register.*
+import kotlinx.android.synthetic.main.fragment_registration.*
 
 import com.wtfart.ipaddressmanager.util.firebase.Auth
 
@@ -20,7 +20,7 @@ class RegistrationFragment : Fragment() {
         fun newInstance() = RegistrationFragment()
     }
 
-    private val mBackToLoginTime = 2000L
+    private val BACK_TO_LOGIN_DELAY = 2000L
 
     private lateinit var mListener: AuthActivity
 
@@ -43,7 +43,7 @@ class RegistrationFragment : Fragment() {
             mListener.onBackPressed()
             Toast.makeText(
                     mListener,
-                    getString(R.string.register_successful),
+                    getString(R.string.shared_registration_successful),
                     Toast.LENGTH_LONG
             ).show()
         }
@@ -52,7 +52,7 @@ class RegistrationFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater?,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?
-    ) = inflater?.inflate(R.layout.fragment_register, container, false)
+    ) = inflater?.inflate(R.layout.fragment_registration, container, false)
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -66,21 +66,30 @@ class RegistrationFragment : Fragment() {
 
                 mListener.showProgressDialog()
                 try {
-                    Auth.registerUser(mListener, email, password) {
-                        mHandler.postDelayed(mBackToLoginRunnable, mBackToLoginTime)
+                    Auth.registerUser(mListener, email, password) { task ->
+                        if (task.isSuccessful) {
+                            mHandler.postDelayed(mBackToLoginRunnable, BACK_TO_LOGIN_DELAY)
+                        } else {
+                            mListener.dismissProgressDialog()
+                            Toast.makeText(
+                                    mListener,
+                                    getString(R.string.registration_failed),
+                                    Toast.LENGTH_LONG
+                            ).show()
+                        }
                     }
                 } catch (e: IllegalArgumentException) {
                     mListener.dismissProgressDialog()
                     Toast.makeText(
                             mListener,
-                            getString(R.string.login_error_empty_input),
+                            getString(R.string.shared_error_empty_input),
                             Toast.LENGTH_LONG
                     ).show()
                 }
             } else {
                 Toast.makeText(
                         mListener,
-                        getString(R.string.register_error_password_mismatch),
+                        getString(R.string.registration_error_password_mismatch),
                         Toast.LENGTH_LONG
                 ).show()
             }

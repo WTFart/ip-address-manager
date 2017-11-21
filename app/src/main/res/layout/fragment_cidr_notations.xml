@@ -12,7 +12,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:text="@string/cidr_list_info_cidr_notations"
+            android:text="@string/cidr_notations_info_cidr_notations"
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="@color/black"
@@ -21,7 +21,7 @@
 
         <TextView
             android:id="@+id/textview_required_cidr_notations"
-            android:text="@string/cidr_list_placeholder_num_cidr_notaitons"
+            android:text="@string/cidr_notations_placeholder_num_cidr_notaitons"
             android:textSize="16sp"
             android:textColor="@color/black"
             android:layout_width="wrap_content"

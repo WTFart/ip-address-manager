@@ -10,7 +10,7 @@ import org.junit.Test
  */
 class NetworkRepositoryTest {
 
-    private val networkRepository = NetworkRepository.repository
+    private val networkRepository = NetworkRepository.INSTANCE
     private val ipAddressRanges = networkRepository.ipAddressRanges
 
     @Before

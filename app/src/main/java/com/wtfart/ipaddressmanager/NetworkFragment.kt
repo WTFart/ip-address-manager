@@ -32,10 +32,10 @@ class NetworkFragment : Fragment() {
         }
     }
 
-    private val mDelayTime = 1000L
+    private val DELETION_DELAY = 2000L
 
     private lateinit var mListener: MainActivity
-    private lateinit var mCidrListFragment: CidrListFragment
+    private lateinit var mCidrNotationsFragment: CidrNotationsFragment
 
     private lateinit var mHandler: Handler
 
@@ -66,7 +66,7 @@ class NetworkFragment : Fragment() {
 
         mNetwork = arguments.getSerializable(NETWORK_INDEX_KEY) as Network
 
-        mCidrListFragment = CidrListFragment.newInstance(mNetwork)
+        mCidrNotationsFragment = CidrNotationsFragment.newInstance(mNetwork)
 
         mListener.setActionBarTitle(mNetwork.name)
     }
@@ -84,7 +84,7 @@ class NetworkFragment : Fragment() {
 
         childFragmentManager
                 .beginTransaction()
-                .replace(R.id.fragment_container, mCidrListFragment)
+                .replace(R.id.fragment_container, mCidrNotationsFragment)
                 .commit()
     }
 
@@ -96,7 +96,7 @@ class NetworkFragment : Fragment() {
 
             Database.revokeIpAddress(Auth.getUid(), mNetwork.id)
 
-            mHandler.postDelayed(mDelayRunnable, mDelayTime)
+            mHandler.postDelayed(mDelayRunnable, DELETION_DELAY)
         }
     }
 

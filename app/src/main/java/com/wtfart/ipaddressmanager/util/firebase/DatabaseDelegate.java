@@ -4,9 +4,6 @@ import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 
-/**
- * Created by mickeycj on 11/15/2017.
- */
 public class DatabaseDelegate {
 
     private static ChildEventListener sUsersChildEventListener;

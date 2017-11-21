@@ -11,22 +11,22 @@ import android.view.MenuItem
 
 import kotlinx.android.synthetic.main.activity_main.*
 
+import com.wtfart.ipaddressmanager.R.id.button_logout
+
 import com.wtfart.ipaddressmanager.util.firebase.Auth
 import com.wtfart.ipaddressmanager.util.firebase.Database
-
-import com.wtfart.ipaddressmanager.R.id.button_logout
 
 class MainActivity : AppCompatActivity() {
 
     private val LOGOUT_KEY = "LOGOUT"
 
-    private val mLogoutTime = 1000L
+    private val LOGOUT_DELAY = 1000L
 
     private lateinit var mHandler: Handler
 
     private lateinit var mLogoutRunnable: Runnable
 
-    private lateinit var progressDialog: ProgressDialog
+    private lateinit var mProgressDialog: ProgressDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         }
 
-        progressDialog = ProgressDialog(this@MainActivity)
+        mProgressDialog = ProgressDialog(this@MainActivity)
 
         supportFragmentManager
                 .beginTransaction()
@@ -69,9 +69,10 @@ class MainActivity : AppCompatActivity() {
                 showProgressDialog()
 
                 Auth.logoutUser()
-                Database.clear()
+                Database.clearDatabase()
 
-                mHandler.postDelayed(mLogoutRunnable, mLogoutTime)
+                mHandler.postDelayed(mLogoutRunnable, LOGOUT_DELAY)
+                return true
             }
         }
 
@@ -91,11 +92,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun showProgressDialog() {
-        progressDialog.show()
+        mProgressDialog.show()
     }
 
     fun dismissProgressDialog() {
-        progressDialog.dismiss()
+        mProgressDialog.dismiss()
     }
 
     fun requestFocus() {

@@ -10,13 +10,13 @@ class AuthActivity : AppCompatActivity() {
 
     private val LOGOUT_KEY = "LOGOUT"
 
-    private lateinit var progressDialog: ProgressDialog
+    private lateinit var mProgressDialog: ProgressDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
 
-        progressDialog = ProgressDialog(this@AuthActivity)
+        mProgressDialog = ProgressDialog(this@AuthActivity)
 
         if (intent.getBooleanExtra(LOGOUT_KEY, false)) {
             Toast.makeText(
@@ -33,11 +33,11 @@ class AuthActivity : AppCompatActivity() {
     }
 
     fun showProgressDialog() {
-        progressDialog.show()
+        mProgressDialog.show()
     }
 
     fun dismissProgressDialog() {
-        progressDialog.dismiss()
+        mProgressDialog.dismiss()
     }
 
     fun switchFragment(fragment: Fragment) {

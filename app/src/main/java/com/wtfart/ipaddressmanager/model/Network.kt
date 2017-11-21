@@ -4,26 +4,21 @@ import java.io.Serializable
 
 import com.google.firebase.database.PropertyName
 
-/**
- * Created by mickeycj on 11/15/2017.
- */
 data class Network(
-        @get:PropertyName("network_id")
-        @set:PropertyName("network_id")
+        @get:PropertyName("id")
+        @set:PropertyName("id")
         var id: String,
+
         @get:PropertyName("name")
         @set:PropertyName("name")
         var name: String,
+
         @get:PropertyName("cidr_notations")
         @set:PropertyName("cidr_notations")
         var cidrNotations: List<Cidr>
 ) : Serializable {
 
-    constructor() : this(
-            "",
-            "",
-            mutableListOf()
-    )
+    constructor() : this("", "", mutableListOf())
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

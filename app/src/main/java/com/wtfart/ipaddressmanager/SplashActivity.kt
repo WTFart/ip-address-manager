@@ -12,8 +12,8 @@ class SplashActivity : AppCompatActivity() {
 
     private val LOGOUT_KEY = "LOGOUT"
 
-    private val mStartMainActivityTime = 2000L
-    private val mDelayTime = 1000L
+    private val START_MAIN_ACTIVITY_DELAY = 2000L
+    private val LOADING_DELAY = 1000L
 
     private lateinit var mHandler: Handler
 
@@ -31,10 +31,9 @@ class SplashActivity : AppCompatActivity() {
         }
         mDelayRunnable = Runnable {
             if (Auth.isLoggedIn()) {
-                Database.retrieveIpAddresses(Auth.getUid())
-                Database.retrieveIpAddressesRanges()
+                Database.retrieveDatabase(Auth.getUid())
 
-                mHandler.postDelayed(mStartMainActivityRunnable, mStartMainActivityTime)
+                mHandler.postDelayed(mStartMainActivityRunnable, START_MAIN_ACTIVITY_DELAY)
             } else {
                 start(AuthActivity::class.java)
             }
@@ -44,7 +43,7 @@ class SplashActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-        mHandler.postDelayed(mDelayRunnable, mDelayTime)
+        mHandler.postDelayed(mDelayRunnable, LOADING_DELAY)
     }
 
     override fun onPause() {

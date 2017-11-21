@@ -23,7 +23,7 @@ class ListFragment : Fragment() {
         fun newInstance() = ListFragment()
     }
 
-    private val mRefreshTime = 1000L
+    private val REFRESH_DELAY = 1000L
 
     private lateinit var mListener: MainActivity
 
@@ -44,7 +44,7 @@ class ListFragment : Fragment() {
 
         mHandler = Handler()
 
-        mNetworks = NetworkRepository.repository.networks
+        mNetworks = NetworkRepository.INSTANCE.networks
 
         mListener.setActionBarTitle(getString(R.string.app_name))
 
@@ -80,7 +80,7 @@ class ListFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         layout_swipe_refresh.setOnRefreshListener {
-            mHandler.postDelayed(mRefreshRunnable, mRefreshTime)
+            mHandler.postDelayed(mRefreshRunnable, REFRESH_DELAY)
         }
         layout_swipe_refresh.setColorSchemeResources(
                 android.R.color.holo_blue_bright,

@@ -12,6 +12,7 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_calculator.*
 
 import com.wtfart.ipaddressmanager.model.Cidr
+import com.wtfart.ipaddressmanager.model.NetworkRepository
 import com.wtfart.ipaddressmanager.util.firebase.Auth
 import com.wtfart.ipaddressmanager.util.firebase.Database
 
@@ -23,10 +24,10 @@ class CalculatorFragment : Fragment() {
         fun newInstance() = CalculatorFragment()
     }
 
-    private val mRegistrationTime = 2000L
+    private val REGISTRATION_DELAY = 2000L
 
     private lateinit var mListener: MainActivity
-    private lateinit var mCidrListFragment: CidrListFragment
+    private lateinit var mCidrNotationsFragment: CidrNotationsFragment
     private lateinit var mRegistrationDialog: RegistrationDialog
 
     private lateinit var mHandler: Handler
@@ -35,13 +36,15 @@ class CalculatorFragment : Fragment() {
 
     private lateinit var mCidrNotations: Array<Cidr>
 
-    private var isCalculated = false
+    private var mIsCalculated = false
+
+    private var mInitialSize = -1
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
 
         mListener = context as MainActivity
-        mCidrListFragment = CidrListFragment.newInstance()
+        mCidrNotationsFragment = CidrNotationsFragment.newInstance()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,7 +56,20 @@ class CalculatorFragment : Fragment() {
 
         mRegistrationRunnable = Runnable {
             mListener.dismissProgressDialog()
-            mListener.onBackPressed()
+            if (mInitialSize != NetworkRepository.INSTANCE.networks.size) {
+                mListener.onBackPressed()
+                Toast.makeText(
+                        mListener,
+                        getString(R.string.shared_registration_successful),
+                        Toast.LENGTH_LONG
+                ).show()
+            } else {
+                Toast.makeText(
+                        mListener,
+                        getString(R.string.calculator_ip_addresses_taken),
+                        Toast.LENGTH_LONG
+                ).show()
+            }
         }
 
         mCidrNotations = arrayOf()
@@ -74,7 +90,7 @@ class CalculatorFragment : Fragment() {
 
         childFragmentManager
                 .beginTransaction()
-                .replace(R.id.fragment_container, mCidrListFragment)
+                .replace(R.id.fragment_container, mCidrNotationsFragment)
                 .commit()
     }
 
@@ -82,20 +98,28 @@ class CalculatorFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         button_calculate_and_register.setOnClickListener {
-            if (isCalculated) {
+            if (mIsCalculated) {
                 mRegistrationDialog
                         .setCidrNotationRange(mCidrNotations)
                         .setOnConfirmClickedListener {
-                            mListener.showProgressDialog()
+                            val name = mRegistrationDialog.geInputName()
 
-                            Database.registerIpAddress(
-                                    Auth.getUid(),
-                                    mRegistrationDialog.geInputName(),
-                                    mCidrNotations.asList()
-                            )
+                            if (name != "") {
+                                mListener.showProgressDialog()
 
-                            mRegistrationDialog.dismiss()
-                            mHandler.postDelayed(mRegistrationRunnable, mRegistrationTime)
+                                mInitialSize = NetworkRepository.INSTANCE.networks.size
+
+                                Database.registerIpAddress(Auth.getUid(), name, mCidrNotations.asList())
+
+                                mHandler.postDelayed(mRegistrationRunnable, REGISTRATION_DELAY)
+                                mRegistrationDialog.dismiss()
+                            } else {
+                                Toast.makeText(
+                                        mListener,
+                                        getString(R.string.shared_error_empty_input),
+                                        Toast.LENGTH_LONG
+                                ).show()
+                            }
                         }
                         .show()
             } else {
@@ -103,12 +127,16 @@ class CalculatorFragment : Fragment() {
                     calculate()
                     mListener.requestFocus()
                 } catch (e: IllegalArgumentException) {
-                    Toast.makeText(mListener, getString(R.string.calculator_error_input), Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                            mListener,
+                            getString(R.string.calculator_error_input),
+                            Toast.LENGTH_LONG
+                    ).show()
                 }
             }
         }
         button_clear.setOnClickListener {
-            isCalculated = false
+            mIsCalculated = false
             edittext_input_ip_address.setText("")
             edittext_input_num_addresses.setText("")
             setEditTextsEnabled(true)
@@ -138,11 +166,11 @@ class CalculatorFragment : Fragment() {
                 edittext_input_ip_address.text.toString(),
                 edittext_input_num_addresses.text.toString().toInt()
         )
-        mCidrListFragment.setCidrNotations(mCidrNotations)
+        mCidrNotationsFragment.setCidrNotations(mCidrNotations)
         setEditTextsEnabled(false)
         button_calculate_and_register.text = getString(R.string.calculator_button_register)
         fragment_container.visibility = View.VISIBLE
-        isCalculated = true
+        mIsCalculated = true
     }
 
     private fun setEditTextsEnabled(status: Boolean) {
