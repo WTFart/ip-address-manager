@@ -43,7 +43,7 @@ class RegistrationFragment : Fragment() {
             mListener.onBackPressed()
             Toast.makeText(
                     mListener,
-                    getString(R.string.registration_successful),
+                    getString(R.string.shared_registration_successful),
                     Toast.LENGTH_LONG
             ).show()
         }
@@ -82,7 +82,7 @@ class RegistrationFragment : Fragment() {
                     mListener.dismissProgressDialog()
                     Toast.makeText(
                             mListener,
-                            getString(R.string.login_error_empty_input),
+                            getString(R.string.shared_error_empty_input),
                             Toast.LENGTH_LONG
                     ).show()
                 }

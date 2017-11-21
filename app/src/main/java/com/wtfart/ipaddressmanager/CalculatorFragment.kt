@@ -12,6 +12,7 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_calculator.*
 
 import com.wtfart.ipaddressmanager.model.Cidr
+import com.wtfart.ipaddressmanager.model.NetworkRepository
 import com.wtfart.ipaddressmanager.util.firebase.Auth
 import com.wtfart.ipaddressmanager.util.firebase.Database
 
@@ -37,6 +38,8 @@ class CalculatorFragment : Fragment() {
 
     private var mIsCalculated = false
 
+    private var mInitialSize = -1
+
     override fun onAttach(context: Context?) {
         super.onAttach(context)
 
@@ -53,7 +56,20 @@ class CalculatorFragment : Fragment() {
 
         mRegistrationRunnable = Runnable {
             mListener.dismissProgressDialog()
-            mListener.onBackPressed()
+            if (mInitialSize != NetworkRepository.INSTANCE.networks.size) {
+                mListener.onBackPressed()
+                Toast.makeText(
+                        mListener,
+                        getString(R.string.shared_registration_successful),
+                        Toast.LENGTH_LONG
+                ).show()
+            } else {
+                Toast.makeText(
+                        mListener,
+                        getString(R.string.calculator_ip_addresses_taken),
+                        Toast.LENGTH_LONG
+                ).show()
+            }
         }
 
         mCidrNotations = arrayOf()
@@ -86,16 +102,24 @@ class CalculatorFragment : Fragment() {
                 mRegistrationDialog
                         .setCidrNotationRange(mCidrNotations)
                         .setOnConfirmClickedListener {
-                            mListener.showProgressDialog()
+                            val name = mRegistrationDialog.geInputName()
 
-                            Database.registerIpAddress(
-                                    Auth.getUid(),
-                                    mRegistrationDialog.geInputName(),
-                                    mCidrNotations.asList()
-                            )
+                            if (name != "") {
+                                mListener.showProgressDialog()
 
-                            mRegistrationDialog.dismiss()
-                            mHandler.postDelayed(mRegistrationRunnable, REGISTRATION_DELAY)
+                                mInitialSize = NetworkRepository.INSTANCE.networks.size
+
+                                Database.registerIpAddress(Auth.getUid(), name, mCidrNotations.asList())
+
+                                mHandler.postDelayed(mRegistrationRunnable, REGISTRATION_DELAY)
+                                mRegistrationDialog.dismiss()
+                            } else {
+                                Toast.makeText(
+                                        mListener,
+                                        getString(R.string.shared_error_empty_input),
+                                        Toast.LENGTH_LONG
+                                ).show()
+                            }
                         }
                         .show()
             } else {

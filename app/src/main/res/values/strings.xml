@@ -15,11 +15,9 @@
     <string name="login_hint_password">Password</string>
     <string name="login_button_login">Login</string>
     <string name="login_failed">Login Failed!</string>
-    <string name="login_error_empty_input">Please fill in the information.</string>
 
     <!--Registration Fragment-->
     <string name="registration_hint_confirm_password">Password Confirmation</string>
-    <string name="registration_successful">Registration Successful!</string>
     <string name="registration_failed">Registration Failed!</string>
     <string name="registration_error_password_mismatch">Password does not match.</string>
 
@@ -31,8 +29,8 @@
     <string name="network_delete_successful">Deletion Successful!</string>
 
     <!--CIDR Notations Fragment-->
-    <string name="cidr_list_info_cidr_notations">CIDR Notations:</string>
-    <string name="cidr_list_placeholder_num_cidr_notaitons">999</string>
+    <string name="cidr_notations_info_cidr_notations">CIDR Notations:</string>
+    <string name="cidr_notations_placeholder_num_cidr_notaitons">999</string>
 
     <!--Calculator Fragment-->
     <string name="calculator_hint_ip_address">IP Address</string>
@@ -41,6 +39,7 @@
     <string name="calculator_button_register">Register</string>
     <string name="calculator_button_clear">Clear</string>
     <string name="calculator_error_input">Invalid Input!</string>
+    <string name="calculator_ip_addresses_taken">IP Addresses Taken!</string>
 
     <!--Registration Dialog-->
     <string name="registration_title">Registration</string>
@@ -61,6 +60,8 @@
     <string name="detail_placeholder_wildcard_mask">0.0.0.0</string>
 
     <!--Shared Strings-->
-    <string name="shared_format_range">%1$s  –  %2$s</string>
+    <string name="shared_registration_successful">Registration Successful!</string>
+    <string name="shared_error_empty_input">Please fill in the information.</string>
     <string name="shared_button_create_account">Create Account</string>
+    <string name="shared_format_range">%1$s  –  %2$s</string>
 </resources>

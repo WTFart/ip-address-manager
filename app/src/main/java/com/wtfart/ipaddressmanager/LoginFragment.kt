@@ -80,7 +80,7 @@ class LoginFragment : Fragment() {
                 mListener.dismissProgressDialog()
                 Toast.makeText(
                         mListener,
-                        getString(R.string.login_error_empty_input),
+                        getString(R.string.shared_error_empty_input),
                         Toast.LENGTH_LONG
                 ).show()
             }
