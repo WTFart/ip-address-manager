@@ -11,10 +11,10 @@ import android.view.MenuItem
 
 import kotlinx.android.synthetic.main.activity_main.*
 
+import com.wtfart.ipaddressmanager.R.id.button_logout
+
 import com.wtfart.ipaddressmanager.util.firebase.Auth
 import com.wtfart.ipaddressmanager.util.firebase.Database
-
-import com.wtfart.ipaddressmanager.R.id.button_logout
 
 class MainActivity : AppCompatActivity() {
 
@@ -72,6 +72,7 @@ class MainActivity : AppCompatActivity() {
                 Database.clearDatabase()
 
                 mHandler.postDelayed(mLogoutRunnable, mLogoutTime)
+                return true
             }
         }
 
