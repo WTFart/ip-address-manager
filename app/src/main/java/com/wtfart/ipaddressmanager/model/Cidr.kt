@@ -7,30 +7,25 @@ import com.google.firebase.database.PropertyName
 
 import com.wtfart.ipaddressmanager.util.IpConverter
 
-/**
- * Created by mickeycj on 11/2/2017 AD.
- */
 data class Cidr(
         @get:PropertyName("notation")
         @set:PropertyName("notation")
         var notation: String,
+
         @get:PropertyName("netmask")
         @set:PropertyName("netmask")
         var netmask: Long,
+
         @get:PropertyName("wildcard_mask")
         @set:PropertyName("wildcard_mask")
         var wildcardMask: Long,
+
         @get:PropertyName("ip_address_range")
         @set:PropertyName("ip_address_range")
         var ipAddressRange: Pair
 ) : Serializable {
 
-    constructor() : this(
-            "",
-            0b0,
-            0b0,
-            Pair(0b0, 0b0)
-    )
+    constructor() : this("", 0b0, 0b0, Pair(0b0, 0b0))
 
     companion object {
 
