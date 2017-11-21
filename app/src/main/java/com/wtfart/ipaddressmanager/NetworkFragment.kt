@@ -32,7 +32,7 @@ class NetworkFragment : Fragment() {
         }
     }
 
-    private val mDelayTime = 1000L
+    private val DELETION_DELAY = 2000L
 
     private lateinit var mListener: MainActivity
     private lateinit var mCidrNotationsFragment: CidrNotationsFragment
@@ -96,7 +96,7 @@ class NetworkFragment : Fragment() {
 
             Database.revokeIpAddress(Auth.getUid(), mNetwork.id)
 
-            mHandler.postDelayed(mDelayRunnable, mDelayTime)
+            mHandler.postDelayed(mDelayRunnable, DELETION_DELAY)
         }
     }
 

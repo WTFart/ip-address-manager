@@ -22,7 +22,7 @@ class LoginFragment : Fragment() {
         fun newInstance() = LoginFragment()
     }
 
-    private val mStartMainActivityTime = 2000L
+    private val START_MAIN_ACTIVITY_DELAY = 2000L
 
     private lateinit var mListener: AuthActivity
 
@@ -64,7 +64,7 @@ class LoginFragment : Fragment() {
             try {
                 Auth.loginUser(mListener, email, password) {
                     Database.retrieveDatabase(Auth.getUid())
-                    mHandler.postDelayed(mStartMainActivityRunnable, mStartMainActivityTime)
+                    mHandler.postDelayed(mStartMainActivityRunnable, START_MAIN_ACTIVITY_DELAY)
                 }
             } catch (e: IllegalArgumentException) {
                 mListener.dismissProgressDialog()

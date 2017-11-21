@@ -23,7 +23,7 @@ class CalculatorFragment : Fragment() {
         fun newInstance() = CalculatorFragment()
     }
 
-    private val mRegistrationTime = 2000L
+    private val REGISTRATION_DELAY = 2000L
 
     private lateinit var mListener: MainActivity
     private lateinit var mCidrNotationsFragment: CidrNotationsFragment
@@ -95,7 +95,7 @@ class CalculatorFragment : Fragment() {
                             )
 
                             mRegistrationDialog.dismiss()
-                            mHandler.postDelayed(mRegistrationRunnable, mRegistrationTime)
+                            mHandler.postDelayed(mRegistrationRunnable, REGISTRATION_DELAY)
                         }
                         .show()
             } else {

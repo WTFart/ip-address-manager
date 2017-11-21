@@ -20,7 +20,7 @@ class RegistrationFragment : Fragment() {
         fun newInstance() = RegistrationFragment()
     }
 
-    private val mBackToLoginTime = 2000L
+    private val BACK_TO_LOGIN_DELAY = 2000L
 
     private lateinit var mListener: AuthActivity
 
@@ -67,7 +67,7 @@ class RegistrationFragment : Fragment() {
                 mListener.showProgressDialog()
                 try {
                     Auth.registerUser(mListener, email, password) {
-                        mHandler.postDelayed(mBackToLoginRunnable, mBackToLoginTime)
+                        mHandler.postDelayed(mBackToLoginRunnable, BACK_TO_LOGIN_DELAY)
                     }
                 } catch (e: IllegalArgumentException) {
                     mListener.dismissProgressDialog()

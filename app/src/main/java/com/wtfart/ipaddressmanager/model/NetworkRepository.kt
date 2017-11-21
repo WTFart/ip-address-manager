@@ -8,7 +8,7 @@ data class NetworkRepository(
     companion object {
 
         @JvmField
-        val repository = NetworkRepository()
+        val INSTANCE = NetworkRepository()
     }
 
     fun contains(range: Pair): Boolean {

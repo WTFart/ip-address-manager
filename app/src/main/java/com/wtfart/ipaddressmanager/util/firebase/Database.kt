@@ -21,7 +21,7 @@ class Database {
         private val USERS_KEY = "users"
         private val IP_ADDRESS_RANGES_KEY = "ip_address_ranges"
 
-        private val networkRepository = NetworkRepository.repository
+        private val networkRepository = NetworkRepository.INSTANCE
         private val networks = networkRepository.networks
         private val ipAddressRanges = networkRepository.ipAddressRanges
 
