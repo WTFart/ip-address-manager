@@ -3,10 +3,39 @@
     <string name="app_name">IP Address Manager</string>
     <string name="calculator_name">CIDR Calculator</string>
 
+    <!--Menu Bar-->
+    <string name="menu_bar_button_logout">Logout</string>
+
+    <!--Auth Activity-->
+    <string name="auth_logout_successful">Logout Successful!</string>
+
+    <!--Login Fragment-->
+    <string name="login_hint_email">Email</string>
+    <string name="login_hint_password">Password</string>
+    <string name="login_button_login">Login</string>
+    <string name="login_error_empty_input">Please fill in the information.</string>
+
+    <!--Register Fragment-->
+    <string name="register_hint_confirm_password">Password Confirmation</string>
+    <string name="register_successful">Registration Successful!</string>
+    <string name="register_error_password_mismatch">Password does not match.</string>
+
+    <!--List Fragment-->
+    <string name="list_login_successful">Login Successful!</string>
+
+    <!--Network Fragment-->
+    <string name="network_button_delete">Delete</string>
+    <string name="network_delete_successful">Deletion Successful!</string>
+
+    <!--CIDR List Fragment-->
+    <string name="cidr_list_info_cidr_notations">CIDR Notations:</string>
+    <string name="cidr_list_placeholder_num_cidr_notaitons">999</string>
+
     <!--Calculator Fragment-->
     <string name="calculator_hint_ip_address">IP Address</string>
     <string name="calculator_hint_number_of_addresses">Number of Addresses</string>
     <string name="calculator_button_calculate">Calculate</string>
+    <string name="calculator_button_register">Register</string>
     <string name="calculator_button_clear">Clear</string>
     <string name="calculator_error_input">Invalid Input!</string>
 
@@ -15,13 +44,20 @@
     <string name="detail_info_cidr_netmask">CIDR Netmask:</string>
     <string name="detail_info_wildcard_mask">Wildcard Mask:</string>
     <string name="detail_info_ip_address_range">IP Address Range:</string>
+    <string name="detail_placeholder_ip_address_range">0.0.0.0  –  0.0.0.0</string>
     <string name="detail_placeholder_cidr_notation">0.0.0.0/00</string>
     <string name="detail_placeholder_cidr_netmask">0.0.0.0</string>
     <string name="detail_placeholder_wildcard_mask">0.0.0.0</string>
-    <string name="detail_placeholder_ip_address_range">0.0.0.0  –  0.0.0.0</string>
-    <string name="detail_format_ip_address_range">%1$s  –  %2$s</string>
 
-    <!--CIDR List Fragment-->
-    <string name="cidr_list_info_cidr_notations">CIDR Notations:</string>
-    <string name="cidr_list_placeholder_num_cidr_notaitons">999</string>
+    <!--Registration Dialog-->
+    <string name="registration_title">Registration</string>
+    <string name="registration_content">Please enter the name for:</string>
+    <string name="registration_placeholder_cidr_notation_range">0.0.0.0/0  –  0.0.0.0/0</string>
+    <string name="registration_hint_name">Name</string>
+    <string name="registration_button_cancel">Cancel</string>
+    <string name="registration_button_confirm">Confirm</string>
+
+    <!--Shared Strings-->
+    <string name="shared_format_range">%1$s  –  %2$s</string>
+    <string name="shared_button_create_account">Create Account</string>
 </resources>

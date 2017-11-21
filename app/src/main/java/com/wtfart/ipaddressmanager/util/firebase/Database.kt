@@ -16,6 +16,11 @@ class Database {
 
     companion object {
 
+        @JvmField
+        val RETRIEVE_ACTION = "RETRIEVE"
+        @JvmField
+        val REVOKE_ACTION = "REVOKE"
+
         private val USERS_KEY = "users"
         private val IP_ADDRESS_RANGES_KEY = "ip_address_ranges"
 
@@ -65,27 +70,40 @@ class Database {
         }
 
         @JvmStatic
-        fun updateIpAddresses(uid: String, dataSnapshot: DataSnapshot) {
-            networkRepository.clearNetworks()
-            if (uid == dataSnapshot.key) {
-                dataSnapshot
-                        .children
-                        .mapNotNullTo(networkRepository.networks) { network ->
-                            network.getValue<Network>(Network::class.java)
-                        }
+        fun updateIpAddresses(uid: String, dataSnapshot: DataSnapshot, action: String) {
+            if (dataSnapshot.key == uid) {
+                val previousSize = networkRepository.networks.size
+                networkRepository.clearNetworks()
+                if (action == RETRIEVE_ACTION || previousSize > 1) {
+                    dataSnapshot
+                            .children
+                            .mapNotNullTo(networkRepository.networks) { network ->
+                                network.getValue<Network>(Network::class.java)
+                            }
+                }
             }
         }
 
         @JvmStatic
-        fun updateIpAddressesRanges(dataSnapshot: DataSnapshot) {
-            networkRepository.clearIpAddressRanges()
+        fun updateIpAddressesRanges(dataSnapshot: DataSnapshot, action: String) {
             if (dataSnapshot.key == IP_ADDRESS_RANGES_KEY) {
-                dataSnapshot
-                        .children
-                        .mapNotNullTo(networkRepository.ipAddressRanges) { ipAddressRange ->
-                            ipAddressRange.getValue<Pair>(Pair::class.java)
-                        }
+                val previousSize = networkRepository.ipAddressRanges.size
+                networkRepository.clearIpAddressRanges()
+                if (action == RETRIEVE_ACTION || previousSize > 1) {
+                    dataSnapshot
+                            .children
+                            .mapNotNullTo(networkRepository.ipAddressRanges) { ipAddressRange ->
+                                ipAddressRange.getValue<Pair>(Pair::class.java)
+                            }
+                }
             }
+        }
+
+        @JvmStatic
+        fun clear() {
+            networkRepository.clearNetworks()
+            networkRepository.clearIpAddressRanges()
+            DatabaseDelegate.removeChildEventListeners()
         }
 
         @JvmStatic

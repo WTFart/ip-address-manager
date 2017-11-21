@@ -44,15 +44,19 @@ class DetailFragment : Fragment() {
 
         mCidr = arguments.getSerializable(CIDR_KEY) as Cidr
 
-        mListener.title = mCidr.notation
+        mListener.setActionBarTitle(mCidr.notation)
     }
 
     override fun onCreateView(
             inflater: LayoutInflater?,
             container: ViewGroup?,
             savedInstanceState: Bundle?
-    ): View? {
-        return inflater?.inflate(R.layout.fragment_detail, container, false)
+    ) = inflater?.inflate(R.layout.fragment_detail, container, false)
+
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        mListener.setActionBarTitle(mCidr.notation)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -68,7 +72,7 @@ class DetailFragment : Fragment() {
             IpConverter.toIpAddress(initialIpAddress)
         } else {
             getString(
-                    R.string.detail_format_ip_address_range,
+                    R.string.shared_format_range,
                     IpConverter.toIpAddress(initialIpAddress),
                     IpConverter.toIpAddress(lastIpAddress)
             )

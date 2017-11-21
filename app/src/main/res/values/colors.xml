@@ -7,6 +7,8 @@
 
     <!--Additional Colors-->
     <color name="black">#000000</color>
+    <color name="dark_grey">#666666</color>
     <color name="grey">#888888</color>
     <color name="light_grey">#AAAAAA</color>
+    <color name="white">#FFFFFF</color>
 </resources>

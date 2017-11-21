@@ -1,5 +1,7 @@
 package com.wtfart.ipaddressmanager.model
 
+import java.io.Serializable
+
 import com.google.firebase.database.PropertyName
 
 /**
@@ -15,7 +17,7 @@ data class Network(
         @get:PropertyName("cidr_notations")
         @set:PropertyName("cidr_notations")
         var cidrNotations: List<Cidr>
-) {
+) : Serializable {
 
     constructor() : this(
             "",
