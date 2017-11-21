@@ -3,6 +3,7 @@ package com.wtfart.ipaddressmanager
 import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
@@ -16,6 +17,14 @@ import com.wtfart.ipaddressmanager.util.firebase.Database
 
 class MainActivity : AppCompatActivity() {
 
+    private val LOGOUT_KEY = "LOGOUT"
+
+    private val mLogoutTime = 1000L
+
+    private lateinit var mHandler: Handler
+
+    private lateinit var mLogoutRunnable: Runnable
+
     private lateinit var progressDialog: ProgressDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,6 +32,18 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         setSupportActionBar(action_bar)
+
+        mHandler = Handler()
+
+        mLogoutRunnable = Runnable {
+            dismissProgressDialog()
+
+            val intent = Intent(this@MainActivity, AuthActivity::class.java)
+            intent.putExtra(LOGOUT_KEY, true)
+            startActivity(intent)
+            finish()
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+        }
 
         progressDialog = ProgressDialog(this@MainActivity)
 
@@ -44,16 +65,22 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
             button_logout -> {
+                showProgressDialog()
+
                 Auth.logoutUser()
                 Database.clear()
 
-                startActivity(Intent(this@MainActivity, AuthActivity::class.java))
-                finish()
-                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+                mHandler.postDelayed(mLogoutRunnable, mLogoutTime)
             }
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        mHandler.removeCallbacks(mLogoutRunnable)
     }
 
     override fun onBackPressed() {

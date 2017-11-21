@@ -10,6 +10,8 @@ import com.wtfart.ipaddressmanager.util.firebase.Database
 
 class SplashActivity : AppCompatActivity() {
 
+    private val LOGOUT_KEY = "LOGOUT"
+
     private val mStartMainActivityTime = 2000L
     private val mDelayTime = 1000L
 
@@ -53,7 +55,11 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun start(cls: Class<*>) {
-        startActivity(Intent(this@SplashActivity, cls))
+        val intent = Intent(this@SplashActivity, cls)
+        if (cls == AuthActivity::class.java) {
+            intent.putExtra(LOGOUT_KEY, false)
+        }
+        startActivity(intent)
         finish()
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
     }
