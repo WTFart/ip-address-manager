@@ -16,6 +16,11 @@ class Database {
 
     companion object {
 
+        @JvmField
+        val RETRIEVE_ACTION = "RETRIEVE"
+        @JvmField
+        val REVOKE_ACTION = "REVOKE"
+
         private val USERS_KEY = "users"
         private val IP_ADDRESS_RANGES_KEY = "ip_address_ranges"
 
@@ -65,26 +70,32 @@ class Database {
         }
 
         @JvmStatic
-        fun updateIpAddresses(uid: String, dataSnapshot: DataSnapshot) {
-            if (uid == dataSnapshot.key) {
+        fun updateIpAddresses(uid: String, dataSnapshot: DataSnapshot, action: String) {
+            if (dataSnapshot.key == uid) {
+                val previousSize = networkRepository.networks.size
                 networkRepository.clearNetworks()
-                dataSnapshot
-                        .children
-                        .mapNotNullTo(networkRepository.networks) { network ->
-                            network.getValue<Network>(Network::class.java)
-                        }
+                if (action == RETRIEVE_ACTION || previousSize > 1) {
+                    dataSnapshot
+                            .children
+                            .mapNotNullTo(networkRepository.networks) { network ->
+                                network.getValue<Network>(Network::class.java)
+                            }
+                }
             }
         }
 
         @JvmStatic
-        fun updateIpAddressesRanges(dataSnapshot: DataSnapshot) {
+        fun updateIpAddressesRanges(dataSnapshot: DataSnapshot, action: String) {
             if (dataSnapshot.key == IP_ADDRESS_RANGES_KEY) {
+                val previousSize = networkRepository.ipAddressRanges.size
                 networkRepository.clearIpAddressRanges()
-                dataSnapshot
-                        .children
-                        .mapNotNullTo(networkRepository.ipAddressRanges) { ipAddressRange ->
-                            ipAddressRange.getValue<Pair>(Pair::class.java)
-                        }
+                if (action == RETRIEVE_ACTION || previousSize > 1) {
+                    dataSnapshot
+                            .children
+                            .mapNotNullTo(networkRepository.ipAddressRanges) { ipAddressRange ->
+                                ipAddressRange.getValue<Pair>(Pair::class.java)
+                            }
+                }
             }
         }
 
