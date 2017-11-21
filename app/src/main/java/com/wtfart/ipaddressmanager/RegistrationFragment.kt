@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 
-import kotlinx.android.synthetic.main.fragment_register.*
+import kotlinx.android.synthetic.main.fragment_registration.*
 
 import com.wtfart.ipaddressmanager.util.firebase.Auth
 
@@ -52,7 +52,7 @@ class RegistrationFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater?,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?
-    ) = inflater?.inflate(R.layout.fragment_register, container, false)
+    ) = inflater?.inflate(R.layout.fragment_registration, container, false)
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

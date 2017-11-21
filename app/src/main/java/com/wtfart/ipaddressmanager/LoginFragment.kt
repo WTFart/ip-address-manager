@@ -41,8 +41,8 @@ class LoginFragment : Fragment() {
         mHandler = Handler()
 
         mStartMainActivityRunnable = Runnable {
-            startActivity(Intent(mListener, MainActivity::class.java))
             mListener.dismissProgressDialog()
+            mListener.startActivity(Intent(mListener, MainActivity::class.java))
             mListener.finish()
             mListener.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
