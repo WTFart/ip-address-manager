@@ -25,7 +25,7 @@
 
         <EditText
             android:id="@+id/edittext_input_confirm_password"
-            android:hint="@string/register_hint_confirm_password"
+            android:hint="@string/registration_hint_confirm_password"
             android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

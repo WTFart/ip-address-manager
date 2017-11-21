@@ -22,7 +22,7 @@ class LoginFragment : Fragment() {
         fun newInstance() = LoginFragment()
     }
 
-    private val START_MAIN_ACTIVITY_DELAY = 2000L
+    private val mStartMainActivityTime = 2000L
 
     private lateinit var mListener: AuthActivity
 
@@ -41,8 +41,8 @@ class LoginFragment : Fragment() {
         mHandler = Handler()
 
         mStartMainActivityRunnable = Runnable {
-            mListener.dismissProgressDialog()
             mListener.startActivity(Intent(mListener, MainActivity::class.java))
+            mListener.dismissProgressDialog()
             mListener.finish()
             mListener.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
@@ -62,9 +62,19 @@ class LoginFragment : Fragment() {
 
             mListener.showProgressDialog()
             try {
-                Auth.loginUser(mListener, email, password) {
-                    Database.retrieveDatabase(Auth.getUid())
-                    mHandler.postDelayed(mStartMainActivityRunnable, START_MAIN_ACTIVITY_DELAY)
+                Auth.loginUser(mListener, email, password) { task ->
+                    if (task.isSuccessful) {
+                        Database.retrieveDatabase(Auth.getUid())
+
+                        mHandler.postDelayed(mStartMainActivityRunnable, mStartMainActivityTime)
+                    } else {
+                        mListener.dismissProgressDialog()
+                        Toast.makeText(
+                                mListener,
+                                getString(R.string.login_failed),
+                                Toast.LENGTH_LONG
+                        ).show()
+                    }
                 }
             } catch (e: IllegalArgumentException) {
                 mListener.dismissProgressDialog()
@@ -76,7 +86,9 @@ class LoginFragment : Fragment() {
             }
         }
         button_create_account.setOnClickListener {
-           mListener.switchFragment(RegistrationFragment.newInstance())
+            edittext_input_email.setText("")
+            edittext_input_password.setText("")
+            mListener.switchFragment(RegistrationFragment.newInstance())
         }
     }
 

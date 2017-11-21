@@ -43,7 +43,7 @@ class RegistrationFragment : Fragment() {
             mListener.onBackPressed()
             Toast.makeText(
                     mListener,
-                    getString(R.string.register_successful),
+                    getString(R.string.registration_successful),
                     Toast.LENGTH_LONG
             ).show()
         }
@@ -66,8 +66,17 @@ class RegistrationFragment : Fragment() {
 
                 mListener.showProgressDialog()
                 try {
-                    Auth.registerUser(mListener, email, password) {
-                        mHandler.postDelayed(mBackToLoginRunnable, BACK_TO_LOGIN_DELAY)
+                    Auth.registerUser(mListener, email, password) { task ->
+                        if (task.isSuccessful) {
+                            mHandler.postDelayed(mBackToLoginRunnable, BACK_TO_LOGIN_DELAY)
+                        } else {
+                            mListener.dismissProgressDialog()
+                            Toast.makeText(
+                                    mListener,
+                                    getString(R.string.registration_failed),
+                                    Toast.LENGTH_LONG
+                            ).show()
+                        }
                     }
                 } catch (e: IllegalArgumentException) {
                     mListener.dismissProgressDialog()
@@ -80,7 +89,7 @@ class RegistrationFragment : Fragment() {
             } else {
                 Toast.makeText(
                         mListener,
-                        getString(R.string.register_error_password_mismatch),
+                        getString(R.string.registration_error_password_mismatch),
                         Toast.LENGTH_LONG
                 ).show()
             }
