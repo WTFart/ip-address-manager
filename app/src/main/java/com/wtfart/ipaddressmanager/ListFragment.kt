@@ -15,9 +15,6 @@ import kotlinx.android.synthetic.main.fragment_list.*
 import com.wtfart.ipaddressmanager.model.Network
 import com.wtfart.ipaddressmanager.model.NetworkRepository
 
-/**
- * Created by oatThanut on 19/11/2017 AD.
- */
 class ListFragment : Fragment() {
 
     companion object {

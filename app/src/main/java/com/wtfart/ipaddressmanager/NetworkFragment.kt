@@ -15,9 +15,6 @@ import com.wtfart.ipaddressmanager.model.Network
 import com.wtfart.ipaddressmanager.util.firebase.Auth
 import com.wtfart.ipaddressmanager.util.firebase.Database
 
-/**
- * Created by oatThanut on 19/11/2017 AD.
- */
 class NetworkFragment : Fragment() {
 
     companion object {
