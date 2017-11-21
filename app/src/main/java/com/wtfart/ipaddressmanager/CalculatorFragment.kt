@@ -103,7 +103,11 @@ class CalculatorFragment : Fragment() {
                     calculate()
                     mListener.requestFocus()
                 } catch (e: IllegalArgumentException) {
-                    Toast.makeText(mListener, getString(R.string.calculator_error_input), Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                            mListener,
+                            getString(R.string.calculator_error_input),
+                            Toast.LENGTH_LONG
+                    ).show()
                 }
             }
         }
