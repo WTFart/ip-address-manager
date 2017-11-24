@@ -33,19 +33,19 @@
             <Button
                 android:id="@+id/button_calculate_and_register"
                 android:text="@string/calculator_button_calculate"
+                android:textColor="@color/white"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:textColor="@color/white"
                 style="@style/Button" />
 
             <Button
                 android:id="@+id/button_clear"
                 android:text="@string/calculator_button_clear"
+                android:textColor="@color/white"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:textColor="@color/white"
                 style="@style/Button" />
         </LinearLayout>
     </LinearLayout>
