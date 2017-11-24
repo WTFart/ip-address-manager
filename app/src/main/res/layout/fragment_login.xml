@@ -27,12 +27,16 @@
             android:id="@+id/button_login"
             android:text="@string/login_button_login"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            style="@style/Button"/>
 
         <Button
             android:id="@+id/button_create_account"
             android:text="@string/shared_button_create_account"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            style="@style/Button" />
     </LinearLayout>
 </LinearLayout>

@@ -126,6 +126,7 @@ class MainActivity : AppCompatActivity() {
         if (supportFragmentManager.backStackEntryCount == 0) {
             supportActionBar?.setHomeButtonEnabled(status)
             supportActionBar?.setDisplayHomeAsUpEnabled(status)
+
         }
     }
 }
