@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.content.Context
 import android.view.View
 import android.view.Window
+import android.view.inputmethod.EditorInfo
 
 import kotlinx.android.synthetic.main.dialog_registration.*
 
@@ -15,6 +16,12 @@ class RegistrationDialog(context: Context) : Dialog(context) {
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         setContentView(R.layout.dialog_registration)
 
+        edittext_input_name.setOnEditorActionListener { _, id, _ ->
+            if (id == EditorInfo.IME_ACTION_DONE) {
+                edittext_input_name.clearFocus()
+            }
+            false
+        }
         button_cancel.setOnClickListener { dismiss() }
     }
 

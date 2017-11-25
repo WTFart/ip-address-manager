@@ -7,6 +7,7 @@ import android.os.Handler
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 
 import kotlinx.android.synthetic.main.fragment_login.*
@@ -56,34 +57,14 @@ class LoginFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        button_login.setOnClickListener {
-            val email = edittext_input_email.text.toString()
-            val password = edittext_input_password.text.toString()
-
-            mListener.showProgressDialog()
-            try {
-                Auth.loginUser(mListener, email, password) { task ->
-                    if (task.isSuccessful) {
-                        Database.retrieveDatabase(Auth.getUid())
-
-                        mHandler.postDelayed(mStartMainActivityRunnable, mStartMainActivityTime)
-                    } else {
-                        mListener.dismissProgressDialog()
-                        Toast.makeText(
-                                mListener,
-                                getString(R.string.login_failed),
-                                Toast.LENGTH_LONG
-                        ).show()
-                    }
-                }
-            } catch (e: IllegalArgumentException) {
-                mListener.dismissProgressDialog()
-                Toast.makeText(
-                        mListener,
-                        getString(R.string.shared_error_empty_input),
-                        Toast.LENGTH_LONG
-                ).show()
+        edittext_input_password.setOnEditorActionListener { _, id, _ ->
+            if (id == EditorInfo.IME_ACTION_DONE) {
+                login()
             }
+            false
+        }
+        button_login.setOnClickListener {
+            login()
         }
         button_create_account.setOnClickListener {
             edittext_input_email.setText("")
@@ -96,5 +77,35 @@ class LoginFragment : Fragment() {
         super.onPause()
 
         mHandler.removeCallbacks(mStartMainActivityRunnable)
+    }
+
+    private fun login() {
+        val email = edittext_input_email.text.toString()
+        val password = edittext_input_password.text.toString()
+
+        mListener.showProgressDialog()
+        try {
+            Auth.loginUser(mListener, email, password) { task ->
+                if (task.isSuccessful) {
+                    Database.retrieveDatabase(Auth.getUid())
+
+                    mHandler.postDelayed(mStartMainActivityRunnable, mStartMainActivityTime)
+                } else {
+                    mListener.dismissProgressDialog()
+                    Toast.makeText(
+                            mListener,
+                            getString(R.string.login_failed),
+                            Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+        } catch (e: IllegalArgumentException) {
+            mListener.dismissProgressDialog()
+            Toast.makeText(
+                    mListener,
+                    getString(R.string.shared_error_empty_input),
+                    Toast.LENGTH_LONG
+            ).show()
+        }
     }
 }
