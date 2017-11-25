@@ -13,6 +13,7 @@
             android:id="@+id/edittext_input_email"
             android:hint="@string/login_hint_email"
             android:inputType="textEmailAddress"
+            android:imeOptions="actionNext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -20,13 +21,15 @@
             android:id="@+id/edittext_input_password"
             android:hint="@string/login_hint_password"
             android:inputType="textPassword"
+            android:imeOptions="actionNext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <EditText
-            android:id="@+id/edittext_input_confirm_password"
-            android:hint="@string/registration_hint_confirm_password"
+            android:id="@+id/edittext_input_password_confirmation"
+            android:hint="@string/registration_hint_password_confirmation"
             android:inputType="textPassword"
+            android:imeOptions="actionDone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
