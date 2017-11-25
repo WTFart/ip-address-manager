@@ -6,6 +6,7 @@ import android.os.Handler
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 
 import kotlinx.android.synthetic.main.fragment_registration.*
@@ -57,42 +58,14 @@ class RegistrationFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        button_create_account.setOnClickListener {
-            val password = edittext_input_password.text.toString()
-            val passwordConfirmation = edittext_input_confirm_password.text.toString()
-
-            if (password == passwordConfirmation) {
-                val email = edittext_input_email.text.toString()
-
-                mListener.showProgressDialog()
-                try {
-                    Auth.registerUser(mListener, email, password) { task ->
-                        if (task.isSuccessful) {
-                            mHandler.postDelayed(mBackToLoginRunnable, BACK_TO_LOGIN_DELAY)
-                        } else {
-                            mListener.dismissProgressDialog()
-                            Toast.makeText(
-                                    mListener,
-                                    getString(R.string.registration_failed),
-                                    Toast.LENGTH_LONG
-                            ).show()
-                        }
-                    }
-                } catch (e: IllegalArgumentException) {
-                    mListener.dismissProgressDialog()
-                    Toast.makeText(
-                            mListener,
-                            getString(R.string.shared_error_empty_input),
-                            Toast.LENGTH_LONG
-                    ).show()
-                }
-            } else {
-                Toast.makeText(
-                        mListener,
-                        getString(R.string.registration_error_password_mismatch),
-                        Toast.LENGTH_LONG
-                ).show()
+        edittext_input_password_confirmation.setOnEditorActionListener { _, id, _ ->
+            if (id == EditorInfo.IME_ACTION_DONE) {
+                register()
             }
+            false
+        }
+        button_create_account.setOnClickListener {
+            register()
         }
     }
 
@@ -100,5 +73,43 @@ class RegistrationFragment : Fragment() {
         super.onPause()
 
         mHandler.removeCallbacks(mBackToLoginRunnable)
+    }
+
+    private fun register() {
+        val password = edittext_input_password.text.toString()
+        val passwordConfirmation = edittext_input_password_confirmation.text.toString()
+
+        if (password == passwordConfirmation) {
+            val email = edittext_input_email.text.toString()
+
+            mListener.showProgressDialog()
+            try {
+                Auth.registerUser(mListener, email, password) { task ->
+                    if (task.isSuccessful) {
+                        mHandler.postDelayed(mBackToLoginRunnable, BACK_TO_LOGIN_DELAY)
+                    } else {
+                        mListener.dismissProgressDialog()
+                        Toast.makeText(
+                                mListener,
+                                getString(R.string.registration_failed),
+                                Toast.LENGTH_LONG
+                        ).show()
+                    }
+                }
+            } catch (e: IllegalArgumentException) {
+                mListener.dismissProgressDialog()
+                Toast.makeText(
+                        mListener,
+                        getString(R.string.shared_error_empty_input),
+                        Toast.LENGTH_LONG
+                ).show()
+            }
+        } else {
+            Toast.makeText(
+                    mListener,
+                    getString(R.string.registration_error_password_mismatch),
+                    Toast.LENGTH_LONG
+            ).show()
+        }
     }
 }

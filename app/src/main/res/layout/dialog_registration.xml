@@ -41,6 +41,8 @@
             android:id="@+id/edittext_input_name"
             android:hint="@string/registration_hint_name"
             android:textSize="16sp"
+            android:inputType="text"
+            android:imeOptions="actionDone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

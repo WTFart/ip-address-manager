@@ -14,12 +14,16 @@
         <EditText
             android:id="@+id/edittext_input_ip_address"
             android:hint="@string/calculator_hint_ip_address"
+            android:inputType="text"
+            android:imeOptions="actionNext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <EditText
             android:id="@+id/edittext_input_num_addresses"
             android:hint="@string/calculator_hint_number_of_addresses"
+            android:inputType="number"
+            android:imeOptions="actionDone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
