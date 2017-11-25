@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 
 import kotlinx.android.synthetic.main.fragment_calculator.*
@@ -97,43 +98,14 @@ class CalculatorFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        button_calculate_and_register.setOnClickListener {
-            if (mIsCalculated) {
-                mRegistrationDialog
-                        .setCidrNotationRange(mCidrNotations)
-                        .setOnConfirmClickedListener {
-                            val name = mRegistrationDialog.geInputName()
-
-                            if (name != "") {
-                                mListener.showProgressDialog()
-
-                                mInitialSize = NetworkRepository.INSTANCE.networks.size
-
-                                Database.registerIpAddress(Auth.getUid(), name, mCidrNotations.asList())
-
-                                mHandler.postDelayed(mRegistrationRunnable, REGISTRATION_DELAY)
-                                mRegistrationDialog.dismiss()
-                            } else {
-                                Toast.makeText(
-                                        mListener,
-                                        getString(R.string.shared_error_empty_input),
-                                        Toast.LENGTH_LONG
-                                ).show()
-                            }
-                        }
-                        .show()
-            } else {
-                try {
-                    calculate()
-                    mListener.requestFocus()
-                } catch (e: IllegalArgumentException) {
-                    Toast.makeText(
-                            mListener,
-                            getString(R.string.calculator_error_input),
-                            Toast.LENGTH_LONG
-                    ).show()
-                }
+        edittext_input_num_addresses.setOnEditorActionListener { _, id, _ ->
+            if (id == EditorInfo.IME_ACTION_DONE) {
+                calculateOrRegister()
             }
+            false
+        }
+        button_calculate_and_register.setOnClickListener {
+            calculateOrRegister()
         }
         button_clear.setOnClickListener {
             mIsCalculated = false
@@ -159,6 +131,45 @@ class CalculatorFragment : Fragment() {
         super.onPause()
 
         mHandler.removeCallbacks(mRegistrationRunnable)
+    }
+
+    private fun calculateOrRegister() {
+        if (mIsCalculated) {
+            mRegistrationDialog
+                    .setCidrNotationRange(mCidrNotations)
+                    .setOnConfirmClickedListener {
+                        val name = mRegistrationDialog.geInputName()
+
+                        if (name != "") {
+                            mListener.showProgressDialog()
+
+                            mInitialSize = NetworkRepository.INSTANCE.networks.size
+
+                            Database.registerIpAddress(Auth.getUid(), name, mCidrNotations.asList())
+
+                            mHandler.postDelayed(mRegistrationRunnable, REGISTRATION_DELAY)
+                            mRegistrationDialog.dismiss()
+                        } else {
+                            Toast.makeText(
+                                    mListener,
+                                    getString(R.string.shared_error_empty_input),
+                                    Toast.LENGTH_LONG
+                            ).show()
+                        }
+                    }
+                    .show()
+        } else {
+            try {
+                calculate()
+                mListener.requestFocus()
+            } catch (e: IllegalArgumentException) {
+                Toast.makeText(
+                        mListener,
+                        getString(R.string.calculator_error_input),
+                        Toast.LENGTH_LONG
+                ).show()
+            }
+        }
     }
 
     private fun calculate() {
