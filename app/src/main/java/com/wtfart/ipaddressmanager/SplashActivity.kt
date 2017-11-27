@@ -12,8 +12,8 @@ class SplashActivity : AppCompatActivity() {
 
     private val LOGOUT_KEY = "LOGOUT"
 
-    private val START_MAIN_ACTIVITY_DELAY = 2000L
-    private val LOADING_DELAY = 3000L
+    private val START_MAIN_ACTIVITY_DELAY = 4000L
+    private val LOADING_DELAY = 1000L
 
     private lateinit var mHandler: Handler
 
