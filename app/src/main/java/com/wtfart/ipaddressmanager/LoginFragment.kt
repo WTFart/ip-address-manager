@@ -23,7 +23,7 @@ class LoginFragment : Fragment() {
         fun newInstance() = LoginFragment()
     }
 
-    private val mStartMainActivityTime = 4000L
+    private val START_MAIN_ACTIVITY_DELAY = 4000L
 
     private lateinit var mListener: AuthActivity
 
@@ -89,7 +89,7 @@ class LoginFragment : Fragment() {
                 if (task.isSuccessful) {
                     Database.retrieveDatabase(Auth.getUid())
 
-                    mHandler.postDelayed(mStartMainActivityRunnable, mStartMainActivityTime)
+                    mHandler.postDelayed(mStartMainActivityRunnable, START_MAIN_ACTIVITY_DELAY)
                 } else {
                     mListener.dismissProgressDialog()
                     Toast.makeText(
